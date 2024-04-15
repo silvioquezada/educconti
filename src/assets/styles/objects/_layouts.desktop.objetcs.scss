@@ -1,0 +1,28 @@
+@media screen and (min-width: $high-width) {
+
+  .container {    
+    display: flex;
+    /*flex-direction: row;*/
+    flex-direction: column;
+    //flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-top: 2%;
+    padding-bottom: 4%;
+  }
+
+  .container-footer {    
+    display: flex;
+    flex-direction: row;
+    //flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-top: 2%;
+  }
+  
+}

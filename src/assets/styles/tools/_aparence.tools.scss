@@ -1,0 +1,20 @@
+/*
+@mixin aparence-text($font-size, $font-weight) {
+  margin: 1px;
+  padding: 1px;
+
+  font-size: $font-size;
+  font-weight: $font-weight;
+}
+
+@mixin width-flex($width, $flex) {
+  width: $width;
+  flex: $flex;
+}
+*/
+@mixin aparence-button($color-font, $color-background) {
+  color: $color-font;
+
+  background-color: $color-background;
+  border: 2px solid $color-background;
+}

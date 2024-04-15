@@ -1,0 +1,15 @@
+@import "npm:@fortawesome/fontawesome-free/css/all.css";
+@import "imports/settings.imports";
+@import "imports/tools.imports";
+@import "imports/generics.imports";
+@import "imports/elements.imports";
+@import "imports/objects.imports";
+@import "imports/components.imports";
+@import "imports/utilities.imports";
+
+
+@layer {
+
+    @import "imports/bootstrap.imports";
+    
+}

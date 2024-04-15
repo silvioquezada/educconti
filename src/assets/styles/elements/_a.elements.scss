@@ -1,0 +1,9 @@
+a {
+  color: $color-white;
+  text-decoration: none;
+  
+  &:hover {
+    font-weight: bold;
+    color: $color-primary;
+  }
+}

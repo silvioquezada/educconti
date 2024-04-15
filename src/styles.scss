@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+//@import "npm:@fortawesome/fontawesome-free/css/all.css";
+@import "assets/styles/imports/settings.imports";
+@import "assets/styles/imports/tools.imports";
+@import "assets/styles/imports/generics.imports";
+@import "assets/styles/imports/elements.imports";
+@import "assets/styles/imports/objects.imports";
+@import "assets/styles/imports/components.imports";
+@import "assets/styles/imports/utilities.imports";
+/*
+@layer {
+
+    @import "imports/bootstrap.imports";
+    
+}
+*/

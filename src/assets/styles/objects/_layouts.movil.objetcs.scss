@@ -1,0 +1,57 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 4%;
+  padding-bottom: 8%;
+}
+
+.container-footer {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  padding-top: 4%;
+}
+
+.card-not-line {
+  width: 100%;
+  text-align: center;
+}
+
+@supports (display: grid) {
+
+  .root-grid-banner {    
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px 15vh 30vh;
+    gap: 0;
+    width: 100%;
+
+    color: $color-white;
+  }
+
+  .image-title-banner {
+    grid-column: 1;
+    grid-row: 1 / 4;
+  }
+
+  .text-grid-banner {    
+    grid-column: 1;
+    grid-row: 2;
+
+    text-align: center;
+  }
+
+}
+
+@supports not (display: grid) {
+  
+  .root-grid-banner { background-color: $color-white; }
+  
+}
