@@ -6,12 +6,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./site/site.module').then(m => m.SiteModule)
   },
-  /*
   {
     path: 'user',
     loadChildren: () => import('./user/user.module').then(m => m.UserModule)
   }
-  */
 ];
 
 

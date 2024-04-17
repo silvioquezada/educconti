@@ -3,20 +3,20 @@ import { CommonModule } from '@angular/common';
 
 import { SiteRoutingModule } from './site-routing.module';
 
-import { InicioComponent } from './components/inicio/inicio.component';
-import { RequisitosComponent } from './components/requisitos/requisitos.component';
-import { AcercaDeComponent } from './components/acerca-de/acerca-de.component';
-import { CategoriaComponent } from './components/categoria/categoria.component';
-import { MisCursosComponent } from './components/mis-cursos/mis-cursos.component';
+import { HomeComponent } from './components/home/home.component';
+import { AboutComponent } from './components/about/about.component';
+import { RequirementsComponent } from './components/requirements/requirements.component';
+import { CategoryComponent } from './components/category/category.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
 
 @NgModule({
   declarations: [
-    InicioComponent,
-    RequisitosComponent,
-    AcercaDeComponent,
-    CategoriaComponent,
-    MisCursosComponent
+    HomeComponent,
+    AboutComponent,
+    RequirementsComponent,
+    CategoryComponent,
+    MyCoursesComponent
   ],
   imports: [
     CommonModule,

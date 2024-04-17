@@ -4,15 +4,15 @@ import { CommonModule } from '@angular/common';
 import { UserRoutingModule } from './user-routing.module';
 
 import { LoginComponent } from './components/login/login.component';
-import { RegistrateComponent } from './components/registrate/registrate.component';
-import { PerfilComponent } from './components/perfil/perfil.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { SignUpComponent } from './components/sign-up/sign-up.component';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
-    RegistrateComponent,
-    PerfilComponent
+    ProfileComponent,
+    SignUpComponent
   ],
   imports: [
     CommonModule,
