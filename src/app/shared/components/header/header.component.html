@@ -13,27 +13,30 @@
         <div class="collapse navbar-collapse nav-flex-end" id="navbar-content">
           <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active text-color-black" href="index.html">Inicio</a>
+              <a class="nav-link active text-color-black" (click)="home()">Inicio</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Categoría</a>
               <ul class="dropdown-menu shadow">
                 <li>
-                  <a class="dropdown-item text-color-black" href="index.html">Informática</a>
+                  <a class="dropdown-item text-color-black" (click)="category()">Informática</a>
                 </li>
                 <li>
-                    <a class="dropdown-item text-color-black" href="index.html">Mecánica</a>
+                    <a class="dropdown-item text-color-black" (click)="category()">Mecánica</a>
                 </li>
                 <li>
-                    <a class="dropdown-item text-color-black" href="index.html">Electricidad</a>
+                    <a class="dropdown-item text-color-black" (click)="category()">Electricidad</a>
                 </li>
                 <li>
-                    <a class="dropdown-item text-color-black" href="index.html">Administración</a>
+                    <a class="dropdown-item text-color-black" (click)="category()">Administración</a>
                 </li>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" href="my_courses.html">Mis Cursos</a>
+              <a class="nav-link text-color-black" (click)="mycourses()">Mis Cursos</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-color-black" (click)="requirements()">Requisitos</a>
             </li>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Gestión</a>
@@ -73,13 +76,13 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" href="about.html">Acerca de</a>
+              <a class="nav-link text-color-black" (click)="about()">Acerca de</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" href="profile.html">Perfil</a>
+              <a class="nav-link text-color-black" (click)="profile()">Perfil</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" href="login.html">Acceder</a>
+              <a class="nav-link text-color-black" (click)="login()">Acceder</a>
             </li>
             <li class="nav-item">
               <div class="nav-link text-color-black" href="login.html"><i class="fa-solid fa-circle-user"></i> Silvio Quezada

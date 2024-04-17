@@ -1,4 +1,4 @@
-//@import "npm:@fortawesome/fontawesome-free/css/all.css";
+@import "@fortawesome/fontawesome-free/css/all.css";
 @import "assets/styles/imports/settings.imports";
 @import "assets/styles/imports/tools.imports";
 @import "assets/styles/imports/generics.imports";
@@ -6,10 +6,9 @@
 @import "assets/styles/imports/objects.imports";
 @import "assets/styles/imports/components.imports";
 @import "assets/styles/imports/utilities.imports";
-/*
+
 @layer {
 
-    @import "imports/bootstrap.imports";
+   @import "assets/styles/imports/bootstrap.imports";
     
 }
-*/
