@@ -7,8 +7,13 @@ import { CourseComponent } from './components/course/course.component';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 const routes: Routes = [
+  {
+    path: 'dashboard',
+    component: DashboardComponent
+  },
   {
     path: 'usuario',
     component: UserComponent

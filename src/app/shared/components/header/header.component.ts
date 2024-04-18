@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  showAuthParticipant: boolean = false;
-  showAuthManager: boolean = false;
+  showAuthParticipant: boolean = true;
+  showAuthManager: boolean = true;
 
   constructor(private router: Router) { }
 
@@ -43,6 +43,9 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('user/perfil');
   }
 
+  dashboard(): void {
+    this.router.navigateByUrl('manager/dashboard');
+  }
 
   user(): void {
     this.router.navigateByUrl('manager/usuario');

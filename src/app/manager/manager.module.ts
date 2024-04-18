@@ -9,6 +9,7 @@ import { CourseComponent } from './components/course/course.component';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ReportsComponent } from './components/reports/reports.component';
     CourseComponent,
     RegistrationsComponent,
     ApprovalsComponent,
-    ReportsComponent
+    ReportsComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,
