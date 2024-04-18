@@ -10,11 +10,55 @@
         <h2>Menú</h2>
         <nav>
           <ul>
-            <li><a class="padding-block" href="index.html">Inicio</a></li>
-            <li><a class="padding-block" href="">Mis Cursos</a></li>
-            <li><a class="padding-block" href="about.html">Acerca de</a></li>
-            <li><a class="padding-block" href="profile.html">Perfil</a></li>
-            <li><a class="padding-block" href="login.html">Acceder</a></li>
+            <li><a class="padding-block" (click)="home()">Inicio</a></li>
+            <li class="nav-item dropdown">
+              <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categoría</a>
+              <ul class="dropdown-menu shadow">
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="category()">Informática</a>
+                </li>
+                <li>
+                    <a class="dropdown-item text-color-black" (click)="category()">Mecánica</a>
+                </li>
+                <li>
+                    <a class="dropdown-item text-color-black" (click)="category()">Electricidad</a>
+                </li>
+                <li>
+                    <a class="dropdown-item text-color-black" (click)="category()">Administración</a>
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="showAuthParticipant || showAuthManager"><a class="padding-block" (click)="mycourses()">Mis Cursos</a></li>
+            <li><a class="padding-block" (click)="requirements()">Requisitos</a></li>
+            <li *ngIf="showAuthManager" class="nav-item dropdown">
+              <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Gestión</a>
+              <ul class="dropdown-menu shadow">
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="user()">Usuarios</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="period()">Periodos</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="categories()">Categorías</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="course()">Cursos</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="registrations()">Inscripciones</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="approvals()">Aprobaciones</a>
+                </li>
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="reports()">Reportes</a>
+                </li>
+              </ul>
+            </li>
+            <li><a class="padding-block" (click)="about()">Acerca de</a></li>
+            <li *ngIf="showAuthParticipant || showAuthManager"><a class="padding-block" (click)="profile()">Perfil</a></li>
+            <li *ngIf="showAuthParticipant !=true || showAuthManager !=true"><a class="padding-block" (click)="login()">Acceder</a></li>
           </ul>
         </nav>
       </div>

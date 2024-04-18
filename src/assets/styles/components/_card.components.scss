@@ -10,7 +10,7 @@
   
   text-align: center;
 
-  box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+  box-shadow: 2px 2px 8px 4px $color-border-card;
   border-radius: 15px;
 
   transition: .5s;
@@ -23,7 +23,7 @@
 
   text-align: center;
 
-  background: #fff;
+  background: $color-white;
 }
 
 .image-card {
@@ -48,7 +48,7 @@
 }
 
 .card:hover {
-  box-shadow: 0 5px 15px rgba(3, 89, 92, .5);
+  box-shadow: 0 5px 15px $color-secondary;
   transform: translateY(-15px);
 }
 
@@ -92,7 +92,7 @@
   
   text-align: center;
 
-  box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+  box-shadow: 2px 2px 8px 4px $color-border-card;
 
   border-radius: 15px;
 

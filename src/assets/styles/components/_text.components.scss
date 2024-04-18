@@ -1,5 +1,12 @@
 .text-color-primary { color: $color-primary; }
 
+.text-link {
+  color: $color-primary;
+  &:hover {
+    font-weight: bold;
+  }
+}
+
 .text-color-black { color: $color-black; }
 
 .text-color-white { color: $color-white; }
