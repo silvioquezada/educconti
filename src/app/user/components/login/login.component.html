@@ -5,17 +5,26 @@
     <h1>Acceso del Usuario</h1>
     </div>
 
-    <form class="form-login skin-form">
+    <form class="form-login skin-form" [formGroup]="loginForm" (ngSubmit)="login()">
 
     <div class="panel-login">
         <div class="input-group">
         <label class="form-label" for="username">Usuario:</label>
-        <input class="form-control" id="username" type="text" placeholder="Ingrese username">
-        <!-- <label>Existe un error</label> -->
+        <input class="form-control" id="username" type="text" placeholder="Ingrese username" [formControl]="usuario">
+          <div *ngIf="usuario.errors">
+            <div *ngIf="usuario.errors && isValidForm != null && !isValidForm">
+              <small class="text-color-red" *ngIf="usuario?.hasError('required')">Usuario es requerido</small>
+            </div>
+          </div>
         </div>
         <div class="input-group">
         <label class="form-label" for="email">Contraseña:</label>
-        <input class="form-control" id="email" type="text" placeholder="Ingrese email">
+        <input class="form-control" id="email" type="text" placeholder="Ingrese email" [formControl]="password">
+        <div *ngIf="password.errors">
+          <div *ngIf="password.errors && isValidForm != null && !isValidForm">
+            <small class="text-color-red" *ngIf="password?.hasError('required')">Password es requerido</small>
+          </div>
+        </div>
         </div>
 
         <div class="input-group content-row-between">

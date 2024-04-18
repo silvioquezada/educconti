@@ -188,6 +188,16 @@
   border: 2px solid $background-color-input;
 }
 
+/*
+.input-error {
+  border-color: $color-red;
+}
+
+.form-control.input-error:focus {
+  border: 1px solid #0a58ca;
+}
+*/
+
 .label-control {
   display: block;
   padding: 6px;

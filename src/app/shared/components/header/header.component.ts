@@ -7,8 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  showAuthParticipant: boolean = true;
-  showAuthManager: boolean = true;
+  showAuthParticipant: boolean = false;
+  showAuthManager: boolean = false;
 
   constructor(private router: Router) { }
 
