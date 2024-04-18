@@ -2,7 +2,7 @@
     <nav class="navbar navbar-expand-sm navbar-dark bg-primary shadow-sm">
   
   
-      <a class="aa" href="#">
+      <a (click)="home()">
         <img class="logo" src="./assets/images/logo.svg" alt="Imagen Logo">
       </a>
   
@@ -16,7 +16,7 @@
               <a class="nav-link active text-color-black" (click)="home()">Inicio</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Categoría</a>
+              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Categoría</a>
               <ul class="dropdown-menu shadow">
                 <li>
                   <a class="dropdown-item text-color-black" (click)="category()">Informática</a>
@@ -39,40 +39,29 @@
               <a class="nav-link text-color-black" (click)="requirements()">Requisitos</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown" data-bs-auto-close="outside">Gestión</a>
+              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Gestión</a>
               <ul class="dropdown-menu shadow">
                 <li>
-                  <a class="dropdown-item text-color-black" href="user_management.html">Usuarios</a>
+                  <a class="dropdown-item text-color-black" (click)="user()">Usuarios</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="period_management.html">Periodos</a>
+                  <a class="dropdown-item text-color-black" (click)="period()">Periodos</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="category_management.html">Categorías</a>
+                  <a class="dropdown-item text-color-black" (click)="categories()">Categorías</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="course_management.html">Cursos</a>
+                  <a class="dropdown-item text-color-black" (click)="course()">Cursos</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="#">Inscripciones</a>
+                  <a class="dropdown-item text-color-black" (click)="registrations()">Inscripciones</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="#">Aprobaciones</a>
+                  <a class="dropdown-item text-color-black" (click)="approvals()">Aprobaciones</a>
                 </li>
                 <li>
-                  <a class="dropdown-item text-color-black" href="#">Reportes</a>
+                  <a class="dropdown-item text-color-black" (click)="reports()">Reportes</a>
                 </li>
-                <!-- <li class="dropend">
-                  <a href="#" class="dropdown-item dropdown-toggle text-color-black" data-bs-toggle="dropdown" data-bs-auto-close="outside">Reportes</a>
-                  <ul class="dropdown-menu shadow">
-                    <li>
-                      <a class="dropdown-item text-color-black" href="#">Inscritos</a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item text-color-black" href="#">aprobación</a>
-                    </li>
-                  </ul>
-                </li> -->
               </ul>
             </li>
             <li class="nav-item">

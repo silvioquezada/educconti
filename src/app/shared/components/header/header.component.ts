@@ -43,4 +43,33 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('user/perfil');
   }
 
+
+  user(): void {
+    this.router.navigateByUrl('manager/usuario');
+  }
+
+  period(): void {
+    this.router.navigateByUrl('manager/periodo');
+  }
+
+  categories(): void {
+    this.router.navigateByUrl('manager/categoria');
+  }
+
+  course(): void {
+    this.router.navigateByUrl('manager/cursos');
+  }
+
+  registrations(): void {
+    this.router.navigateByUrl('manager/inscripciones');
+  }
+
+  approvals(): void {
+    this.router.navigateByUrl('manager/aprobaciones');
+  }
+
+  reports(): void {
+    this.router.navigateByUrl('manager/reportes');
+  }
+
 }

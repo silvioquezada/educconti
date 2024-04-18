@@ -179,7 +179,7 @@
   }
 }
 
-@media screen and (min-width: 1000) {
+@media screen and (min-width: $high-width-max) {
 
   .card {
     margin-top: 10px;

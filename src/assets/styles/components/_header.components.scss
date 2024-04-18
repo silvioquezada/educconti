@@ -65,7 +65,7 @@ nav {
   text-align: center;
 }
 
-@media screen and (min-width: 570px) {
+@media screen and (min-width: $medium-width) {
 
   .header {
     display: flex;
@@ -96,15 +96,13 @@ nav {
     padding-left: 12px;
     padding-right: 12px;
   }
-    
-}
 
-@media screen and (min-width: 576) {
   .nav-flex-end {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
+    
 }
 
 .dropdown-menu.show {

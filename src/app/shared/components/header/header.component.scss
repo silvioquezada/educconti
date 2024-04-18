@@ -1,0 +1,8 @@
+.node .hover-display {
+    display: none;
+}
+
+// show elements marked with hover-display class in a node div *when any part of the div is hovered over*
+.node:hover .hover-display {
+    display: flex;
+}

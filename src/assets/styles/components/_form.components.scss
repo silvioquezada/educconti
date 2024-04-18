@@ -80,7 +80,7 @@
   .form-login { width: 70%; }
 }
 
-@media screen and (min-width: 1000) {
+@media screen and (min-width: $high-width-max) {
   .form-login { width: 40%; }
 }
 
@@ -264,6 +264,6 @@
   .w40 { width: 70%; }
 }
 
-@media screen and (min-width: 1000) {
+@media screen and (min-width: $high-width-max) {
   .w40 { width: 40%; }
 }
