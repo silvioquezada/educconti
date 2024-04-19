@@ -185,16 +185,20 @@
   font-size: 16px;
 
   border-radius: 5px;
-  border: 2px solid $background-color-input;
+  //border: 2px solid $background-color-input;
 }
 
 /*
 .input-error {
   border-color: $color-red;
 }
+*/
 
+/*
 .form-control.input-error:focus {
-  border: 1px solid #0a58ca;
+  //border: 1px solid #ca0a0a;
+  //box-shadow: 2px 2px 2px 2px #ca0a0a;
+  border-block: $color-red;
 }
 */
 
