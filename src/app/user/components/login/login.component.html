@@ -2,15 +2,15 @@
   <section class="container" aria-label="Detalle de Curso">
 
     <div class="content-title">
-    <h1>Acceso del Usuario</h1>
+      <h1>Acceso del Usuario</h1>
     </div>
 
     <form class="form-login skin-form" [formGroup]="loginForm" (ngSubmit)="login()">
 
-    <div class="panel-login">
+      <div class="panel-login">
         <div class="input-group">
-        <label class="form-label" for="username">Usuario:</label>
-        <input class="form-control" id="username" type="text" placeholder="Ingrese username" [formControl]="usuario" [ngClass]="{ 'is-invalid': usuario.errors && isValidForm != null && !isValidForm}">
+          <label class="form-label" for="username">Usuario:</label>
+          <input class="form-control" id="username" type="text" placeholder="Ingrese username" [formControl]="usuario" [ngClass]="{ 'is-invalid': usuario.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="usuario.errors">
             <div *ngIf="usuario.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="usuario?.hasError('required')">Usuario es requerido</small>
@@ -18,21 +18,22 @@
           </div>
         </div>
         <div class="input-group">
-        <label class="form-label" for="password">Contraseña:</label>
-        <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
-        <div *ngIf="password.errors">
-          <div *ngIf="password.errors && isValidForm != null && !isValidForm">
-            <small class="text-color-red" *ngIf="password?.hasError('required')">Password es requerido</small>
+          <label class="form-label" for="password">Contraseña:</label>
+          <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
+          <div *ngIf="password.errors">
+            <div *ngIf="password.errors && isValidForm != null && !isValidForm">
+              <small class="text-color-red" *ngIf="password?.hasError('required')">Contraseña es requerido</small>
+            </div>
           </div>
-        </div>
         </div>
 
         <div class="input-group content-row-between">
-        <button type="button" class="btn btn-primary" (click)="login()"><i class="fa-solid fa-key"></i> Ingresar</button>
-        <a class="text-color-primary" routerLink="/user/registrate"><span class="text-link">Regístrate</span></a>
+          <button type="button" class="btn btn-primary" (click)="login()"><i class="fa-solid fa-key"></i> Ingresar</button>
+          <a class="text-color-primary" routerLink="/user/registrate"><span class="text-link">Regístrate</span></a>
         </div>
-        <div class="input-group"><a class="text-color-primary" href="sign_up.html"><span class="text-link">Recuperar contraseña</span></a></div>
-    </div>
+        <div class="input-group"><a class="text-color-primary" href="sign_up.html">
+          <span class="text-link">Recuperar contraseña</span></a></div>
+        </div>
 
     </form>
 
