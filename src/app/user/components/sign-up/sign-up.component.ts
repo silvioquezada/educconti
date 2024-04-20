@@ -5,7 +5,14 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractC
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
 
+
 import * as moment from 'moment';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { ToastrService } from 'ngx-toastr';
+
+
+import { finalize } from "rxjs/operators";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -36,6 +43,7 @@ export class SignUpComponent implements OnInit {
     //private sharedService: SharedService,
     //private headerMenusService: HeaderMenusService,
     //private localStorageService: LocalStorageService,
+    private toastr : ToastrService,
     private router: Router) {
 
     this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '');
@@ -208,25 +216,32 @@ export class SignUpComponent implements OnInit {
 
     this.loading = true;
 
-    this.usuarioService.save(this.usuarioDTO).subscribe( (data : any) =>
-    {
+    this.usuarioService.save(this.usuarioDTO).pipe(
+      finalize(async () => {
+          this.router.navigateByUrl('inicio');
+      })
+    )
+    .subscribe( (data) => {
         this.loading = false;
-        this.router.navigateByUrl('home');
-/*
-        if (data.estado == true)
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
         {
-          //this.formularioNormal();
-          //this.toastr.success("Registro Almacenado Satisfactoriamente", "INFORMACIÓN DEL SISTEMA");
+          Swal.fire({
+            icon: "success",
+            title: "Se ha inscrito correctamente",
+          });
         }
         else
         {
-          //this.toastr.error("Registro no se pudo Almacenar, vuelva a intertarlo por favor", "INFORMACIÓN DEL SISTEMA");
+          this.toastr.error("Registro no se pudo Almacenar, vuelva a intertarlo por favor", "INFORMACIÓN DEL SISTEMA");
         }
-        */
-      }, err => {
-        //this.toastr.error(this.error.getClienteStatus(err.status), "INFORMACIÓN DEL SISTEMA");
+      },
+      (error: HttpErrorResponse) => {
         this.loading = false;
-      
-    });
+        //console.log(error.error);
+        this.toastr.error("Se ha originado un error en el servidor", "INFORMACIÓN DEL SISTEMA");
+      }
+    );
   }
 }
