@@ -5,14 +5,12 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractC
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
 
+import { finalize } from "rxjs/operators";
+import { HttpErrorResponse } from '@angular/common/http';
 
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { ToastrService } from 'ngx-toastr';
-
-
-import { finalize } from "rxjs/operators";
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-sign-up',
@@ -211,25 +209,24 @@ export class SignUpComponent implements OnInit {
     
   }
 
-  
   save(): void {
 
     this.loading = true;
 
     this.usuarioService.save(this.usuarioDTO).pipe(
-      finalize(async () => {
+      finalize( () => {
           this.router.navigateByUrl('inicio');
       })
     )
-    .subscribe( (data) => {
+    .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
         
         if (dataResult.estado === 1)
         {
-          Swal.fire({
+          await Swal.fire({
             icon: "success",
-            title: "Se ha inscrito correctamente",
+            title: "Se ha inscrito correctamente, Bienvenido a Educconti",
           });
         }
         else
@@ -244,4 +241,5 @@ export class SignUpComponent implements OnInit {
       }
     );
   }
+
 }
