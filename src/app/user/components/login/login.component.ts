@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
     //private localStorageService: LocalStorageService,
     private router: Router) {
       this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '');
-      this.usuario = new FormControl('', [
+      this.usuario = new FormControl(this.usuarioDTO.usuario, [
         Validators.required
       ]);
   
-      this.password = new FormControl('', [
+      this.password = new FormControl(this.usuarioDTO.password, [
         Validators.required,
         //Validators.minLength(8),
         //Validators.maxLength(16),
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     }
 
     this.isValidForm = true;
-
+    this.usuarioDTO = this.loginForm.value;
     this.router.navigateByUrl('manager/dashboard');
   }
 

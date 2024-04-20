@@ -39,9 +39,8 @@
         <div class="input-group">
           <label class="form-label" for="genero">Género:</label>
           <select class="form-control form-control-select" id="genero" [formControl]="genero" [ngClass]="{ 'is-invalid': genero.errors && isValidForm != null && !isValidForm}">
-            <option>Seleccione un género</option>
-            <option>Masculino</option>
-            <option>Femenino</option>
+            <option value="MASCULINO">MASCULINO</option>
+            <option value="FEMENINO">FEMENINO</option>
           </select>
           <div *ngIf="genero.errors">
             <div *ngIf="genero.errors && isValidForm != null && !isValidForm">
@@ -52,12 +51,11 @@
         <div class="input-group">
           <label class="form-label" for="etnia">Etnia</label>
           <select class="form-control form-control-select" id="etnia" [formControl]="etnia" [ngClass]="{ 'is-invalid': etnia.errors && isValidForm != null && !isValidForm}">
-            <option>Seleccione una etnia</option>
-            <option>Mestizo</option>
-            <option>Montubio</option>
-            <option>Indígena</option>
-            <option>Blanca</option>
-            <option>Negra</option>
+            <option value="MESTIZO">MESTIZO</option>
+            <option value="MONTUBIO">MONTUBIO</option>
+            <option value="INDÍGENA">INDÍGENA</option>
+            <option value="BLANCA">BLANCA</option>
+            <option value="NEGRA">NEGRA</option>
           </select>
           <div *ngIf="etnia.errors">
             <div *ngIf="etnia.errors && isValidForm != null && !isValidForm">
@@ -99,12 +97,11 @@
         <div class="input-group">
           <label class="form-label" for="instruccion">Nivel de Instrucción:</label>
           <select class="form-control form-control-select" id="instruccion" [formControl]="nivelInstruccion" [ngClass]="{ 'is-invalid': nivelInstruccion.errors && isValidForm != null && !isValidForm}">
-            <option>Seleccione una instruccion</option>
-            <option>Ninguna</option>
-            <option>Primaria</option>
-            <option>Secundaria</option>
-            <option>Tercer Nivel</option>
-            <option>Cuarto Nivel</option>
+            <option>NINGUNA</option>
+            <option>PRIMARIA</option>
+            <option>SECUNDARIA</option>
+            <option>TERCER NIVEL</option>
+            <option>CUARTO NIVEL</option>
           </select>
           <div *ngIf="nivelInstruccion.errors">
             <div *ngIf="nivelInstruccion.errors && isValidForm != null && !isValidForm">
@@ -123,7 +120,7 @@
         </div>
         <div class="input-group">
           <label class="form-label" for="password">Contraseña:</label>
-          <input class="form-control" id="password" type="text" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
+          <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="password.errors">
             <div *ngIf="password.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="password?.hasError('required')">Contraseña es requerido</small>
@@ -134,7 +131,7 @@
 
         <div class="input-group">
           <label class="form-label" for="password">Confirme contraseña:</label>
-          <input class="form-control" id="password" type="text" placeholder="Confirme contraseña" [formControl]="password2" [ngClass]="{ 'is-invalid': password2.errors && isValidForm != null && !isValidForm}">
+          <input class="form-control" id="password" type="password" placeholder="Confirme contraseña" [formControl]="password2" [ngClass]="{ 'is-invalid': password2.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="password2.errors">
             <div *ngIf="password2.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="password2?.hasError('isValid')">{{ messaguePassword }}</small>
@@ -142,7 +139,7 @@
           </div>
         </div>
         <div class="input-group input-group-center">
-          <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Registrarse</button>
+          <button class="btn btn-primary" type="submit"><i class="fa-solid fa-paper-plane"></i> Registrarse</button>
         </div>
       </div>
 

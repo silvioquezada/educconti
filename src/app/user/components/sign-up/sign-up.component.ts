@@ -5,6 +5,8 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractC
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
 
+import * as moment from 'moment';
+
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
@@ -28,6 +30,7 @@ export class SignUpComponent implements OnInit {
   isValidForm!: boolean | null;
   messagueCedula: string = "";
   messaguePassword: string = "";
+  loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     //private sharedService: SharedService,
@@ -37,52 +40,48 @@ export class SignUpComponent implements OnInit {
 
     this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '');
 
-    this.cedula = new FormControl('', [
+    this.cedula = new FormControl(this.usuarioDTO.cedula, [
       this.cedulaValidator
     ]);
 
-    this.apellido = new FormControl('', [
+    this.apellido = new FormControl(this.usuarioDTO.apellido, [
       Validators.required
     ]);
 
-    this.nombre = new FormControl('', [
+    this.nombre = new FormControl(this.usuarioDTO.nombre, [
       Validators.required
     ]);
 
-    this.genero = new FormControl('', [
+    this.genero = new FormControl(this.usuarioDTO.genero, [
       Validators.required
     ]);
 
-    this.etnia = new FormControl('', [
+    this.etnia = new FormControl(this.usuarioDTO.etnia, [
       Validators.required
     ]);
 
-    this.direccion = new FormControl('', [
+    this.direccion = new FormControl(this.usuarioDTO.direccion, [
       Validators.required
     ]);
 
-    this.celular = new FormControl('', [
+    this.celular = new FormControl(this.usuarioDTO.celular, [
       Validators.required
     ]);
 
-    this.direccion = new FormControl('', [
-      Validators.required
-    ]);
-
-    this.correo = new FormControl('', [
+    this.correo = new FormControl(this.usuarioDTO.correo, [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
     ]);
 
-    this.nivelInstruccion = new FormControl('', [
+    this.nivelInstruccion = new FormControl(this.usuarioDTO.nivel_instruccion, [
       Validators.required
     ]);
 
-    this.usuario = new FormControl('', [
+    this.usuario = new FormControl(this.usuarioDTO.usuario, [
       Validators.required
     ]);
 
-    this.password = new FormControl('', [
+    this.password = new FormControl(this.usuarioDTO.password, [
       Validators.required,
       Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/)
     ]);
@@ -92,8 +91,19 @@ export class SignUpComponent implements OnInit {
     ]);
 
     this.signUpForm = this.formBuilder.group({
+      cod_usuario : moment().unix().toString(),
+      cedula: this.cedula,
+      apellido: this.apellido,
+      nombre: this.nombre,
+      genero: this.genero,
+      etnia: this.etnia,
+      direccion: this.direccion,
+      celular: this.celular,
+      correo: this.correo,
+      nivel_instruccion: this.nivelInstruccion,
       usuario: this.usuario,
       password: this.password,
+      password2: this.password2
     });
   }
 
@@ -164,19 +174,18 @@ export class SignUpComponent implements OnInit {
   passwordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
     this.messaguePassword = '';
     let password2 = control.value;
-    if(password2.value == ''){
+    
+    if(password2 === ''){
       this.messaguePassword = 'Contraseña de confirmación es requerida';
       return { isValid: true }
     }
 
-    if (this.password.value != password2.value){
+    if (this.password.value != password2){
       this.messaguePassword = 'Las contraseñas no coinciden';
       return { isValid: true }
     }
-    
-    return null;
   
-
+    return null;
   }
 
   ngOnInit(): void {
@@ -184,12 +193,40 @@ export class SignUpComponent implements OnInit {
 
   login(): void {
     this.isValidForm = false;
-    if (this.signUpForm.status=='INVALID') {
+    if (this.signUpForm.status == 'INVALID') {
       return;
     }
 
     this.isValidForm = true;
+    this.usuarioDTO = this.signUpForm.value;
+    this.save();
+    
+  }
 
-    this.router.navigateByUrl('manager/dashboard');
+  
+  save(): void {
+
+    this.loading = true;
+
+    this.usuarioService.save(this.usuarioDTO).subscribe( (data : any) =>
+    {
+        this.loading = false;
+        this.router.navigateByUrl('home');
+/*
+        if (data.estado == true)
+        {
+          //this.formularioNormal();
+          //this.toastr.success("Registro Almacenado Satisfactoriamente", "INFORMACIÓN DEL SISTEMA");
+        }
+        else
+        {
+          //this.toastr.error("Registro no se pudo Almacenar, vuelva a intertarlo por favor", "INFORMACIÓN DEL SISTEMA");
+        }
+        */
+      }, err => {
+        //this.toastr.error(this.error.getClienteStatus(err.status), "INFORMACIÓN DEL SISTEMA");
+        this.loading = false;
+      
+    });
   }
 }
