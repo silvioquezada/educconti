@@ -28,7 +28,7 @@
                 </li>
               </ul>
             </li>
-            <li *ngIf="showAuthParticipant || showAuthManager"><a class="padding-block" (click)="mycourses()">Mis Cursos</a></li>
+            <li *ngIf="showAuthNormal || showAuthManager"><a class="padding-block" (click)="mycourses()">Mis Cursos</a></li>
             <li><a class="padding-block" (click)="requirements()">Requisitos</a></li>
             <li *ngIf="showAuthManager" class="nav-item dropdown">
               <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Gestión</a>
@@ -57,8 +57,8 @@
               </ul>
             </li>
             <li><a class="padding-block" (click)="about()">Acerca de</a></li>
-            <li *ngIf="showAuthParticipant || showAuthManager"><a class="padding-block" (click)="profile()">Perfil</a></li>
-            <li *ngIf="showAuthParticipant !=true || showAuthManager !=true"><a class="padding-block" (click)="login()">Acceder</a></li>
+            <li *ngIf="showAuthNormal || showAuthManager"><a class="padding-block" (click)="profile()">Perfil</a></li>
+            <li *ngIf="!showAuthNormal"><a class="padding-block" (click)="login()">Acceder</a></li>
           </ul>
         </nav>
       </div>

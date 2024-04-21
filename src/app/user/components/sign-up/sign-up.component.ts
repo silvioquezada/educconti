@@ -5,7 +5,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractC
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
 
-import { finalize } from "rxjs/operators";
+import { finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import * as moment from 'moment';
@@ -33,18 +33,15 @@ export class SignUpComponent implements OnInit {
   password2: FormControl;
   signUpForm: FormGroup;
   isValidForm!: boolean | null;
-  messagueCedula: string = "";
-  messaguePassword: string = "";
+  messagueCedula: string = '';
+  messaguePassword: string = '';
   loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    //private sharedService: SharedService,
-    //private headerMenusService: HeaderMenusService,
-    //private localStorageService: LocalStorageService,
     private toastr : ToastrService,
     private router: Router) {
 
-    this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, 'NORMAL', '');
+    this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
 
     this.cedula = new FormControl(this.usuarioDTO.cedula, [
       this.cedulaValidator
@@ -205,19 +202,15 @@ export class SignUpComponent implements OnInit {
 
     this.isValidForm = true;
     this.usuarioDTO = this.signUpForm.value;
+    this.usuarioDTO.tipo_usuario = 'NORMAL';
     this.save();
-    
   }
 
   save(): void {
 
     this.loading = true;
 
-    this.usuarioService.save(this.usuarioDTO).pipe(
-      finalize( () => {
-          this.router.navigateByUrl('inicio');
-      })
-    )
+    this.usuarioService.save(this.usuarioDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -225,19 +218,28 @@ export class SignUpComponent implements OnInit {
         if (dataResult.estado === 1)
         {
           await Swal.fire({
-            icon: "success",
-            title: "Se ha inscrito correctamente, Bienvenido a Educconti",
+            icon: 'success',
+            title: 'Se ha inscrito correctamente',
+            showConfirmButton: false,
+            timer: 1500
           });
+          this.router.navigateByUrl('inicio');
         }
         else
         {
-          this.toastr.error("Registro no se pudo Almacenar, vuelva a intertarlo por favor", "INFORMACIÓN DEL SISTEMA");
+          this.toastr.error('Registro no se pudo Almacenar, vuelva a intertarlo por favor', 'INFORMACIÓN DEL SISTEMA');
         }
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
         //console.log(error.error);
-        this.toastr.error("Se ha originado un error en el servidor", "INFORMACIÓN DEL SISTEMA");
+        //this.toastr.error('Se ha originado un error en el servidor', 'INFORMACIÓN DEL SISTEMA');
+        Swal.fire({
+          icon: 'success',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
   }

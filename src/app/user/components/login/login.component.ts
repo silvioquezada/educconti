@@ -8,11 +8,9 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 import { HeaderMenus } from 'src/app/shared/models/header-menus.dto';
 import { AccessService } from 'src/app/shared/services/access.service';
 
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-import { finalize } from "rxjs/operators";
 import { HttpErrorResponse } from '@angular/common/http';
-
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -28,10 +26,7 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    //private sharedService: SharedService,
-    //private headerMenusService: HeaderMenusService,
     private localStorageService: LocalStorageService,
-    private toastr : ToastrService,
     private router: Router,
     private accessservice: AccessService) {
       this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
@@ -40,9 +35,7 @@ export class LoginComponent implements OnInit {
       ]);
   
       this.password = new FormControl(this.usuarioDTO.password, [
-        Validators.required,
-        //Validators.minLength(8),
-        //Validators.maxLength(16),
+        Validators.required
       ]);
 
       this.loginForm = this.formBuilder.group({
@@ -70,7 +63,7 @@ export class LoginComponent implements OnInit {
     this.loading = true;
 
     this.usuarioService.login(this.usuarioDTO)
-    .subscribe( async (data) => {
+    .subscribe( (data) => {
         this.loading = false;
         const dataResult = data;
         
@@ -89,7 +82,13 @@ export class LoginComponent implements OnInit {
               status_normal: true
             };
             this.accessservice.headerManagement.next(headerInfo);
-            this.router.navigateByUrl('manager/dashboard');
+            this.router.navigateByUrl('inicio');
+            Swal.fire({
+              icon: 'success',
+              title: 'Bienvenido a Educconti',
+              showConfirmButton: false,
+              timer: 1500
+            });
           } else {
             const headerInfo: HeaderMenus = {
               status_manager: true,
@@ -101,14 +100,24 @@ export class LoginComponent implements OnInit {
         }
         else
         {
-          this.toastr.error("Las credenciales son incorrectas", "INFORMACIÓN DEL SISTEMA");
+          Swal.fire({
+            icon: 'error',
+            title: 'Las credenciales son incorrectas',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
         
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
         //console.log(error.error);
-        this.toastr.error("Se ha originado un error en el servidor", "INFORMACIÓN DEL SISTEMA");
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
   }

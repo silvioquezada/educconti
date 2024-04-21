@@ -38,7 +38,7 @@
             <li class="nav-item">
               <a class="nav-link text-color-black" (click)="requirements()">Requisitos</a>
             </li>
-            <li *ngIf="showAuthManager"  class="nav-item dropdown">
+            <li *ngIf="showAuthManager" class="nav-item dropdown">
               <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Gestión</a>
               <ul class="dropdown-menu shadow">
                 <li>
@@ -73,7 +73,7 @@
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">
               <a class="nav-link text-color-black" (click)="profile()">Perfil</a>
             </li>
-            <li *ngIf="showAuthNormal !=true || showAuthManager !=true" class="nav-item">
+            <li *ngIf="!showAuthNormal" class="nav-item">
               <a class="nav-link text-color-black" (click)="login()">Acceder</a>
             </li>
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">

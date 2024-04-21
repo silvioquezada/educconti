@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { HeaderMenus } from '../../models/header-menus.dto';
+import { AccessService } from '../../services/access.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
   selector: 'app-footer',
@@ -7,12 +10,40 @@ import { Router } from '@angular/router';
   styleUrls: ['./footer.component.scss']
 })
 export class FooterComponent implements OnInit {
-  showAuthParticipant: boolean = false;
+  showAuthNormal: boolean = false;
   showAuthManager: boolean = false;
+  statusSesion : string = "";
   
-  constructor(private router: Router) { }
+  constructor(private router: Router, private accessservice: AccessService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
+    this.accessservice.headerManagement.subscribe(
+      (headerInfo: HeaderMenus) => {
+        if (headerInfo) {
+                    
+          this.showAuthNormal = headerInfo.status_normal;
+          this.showAuthManager = headerInfo.status_manager;
+
+          this.statusSesion = this.localStorageService.getData("estado_sesion")!;
+
+          if(this.statusSesion == "")
+          {
+            this.showAuthNormal = headerInfo.status_normal;
+            this.showAuthManager = headerInfo.status_manager; 
+           
+          } else {
+            if(this.localStorageService.getData("tipo_usuario")==="NORMAL") {
+              this.showAuthNormal = true;
+              this.showAuthManager = false;
+            } else {
+              this.showAuthNormal = true;
+              this.showAuthManager = true;
+            }
+
+          }
+        }
+      }
+    );
   }
 
   home(): void {
