@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { HeaderMenus } from 'src/app/shared/models/header-menus.dto';
+import { AccessService } from 'src/app/shared/services/access.service';
+
 
 import { finalize } from "rxjs/operators";
 import { HttpErrorResponse } from '@angular/common/http';
@@ -26,10 +30,11 @@ export class LoginComponent implements OnInit {
     private usuarioService: UsuarioService,
     //private sharedService: SharedService,
     //private headerMenusService: HeaderMenusService,
-    //private localStorageService: LocalStorageService,
+    private localStorageService: LocalStorageService,
     private toastr : ToastrService,
-    private router: Router) {
-      this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '');
+    private router: Router,
+    private accessservice: AccessService) {
+      this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
       this.usuario = new FormControl(this.usuarioDTO.usuario, [
         Validators.required
       ]);
@@ -71,7 +76,28 @@ export class LoginComponent implements OnInit {
         
         if (dataResult.estado === 1)
         {
-          this.router.navigateByUrl('manager/dashboard');
+          //console.log(dataResult);
+          this.localStorageService.saveData("usuario", dataResult.usuario);
+          this.localStorageService.saveData("tipo_usuario", dataResult.tipo_usuario);
+          this.localStorageService.saveData("token", dataResult.token);
+          this.localStorageService.saveData("estado_sesion", "true");
+
+          
+          if(dataResult.tipo_usuario==="NORMAL") {
+            const headerInfo: HeaderMenus = {
+              status_manager: false,
+              status_normal: true
+            };
+            this.accessservice.headerManagement.next(headerInfo);
+            this.router.navigateByUrl('manager/dashboard');
+          } else {
+            const headerInfo: HeaderMenus = {
+              status_manager: true,
+              status_normal: true
+            };
+            this.accessservice.headerManagement.next(headerInfo);
+            this.router.navigateByUrl('manager/dashboard');
+          }
         }
         else
         {
