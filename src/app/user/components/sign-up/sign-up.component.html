@@ -91,7 +91,7 @@
           <div *ngIf="correo.errors">
             <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="correo?.hasError('required')">Correo es requerido</small>
-              <small class="text-color-red" *ngIf="correo?.hasError('pattern')">Correo no es válido</small>
+              <small class="text-color-red" *ngIf="correo?.hasError('isValid')">{{ messagueEmail }}</small>
             </div>
           </div>
         </div>

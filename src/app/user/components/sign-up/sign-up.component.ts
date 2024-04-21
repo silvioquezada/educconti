@@ -34,6 +34,7 @@ export class SignUpComponent implements OnInit {
   signUpForm: FormGroup;
   isValidForm!: boolean | null;
   messagueCedula: string = '';
+  messagueEmail: string = '';
   messaguePassword: string = '';
   loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
@@ -73,7 +74,7 @@ export class SignUpComponent implements OnInit {
 
     this.correo = new FormControl(this.usuarioDTO.correo, [
       Validators.required,
-      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
+      this.emailValidator
     ]);
 
     this.nivelInstruccion = new FormControl(this.usuarioDTO.nivel_instruccion, [
@@ -189,6 +190,60 @@ export class SignUpComponent implements OnInit {
     }
   
     return null;
+  }
+
+  emailValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    //console.log(control.value);
+    //Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
+    //return null;
+    let validator = true;
+    let email = control.value;
+    const atIndex = email.indexOf('@');
+    if (atIndex <= 0 || atIndex === email.length - 1) {
+      this.messagueEmail = 'Correo no es válido';
+      return { isValid: true };
+    }
+
+    const [local, domain] = email.split('@');
+
+    if (!local || !domain) {
+      this.messagueEmail = 'Correo no es válido';
+      return { isValid: true };
+    }
+
+    // Verificamos que el dominio contenga un punto y no esté al inicio ni al final
+    const dotIndex = domain.indexOf('.');
+    if (dotIndex <= 0 || dotIndex === domain.length - 1) {
+      this.messagueEmail = 'Correo no es válido';
+      return { isValid: true };
+    }
+
+    // Comprobamos que el dominio no tenga más de un punto consecutivo
+    if (domain.includes('..')) {
+      this.messagueEmail = 'Correo no es válido';
+      return { isValid: true };
+    }
+
+    const invalidChars = [' ', '!', '#', '$', '%', '&', '*', '(', ')', '+', ',', '/', ':', ';', '<', '=', '>', '?', '[', '\\', ']', '^', '`', '{', '|', '}', '~'];
+    for (let char of invalidChars) {
+      if (email.includes(char)) {
+        this.messagueEmail = 'Correo no es válido';
+        return { isValid: true };
+      }
+    }
+    
+    let resultEmail = this.searchEmail();
+    if(!resultEmail) {
+      this.messagueEmail = 'Correo ya está registrado';
+      return { isValid: true };
+    }
+
+    return null;
+  }
+
+  searchEmail(): boolean {
+
+    return true;
   }
 
   ngOnInit(): void {
