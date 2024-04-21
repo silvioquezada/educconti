@@ -18,4 +18,12 @@ export class UsuarioService {
   save(post: UsuarioDTO): Observable<UsuarioDTO> {
     return this.http.post<UsuarioDTO>(this.api, post);
   }
+
+  searchEmail(email: string): Observable<any> {
+    return this.http.get<any>(this.api + "searchemail/" + email);
+  }
+
+  searchUser(user: string): Observable<any> {
+    return this.http.get<any>(this.api + "searchuser/" + user);
+  }
 }

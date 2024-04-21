@@ -7,7 +7,7 @@
       <h1>Regístrate</h1>
     </div> 
   
-    <form class="form skin-form" [formGroup]="signUpForm" (ngSubmit)="login()">
+    <form class="form skin-form" [formGroup]="signUpForm" (ngSubmit)="signUp()">
 
       <div class="panel panel-col-p50">
         <div class="input-group">
@@ -87,11 +87,14 @@
         </div>
         <div class="input-group">
           <label class="form-label" for="correo">Correo:</label>
-          <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" [formControl]="correo" [ngClass]="{ 'is-invalid': correo.errors && isValidForm != null && !isValidForm}">
-          <div *ngIf="correo.errors">
+          <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
+          <div *ngIf="correo.errors || !isValidFormEmail">
             <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="correo?.hasError('required')">Correo es requerido</small>
-              <small class="text-color-red" *ngIf="correo?.hasError('isValid')">{{ messagueEmail }}</small>
+              <small class="text-color-red" *ngIf="correo?.hasError('pattern')">Correo no es válido</small>
+            </div>
+            <div *ngIf="!isValidFormEmail">
+              <small class="text-color-red">Correo ya está registrado</small>
             </div>
           </div>
         </div>
@@ -112,10 +115,13 @@
         </div>
         <div class="input-group">
           <label class="form-label" for="usuario">Usuario:</label>
-          <input class="form-control" id="usuario" type="text" placeholder="Ingrese usuario" [formControl]="usuario" [ngClass]="{ 'is-invalid': usuario.errors && isValidForm != null && !isValidForm}">
-          <div *ngIf="usuario.errors">
+          <input class="form-control" id="usuario" type="text" placeholder="Ingrese usuario" [formControl]="usuario" [ngClass]="{ 'is-invalid': (usuario.errors && isValidForm != null && !isValidForm) || !isValidFormUser}">
+          <div *ngIf="usuario.errors || !isValidFormUser">
             <div *ngIf="usuario.errors && isValidForm != null && !isValidForm">
               <small class="text-color-red" *ngIf="usuario?.hasError('required')">Usuario es requerido</small>
+            </div>
+            <div *ngIf="!isValidFormUser">
+              <small class="text-color-red">Usuario ya está registrado</small>
             </div>
           </div>
         </div>

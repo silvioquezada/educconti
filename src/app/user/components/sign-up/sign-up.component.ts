@@ -33,6 +33,8 @@ export class SignUpComponent implements OnInit {
   password2: FormControl;
   signUpForm: FormGroup;
   isValidForm!: boolean | null;
+  isValidFormEmail: boolean;
+  isValidFormUser: boolean;
   messagueCedula: string = '';
   messagueEmail: string = '';
   messaguePassword: string = '';
@@ -74,7 +76,7 @@ export class SignUpComponent implements OnInit {
 
     this.correo = new FormControl(this.usuarioDTO.correo, [
       Validators.required,
-      this.emailValidator
+      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
     ]);
 
     this.nivelInstruccion = new FormControl(this.usuarioDTO.nivel_instruccion, [
@@ -192,73 +194,120 @@ export class SignUpComponent implements OnInit {
     return null;
   }
 
-  emailValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    //console.log(control.value);
-    //Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$'),
-    //return null;
-    let validator = true;
-    let email = control.value;
-    const atIndex = email.indexOf('@');
-    if (atIndex <= 0 || atIndex === email.length - 1) {
-      this.messagueEmail = 'Correo no es válido';
-      return { isValid: true };
-    }
-
-    const [local, domain] = email.split('@');
-
-    if (!local || !domain) {
-      this.messagueEmail = 'Correo no es válido';
-      return { isValid: true };
-    }
-
-    // Verificamos que el dominio contenga un punto y no esté al inicio ni al final
-    const dotIndex = domain.indexOf('.');
-    if (dotIndex <= 0 || dotIndex === domain.length - 1) {
-      this.messagueEmail = 'Correo no es válido';
-      return { isValid: true };
-    }
-
-    // Comprobamos que el dominio no tenga más de un punto consecutivo
-    if (domain.includes('..')) {
-      this.messagueEmail = 'Correo no es válido';
-      return { isValid: true };
-    }
-
-    const invalidChars = [' ', '!', '#', '$', '%', '&', '*', '(', ')', '+', ',', '/', ':', ';', '<', '=', '>', '?', '[', '\\', ']', '^', '`', '{', '|', '}', '~'];
-    for (let char of invalidChars) {
-      if (email.includes(char)) {
-        this.messagueEmail = 'Correo no es válido';
-        return { isValid: true };
-      }
-    }
-    
-    let resultEmail = this.searchEmail();
-    if(!resultEmail) {
-      this.messagueEmail = 'Correo ya está registrado';
-      return { isValid: true };
-    }
-
-    return null;
-  }
-
-  searchEmail(): boolean {
-
-    return true;
-  }
-
   ngOnInit(): void {
+    this.isValidFormEmail = true;
+    this.isValidFormUser = true;
   }
 
-  login(): void {
+  signUp() {
     this.isValidForm = false;
     if (this.signUpForm.status == 'INVALID') {
       return;
     }
 
     this.isValidForm = true;
+    this.isValidFormEmail = true;
+    this.isValidFormUser = true;
     this.usuarioDTO = this.signUpForm.value;
     this.usuarioDTO.tipo_usuario = 'NORMAL';
-    this.save();
+
+    const promise1 = this.searchEmail().then();
+    const promise2 = this.searchUser().then();
+    Promise.all([promise1, promise2])
+    .then(() => {
+      if(this.isValidFormEmail && this.isValidFormUser) {
+        this.save();
+      }
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error enla conexión intente mas tarde',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
+    
+    /*
+    const result = this.searchEmail().then();
+    result.then(() => {
+
+
+      const result = this.searchUser().then();
+      result.then(() => {
+
+        console.log("Email 2:" + this.isValidFormEmail);
+        console.log("User 2:" + this.isValidFormUser);
+        if(this.isValidFormEmail && this.isValidFormUser) {
+          //this.save();
+          alert("Guardar");
+        }
+
+
+      }).catch(() => {
+        this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
+      });
+
+    }).catch(() => {
+      this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
+    });
+    */
+  }
+
+  searchEmail() {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      this.usuarioService.searchEmail(this.correo.value)
+      .subscribe( (data : any) =>
+      {
+        this.loading = false;
+        const dataResult = data;
+        if (dataResult.estado) {
+          this.isValidFormEmail = false;
+        } else {
+          this.isValidFormEmail = true;
+        }
+        resolve(true);
+      }, (error: HttpErrorResponse) => {
+        this.loading = false;
+        this.isValidFormEmail = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error enla conexión intente mas tarde',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        reject(false);
+      });
+    });
+  }
+
+  searchUser() {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      this.usuarioService.searchUser(this.usuario.value)
+      .subscribe( (data : any) =>
+      {
+        this.loading = false;
+        const dataResult = data;
+        if (dataResult.estado) {
+          this.isValidFormUser = false;
+        } else {
+          this.isValidFormUser = true;
+        }
+        resolve(true);
+      }, (error: HttpErrorResponse) => {
+        this.loading = false;
+        this.isValidFormUser = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error enla conexión intente mas tarde',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        reject(false);
+      });
+    });
   }
 
   save(): void {
@@ -282,15 +331,18 @@ export class SignUpComponent implements OnInit {
         }
         else
         {
-          this.toastr.error('Registro no se pudo Almacenar, vuelva a intertarlo por favor', 'INFORMACIÓN DEL SISTEMA');
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro no se pudo Almacenar, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
         }
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
-        //console.log(error.error);
-        //this.toastr.error('Se ha originado un error en el servidor', 'INFORMACIÓN DEL SISTEMA');
         Swal.fire({
-          icon: 'success',
+          icon: 'error',
           title: 'Se ha originado un error en el servidor',
           showConfirmButton: false,
           timer: 1500
