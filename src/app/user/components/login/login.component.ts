@@ -69,12 +69,10 @@ export class LoginComponent implements OnInit {
         
         if (dataResult.estado === 1)
         {
-          //console.log(dataResult);
           this.localStorageService.saveData("usuario", dataResult.usuario);
           this.localStorageService.saveData("tipo_usuario", dataResult.tipo_usuario);
           this.localStorageService.saveData("token", dataResult.token);
           this.localStorageService.saveData("estado_sesion", "true");
-
           
           if(dataResult.tipo_usuario==="NORMAL") {
             const headerInfo: HeaderMenus = {

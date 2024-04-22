@@ -26,4 +26,8 @@ export class UsuarioService {
   searchUser(user: string): Observable<any> {
     return this.http.get<any>(this.api + "searchuser/" + user);
   }
+
+  searchRowUser(post: UsuarioDTO): Observable<UsuarioDTO> {
+    return this.http.post<UsuarioDTO>(this.api + "searchrowuser/", post);
+  }
 }

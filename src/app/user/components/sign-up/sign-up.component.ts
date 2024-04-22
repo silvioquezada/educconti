@@ -5,12 +5,10 @@ import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractC
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { UsuarioService } from '../../services/usuario.service';
 
-import { finalize } from 'rxjs/operators';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-sign-up',
@@ -41,7 +39,6 @@ export class SignUpComponent implements OnInit {
   loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
-    private toastr : ToastrService,
     private router: Router) {
 
     this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
