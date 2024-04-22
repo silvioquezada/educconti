@@ -19,8 +19,12 @@ export class UsuarioService {
     return this.http.post<UsuarioDTO>(this.api, post);
   }
 
-  update(post: UsuarioDTO): Observable<UsuarioDTO> {
-    return this.http.put<UsuarioDTO>(this.api, post);
+  update(put: UsuarioDTO): Observable<UsuarioDTO> {
+    return this.http.put<UsuarioDTO>(this.api, put);
+  }
+
+  searchCedula(cedula: string): Observable<any> {
+    return this.http.get<any>(this.api + "searchcedula/" + cedula);
   }
 
   searchEmail(email: string): Observable<any> {

@@ -29,8 +29,9 @@ export class ProfileComponent implements OnInit {
   usuario: FormControl;
   password: FormControl;
   password2: FormControl;
-  signUpForm: FormGroup;
+  profileForm: FormGroup;
   isValidForm!: boolean | null;
+  isValidFormCedula: boolean;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
   messagueCedula: string = '';
@@ -96,8 +97,8 @@ export class ProfileComponent implements OnInit {
       this.passwordValidator
     ]);
 
-    this.signUpForm = this.formBuilder.group({
-      cod_usuario : moment().unix().toString(),
+    this.profileForm = this.formBuilder.group({
+      //cod_usuario : moment().unix().toString(),
       cedula: this.cedula,
       apellido: this.apellido,
       nombre: this.nombre,
@@ -114,6 +115,7 @@ export class ProfileComponent implements OnInit {
   }
 
   cedulaValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    this.isValidFormCedula = true;
     this.messagueCedula = '';
     let cedula = control.value;
 
@@ -195,6 +197,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isValidFormCedula = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
     this.searchRowUser();
@@ -218,6 +221,7 @@ export class ProfileComponent implements OnInit {
         }
         else
         {
+          //this.cod_usuario.setValue(dataResult.cedula);
           this.cedula.setValue(dataResult.cedula);
           this.apellido.setValue(dataResult.apellido);
           this.nombre.setValue(dataResult.nombre);
@@ -247,24 +251,33 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  signUp() {
+  profile() {
     this.isValidForm = false;
-    if (this.signUpForm.status == 'INVALID') {
+    if (this.profileForm.status == 'INVALID') {
       return;
     }
 
     this.isValidForm = true;
+    this.isValidFormCedula = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
-    this.usuarioDTO = this.signUpForm.value;
+    this.usuarioDTO = this.profileForm.value;
     this.usuarioDTO.tipo_usuario = 'NORMAL';
 
-    const promise1 = this.searchEmail().then();
-    const promise2 = this.searchUser().then();
-    Promise.all([promise1, promise2])
+    const promise1 = this.searchCedula().then();
+    const promise2 = this.searchEmail().then();
+    const promise3 = this.searchUser().then();
+    Promise.all([promise1, promise2, promise3])
     .then(() => {
-      if(this.isValidFormEmail && this.isValidFormUser) {
-        this.update();
+      if(this.isValidFormCedula && this.isValidFormEmail && this.isValidFormUser) {
+        this.save();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Algunos valores son existentes, revise por favor',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
     .catch(() => {
@@ -277,63 +290,105 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  searchCedula() {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+
+      if(this.cedulaTemporal === this.usuarioDTO.cedula) {
+        resolve(true);
+      } else {
+        this.usuarioService.searchCedula(this.cedula.value)
+        .subscribe( (data : any) =>
+        {
+          this.loading = false;
+          const dataResult = data;
+          if (dataResult.estado) {
+            this.isValidFormCedula = false;
+            this.messagueCedula = 'Cédula ya está registrada';
+          } else {
+            this.isValidFormCedula = true;
+          }
+          resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          this.isValidFormCedula = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error enla conexión intente mas tarde',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reject(false);
+        });
+      }
+    });
+  }
+
   searchEmail() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-      this.usuarioService.searchEmail(this.correo.value)
-      .subscribe( (data : any) =>
-      {
-        this.loading = false;
-        const dataResult = data;
-        if (dataResult.estado) {
-          this.isValidFormEmail = false;
-        } else {
-          this.isValidFormEmail = true;
-        }
+      if(this.correoTemporal === this.usuarioDTO.correo) {
         resolve(true);
-      }, (error: HttpErrorResponse) => {
-        this.loading = false;
-        this.isValidFormEmail = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
+      } else {
+        this.usuarioService.searchEmail(this.correo.value)
+        .subscribe( (data : any) =>
+        {
+          this.loading = false;
+          const dataResult = data;
+          if (dataResult.estado) {
+            this.isValidFormEmail = false;
+          } else {
+            this.isValidFormEmail = true;
+          }
+          resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          this.isValidFormEmail = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error enla conexión intente mas tarde',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reject(false);
         });
-        reject(false);
-      });
+      }
     });
   }
 
   searchUser() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-      this.usuarioService.searchUser(this.usuario.value)
-      .subscribe( (data : any) =>
-      {
-        this.loading = false;
-        const dataResult = data;
-        if (dataResult.estado) {
-          this.isValidFormUser = false;
-        } else {
-          this.isValidFormUser = true;
-        }
+      if(this.usuarioTemporal === this.usuarioDTO.usuario) {
         resolve(true);
-      }, (error: HttpErrorResponse) => {
-        this.loading = false;
-        this.isValidFormUser = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
+      } else {
+        this.usuarioService.searchUser(this.usuario.value)
+        .subscribe( (data : any) =>
+        {
+          this.loading = false;
+          const dataResult = data;
+          if (dataResult.estado) {
+            this.isValidFormUser = false;
+          } else {
+            this.isValidFormUser = true;
+          }
+          resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          this.isValidFormUser = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error enla conexión intente mas tarde',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reject(false);
         });
-        reject(false);
-      });
+      }
     });
   }
 
-  update(): void {
+  save(): void {
 
     this.loading = true;
 

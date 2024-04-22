@@ -31,6 +31,7 @@ export class SignUpComponent implements OnInit {
   password2: FormControl;
   signUpForm: FormGroup;
   isValidForm!: boolean | null;
+  isValidFormCedula: boolean;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
   messagueCedula: string = '';
@@ -111,6 +112,7 @@ export class SignUpComponent implements OnInit {
   }
 
   cedulaValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
+    this.isValidFormCedula = true;
     this.messagueCedula = '';
     let cedula = control.value;
 
@@ -192,6 +194,7 @@ export class SignUpComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.isValidFormCedula = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
   }
@@ -203,17 +206,26 @@ export class SignUpComponent implements OnInit {
     }
 
     this.isValidForm = true;
+    this.isValidFormCedula = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
     this.usuarioDTO = this.signUpForm.value;
     this.usuarioDTO.tipo_usuario = 'NORMAL';
 
-    const promise1 = this.searchEmail().then();
-    const promise2 = this.searchUser().then();
-    Promise.all([promise1, promise2])
+    const promise1 = this.searchCedula().then();
+    const promise2 = this.searchEmail().then();
+    const promise3 = this.searchUser().then();
+    Promise.all([promise1, promise2, promise3])
     .then(() => {
-      if(this.isValidFormEmail && this.isValidFormUser) {
+      if(this.isValidFormCedula && this.isValidFormEmail && this.isValidFormUser) {
         this.save();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Algunos valores son existentes, revise por favor',
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     })
     .catch(() => {
@@ -224,31 +236,35 @@ export class SignUpComponent implements OnInit {
         timer: 1500
       });
     });
-    
-    /*
-    const result = this.searchEmail().then();
-    result.then(() => {
+  }
 
-
-      const result = this.searchUser().then();
-      result.then(() => {
-
-        console.log("Email 2:" + this.isValidFormEmail);
-        console.log("User 2:" + this.isValidFormUser);
-        if(this.isValidFormEmail && this.isValidFormUser) {
-          //this.save();
-          alert("Guardar");
+  searchCedula() {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      this.usuarioService.searchCedula(this.cedula.value)
+      .subscribe( (data : any) =>
+      {
+        this.loading = false;
+        const dataResult = data;
+        if (dataResult.estado) {
+          this.isValidFormCedula = false;
+          this.messagueCedula = 'Cédula ya está registrada';
+        } else {
+          this.isValidFormCedula = true;
         }
-
-
-      }).catch(() => {
-        this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
+        resolve(true);
+      }, (error: HttpErrorResponse) => {
+        this.loading = false;
+        this.isValidFormCedula = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Error enla conexión intente mas tarde',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        reject(false);
       });
-
-    }).catch(() => {
-      this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
     });
-    */
   }
 
   searchEmail() {
