@@ -37,6 +37,9 @@ export class ProfileComponent implements OnInit {
   messagueEmail: string = '';
   messaguePassword: string = '';
   loading: boolean = false;
+  cedulaTemporal: string = '';
+  correoTemporal: string = '';
+  usuarioTemporal: string = '';
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router: Router) {
@@ -204,28 +207,33 @@ export class ProfileComponent implements OnInit {
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
-        console.log(dataResult);
-        /*
-        if (dataResult.estado === 1)
-        {
-          await Swal.fire({
-            icon: 'success',
-            title: 'Se ha inscrito correctamente',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          this.router.navigateByUrl('inicio');
-        }
-        else
+        if (dataResult.estado === 0)
         {
           Swal.fire({
             icon: 'error',
-            title: 'Registro no se pudo Almacenar, vuelva a intertarlo por favor',
+            title: 'Registro no se encontró',
             showConfirmButton: false,
             timer: 1500
           });
         }
-        */
+        else
+        {
+          this.cedula.setValue(dataResult.cedula);
+          this.apellido.setValue(dataResult.apellido);
+          this.nombre.setValue(dataResult.nombre);
+          this.genero.setValue(dataResult.genero);
+          this.etnia.setValue(dataResult.etnia);
+          this.direccion.setValue(dataResult.direccion);
+          this.celular.setValue(dataResult.celular);
+          this.correo.setValue(dataResult.correo);
+          this.nivelInstruccion.setValue(dataResult.nivel_instruccion);
+          this.usuario.setValue(dataResult.usuario);
+          this.password.setValue("");
+          this.password2.setValue("");
+          this.cedulaTemporal = dataResult.cedula;
+          this.correoTemporal = dataResult.correo;
+          this.usuarioTemporal = dataResult.usuario;
+        }
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -256,7 +264,7 @@ export class ProfileComponent implements OnInit {
     Promise.all([promise1, promise2])
     .then(() => {
       if(this.isValidFormEmail && this.isValidFormUser) {
-        this.save();
+        this.update();
       }
     })
     .catch(() => {
@@ -267,31 +275,6 @@ export class ProfileComponent implements OnInit {
         timer: 1500
       });
     });
-    
-    /*
-    const result = this.searchEmail().then();
-    result.then(() => {
-
-
-      const result = this.searchUser().then();
-      result.then(() => {
-
-        console.log("Email 2:" + this.isValidFormEmail);
-        console.log("User 2:" + this.isValidFormUser);
-        if(this.isValidFormEmail && this.isValidFormUser) {
-          //this.save();
-          alert("Guardar");
-        }
-
-
-      }).catch(() => {
-        this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
-      });
-
-    }).catch(() => {
-      this.toastr.warning("No se completó la carga completa de registros debido a un error de tu conectividad", "INFORMACIÓN DEL SISTEMA");
-    });
-    */
   }
 
   searchEmail() {
@@ -350,11 +333,11 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  save(): void {
+  update(): void {
 
     this.loading = true;
 
-    this.usuarioService.save(this.usuarioDTO)
+    this.usuarioService.update(this.usuarioDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;

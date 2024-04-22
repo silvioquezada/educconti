@@ -19,6 +19,10 @@ export class UsuarioService {
     return this.http.post<UsuarioDTO>(this.api, post);
   }
 
+  update(post: UsuarioDTO): Observable<UsuarioDTO> {
+    return this.http.put<UsuarioDTO>(this.api, post);
+  }
+
   searchEmail(email: string): Observable<any> {
     return this.http.get<any>(this.api + "searchemail/" + email);
   }
