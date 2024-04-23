@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private router: Router,
     private accessservice: AccessService) {
-      this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
+      this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
       this.usuario = new FormControl(this.usuarioDTO.usuario, [
         Validators.required
       ]);

@@ -17,6 +17,7 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 })
 export class ProfileComponent implements OnInit {
   usuarioDTO: UsuarioDTO
+  cod_usuario: number = 0;
   cedula: FormControl;
   apellido: FormControl;
   nombre: FormControl;
@@ -45,7 +46,7 @@ export class ProfileComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router) {
 
-    this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
+    this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
 
     this.cedula = new FormControl(this.usuarioDTO.cedula, [
       this.cedulaValidator
@@ -98,7 +99,6 @@ export class ProfileComponent implements OnInit {
     ]);
 
     this.profileForm = this.formBuilder.group({
-      //cod_usuario : moment().unix().toString(),
       cedula: this.cedula,
       apellido: this.apellido,
       nombre: this.nombre,
@@ -221,7 +221,7 @@ export class ProfileComponent implements OnInit {
         }
         else
         {
-          //this.cod_usuario.setValue(dataResult.cedula);
+          this.cod_usuario = Number(dataResult.cod_usuario);
           this.cedula.setValue(dataResult.cedula);
           this.apellido.setValue(dataResult.apellido);
           this.nombre.setValue(dataResult.nombre);
@@ -263,6 +263,7 @@ export class ProfileComponent implements OnInit {
     this.isValidFormUser = true;
     this.usuarioDTO = this.profileForm.value;
     this.usuarioDTO.tipo_usuario = 'NORMAL';
+    this.usuarioDTO.cod_usuario = this.cod_usuario;
 
     const promise1 = this.searchCedula().then();
     const promise2 = this.searchEmail().then();

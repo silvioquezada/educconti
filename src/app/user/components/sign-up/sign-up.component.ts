@@ -42,7 +42,7 @@ export class SignUpComponent implements OnInit {
     private usuarioService: UsuarioService,
     private router: Router) {
 
-    this.usuarioDTO = new UsuarioDTO('', '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
+    this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
 
     this.cedula = new FormControl(this.usuarioDTO.cedula, [
       this.cedulaValidator

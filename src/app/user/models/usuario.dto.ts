@@ -1,5 +1,5 @@
 export class UsuarioDTO {
-    cod_usuario: string;
+    cod_usuario: number;
     cedula: string;
     apellido: string;
     nombre: string;
@@ -15,7 +15,7 @@ export class UsuarioDTO {
     tipo_usuario: string;
     token: string;
   
-    constructor(cod_usuario: string, cedula: string, apellido: string, nombre: string, genero: string, etnia: string, direccion: string, celular: string, correo: string, nivel_instruccion: string, usuario: string, password: string, estado: number, tipo_usuario: string, token: string) {
+    constructor(cod_usuario: number, cedula: string, apellido: string, nombre: string, genero: string, etnia: string, direccion: string, celular: string, correo: string, nivel_instruccion: string, usuario: string, password: string, estado: number, tipo_usuario: string, token: string) {
       this.cod_usuario = cod_usuario;
       this.cedula = cedula;
       this.apellido = apellido;
