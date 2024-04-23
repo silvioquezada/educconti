@@ -254,6 +254,12 @@ export class ProfileComponent implements OnInit {
   profile() {
     this.isValidForm = false;
     if (this.profileForm.status == 'INVALID') {
+      Swal.fire({
+        icon: 'error',
+        title: 'Algunos datos son inválidos, revise por favor',
+        showConfirmButton: false,
+        timer: 1500
+      });
       return;
     }
 
