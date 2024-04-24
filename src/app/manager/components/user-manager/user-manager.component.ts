@@ -35,6 +35,12 @@ export class UserManagerComponent implements OnInit {
   messagueEmail: string = '';
   messaguePassword: string = '';
   loading: boolean = false;
+
+  filterpost = "";
+  page = 1;
+  count = 0;
+  pagesize = 5;
+
   constructor(private formBuilder: FormBuilder, private managerService: ManagerService, private router: Router) {
 
     this.managerDTO = new ManagerDTO(0, '', '', '', '', '', '', 1, '', '');
@@ -113,7 +119,7 @@ export class UserManagerComponent implements OnInit {
     .subscribe( (data) => {
         this.loading = false;
         this.managersDTO = data;
-        console.log(this.managersDTO);
+        //console.log(this.managersDTO);
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -266,6 +272,14 @@ export class UserManagerComponent implements OnInit {
         });
       }
     );
+  }
+
+  keyFilter() {
+    this.page = 1;
+  }
+
+  handlePageChange(event: number): void {
+    this.page = event;
   }
 
 }

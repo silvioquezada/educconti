@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ManagerRoutingModule } from './manager-routing.module';
 import { PeriodComponent } from './components/period/period.component';
@@ -12,7 +12,10 @@ import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManagerComponent } from './components/user-manager/user-manager.component';
+import { FilterUsuarioPipe } from './pipes/filter-usuario.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
 
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -23,12 +26,16 @@ import { UserManagerComponent } from './components/user-manager/user-manager.com
     ApprovalsComponent,
     ReportsComponent,
     DashboardComponent,
-    UserManagerComponent
+    UserManagerComponent,
+    FilterUsuarioPipe
   ],
   imports: [
     CommonModule,
     ManagerRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    SharedModule,
+    FormsModule
   ]
 })
 export class ManagerModule { }

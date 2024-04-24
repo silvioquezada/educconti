@@ -8,12 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 
-import { LoaderComponent } from '../shared/components/loader/loader.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
-    LoaderComponent,
     LoginComponent,
     ProfileComponent,
     SignUpComponent
@@ -21,7 +19,8 @@ import { LoaderComponent } from '../shared/components/loader/loader.component';
   imports: [
     CommonModule,
     UserRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ]
 })
 export class UserModule { }

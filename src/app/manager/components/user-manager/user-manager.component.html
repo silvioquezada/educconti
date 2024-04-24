@@ -1,3 +1,5 @@
+<app-loader [loading] = "loading"></app-loader>
+
 <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -173,7 +175,8 @@
           <div class="content-column-between">
             <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalNuevo"><i class="fas fa-plus"></i> NUEVO</button>
 
-            <input class="form-filter" type="text" placeholder="Buscar">
+            <input (keyup)="keyFilter();" class="form-filter" type="text" placeholder="Buscar" name="filterpost" [(ngModel)]="filterpost">
+
           </div>
 
           
@@ -188,11 +191,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>silvio@</td>
-                <td>Silvio Quezada</td>
-                <td>sss.silq@gmail.com</td>
-                <td>0939278001</td>
+              <tr *ngFor="let item of (managersDTO | filterUsuario: filterpost) | paginate : {
+                itemsPerPage: pagesize,
+                currentPage: page,
+                totalItems: count
+              }">
+                <td>{{item.usuario}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.correo}}</td>
+                <td>{{item.celular}}</td>
                 <td>
                   <div class="flex-content-right">
                     <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
@@ -203,7 +210,14 @@
               </tr>
             </tbody>
           </table>
-
+          <div class="flex-content-right">
+            <pagination-controls class="custom-pagination"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)">
+            </pagination-controls>
+          </div>
 
         </div>
 
