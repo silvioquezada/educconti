@@ -21,6 +21,7 @@
     "@fortawesome/fontawesome-free": "^6.5.2",
     "bootstrap": "^5.3.3",
     "crypto-js": "^4.2.0",
+    "jquery-slim": "^3.0.0",
     "moment": "^2.29.4",
     "ngx-pagination": "^6.0.3",
     "ngx-toastr": "^15.0.0",
