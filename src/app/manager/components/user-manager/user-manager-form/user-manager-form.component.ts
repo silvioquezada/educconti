@@ -1,16 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ManagerDTO } from 'src/app/manager/models/manager.dto';
 import { ManagerService } from 'src/app/manager/services/manager.service';
 import { UsuarioService } from 'src/app/user/services/usuario.service';
-
 import { HttpErrorResponse } from '@angular/common/http';
-
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-
 declare var $:any;
 
 @Component({
@@ -19,10 +15,10 @@ declare var $:any;
   styleUrls: ['./user-manager-form.component.scss']
 })
 export class UserManagerFormComponent implements OnInit {
-  @Output() datosenviar: EventEmitter<any> = new EventEmitter<any>();
-
+  @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
+  title: string = "";
   managerDTO: ManagerDTO;
-  cedula: FormControl;
+  cod_usuario: number = 0;
   apellido: FormControl;
   nombre: FormControl;
   celular: FormControl;
@@ -30,12 +26,14 @@ export class UserManagerFormComponent implements OnInit {
   usuario: FormControl;
   password: FormControl;
   password2: FormControl;
-  signUpForm: FormGroup;
+  registerForm: FormGroup;
   isValidForm!: boolean | null;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
   messagueEmail: string = '';
   messaguePassword: string = '';
+  correoTemporal: string = '';
+  usuarioTemporal: string = '';
   loading: boolean = false;
 
   filterpost = "";
@@ -44,7 +42,11 @@ export class UserManagerFormComponent implements OnInit {
   pagesize = 5;
 
   constructor(private formBuilder: FormBuilder, private managerService: ManagerService, private router: Router, private usuarioService: UsuarioService) {
+    this.formNormal();
+  }
 
+  formNormal() : void {
+    this.title = "Nuevo Registro";
     this.managerDTO = new ManagerDTO(0, '', '', '', '', '', '', 1, '', '');
 
     this.apellido = new FormControl(this.managerDTO.apellido, [
@@ -78,8 +80,7 @@ export class UserManagerFormComponent implements OnInit {
       this.passwordValidator
     ]);
 
-    this.signUpForm = this.formBuilder.group({
-      cod_usuario : moment().unix().toString(),
+    this.registerForm = this.formBuilder.group({
       apellido: this.apellido,
       nombre: this.nombre,
       celular: this.celular,
@@ -88,6 +89,26 @@ export class UserManagerFormComponent implements OnInit {
       password: this.password,
       password2: this.password2
     });
+
+    this.cod_usuario = Number(moment().unix().toString());
+
+    this.isValidForm = true;
+    this.isValidFormEmail = true;
+    this.isValidFormUser = true;
+  }
+
+  assignValues(managerDTO: ManagerDTO): void {
+    this.title = "Editar Registro";
+    this.cod_usuario = Number(managerDTO.cod_usuario);
+    this.apellido.setValue(managerDTO.apellido);
+    this.nombre.setValue(managerDTO.nombre);
+    this.celular.setValue(managerDTO.celular);
+    this.correo.setValue(managerDTO.correo);
+    this.usuario.setValue(managerDTO.usuario);
+    this.password.setValue("");
+    this.password2.setValue("");
+    this.correoTemporal = managerDTO.correo;
+    this.usuarioTemporal = managerDTO.usuario;
   }
 
   passwordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -112,10 +133,9 @@ export class UserManagerFormComponent implements OnInit {
     this.isValidFormUser = true;
   }
 
-  signUp() {
-    /*
+  register() {
     this.isValidForm = false;
-    if (this.signUpForm.status == 'INVALID') {
+    if (this.registerForm.status == 'INVALID') {
       Swal.fire({
         icon: 'error',
         title: 'Algunos datos son inválidos, revise por favor',
@@ -128,8 +148,9 @@ export class UserManagerFormComponent implements OnInit {
     this.isValidForm = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
-    this.managerDTO = this.signUpForm.value;
+    this.managerDTO = this.registerForm.value;
     this.managerDTO.tipo_usuario = 'GESTOR';
+    this.managerDTO.cod_usuario = this.cod_usuario;
 
     const promise1 = this.searchEmail().then();
     const promise2 = this.searchUser().then();
@@ -154,8 +175,6 @@ export class UserManagerFormComponent implements OnInit {
         timer: 1500
       });
     });
-    */
-    $("#modalForm").modal("hide");
   }
 
   searchEmail() {
@@ -215,9 +234,7 @@ export class UserManagerFormComponent implements OnInit {
   }
 
   save(): void {
-    
     this.loading = true;
-
     this.managerService.saveManager(this.managerDTO)
     .subscribe( async (data) => {
         this.loading = false;
@@ -232,7 +249,7 @@ export class UserManagerFormComponent implements OnInit {
             timer: 1500
           });
           $("#modalForm").modal("hide");
-          this.datosenviar.emit();
+          this.dataSend.emit();
         }
         else
         {

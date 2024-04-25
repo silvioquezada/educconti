@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ManagerDTO } from 'src/app/manager/models/manager.dto';
 import { ManagerService } from 'src/app/manager/services/manager.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { UserManagerFormComponent } from '../user-manager-form/user-manager-form.component';
+import { UserManagerSearchComponent } from '../user-manager-search/user-manager-search.component';
 
 @Component({
   selector: 'app-user-manager-list',
@@ -10,6 +12,8 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
   styleUrls: ['./user-manager-list.component.scss']
 })
 export class UserManagerListComponent implements OnInit {
+  @ViewChild(UserManagerFormComponent) userManagerForm: any;
+  @ViewChild(UserManagerSearchComponent) userManagerSearchForm: any;
   loading: boolean = false;
   managersDTO: ManagerDTO[];
   filterpost = "";
@@ -54,6 +58,20 @@ export class UserManagerListComponent implements OnInit {
 
   handlePageChange(event: number): void {
     this.page = event;
+  }
+
+  newRow(): void {
+    this.userManagerForm.formNormal();
+  }
+
+  editRow(managerDTO: ManagerDTO): void {
+    this.userManagerForm.formNormal();
+    this.userManagerForm.assignValues(managerDTO);
+  }
+
+  viewRow(managerDTO: ManagerDTO): void {
+    this.userManagerSearchForm.formNormal();
+    this.userManagerSearchForm.assignValues(managerDTO);
   }
 
 }

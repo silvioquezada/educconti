@@ -1,6 +1,6 @@
 <app-loader [loading] = "loading"></app-loader>
 
-<app-user-manager-form></app-user-manager-form>
+<app-user-manager-form (dataSend)="receiveManagerData()"></app-user-manager-form>
 
 <app-user-manager-search></app-user-manager-search>
 
@@ -19,7 +19,7 @@
         <div class="panel panel-col-p100">
 
           <div class="content-column-between">
-            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm"><i class="fas fa-plus"></i> NUEVO</button>
+            <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" (click)="newRow()"><i class="fas fa-plus"></i> NUEVO</button>
 
             <input (keyup)="keyFilter();" class="form-filter" type="text" placeholder="Buscar" name="filterpost" [(ngModel)]="filterpost">
 
@@ -48,8 +48,8 @@
                 <td>{{item.celular}}</td>
                 <td>
                   <div class="flex-content-right">
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalEditar"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalBuscar"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" (click)="viewRow(item)"><i class="fas fa-search"></i></button>
                     <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
                   </div>
                 </td>
