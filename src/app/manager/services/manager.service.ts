@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManagerService {
-  api = environment.baseUrl + 'usuarios/';
+  api = environment.baseUrl + 'usuariosmanager/';
   constructor(private http:HttpClient) { }
 
   listUserManager(): Observable<ManagerDTO[]> {
@@ -19,7 +19,7 @@ export class ManagerService {
     return this.http.post<ManagerDTO>(this.api + 'login/', post);
   }
   */
-  save(post: ManagerDTO): Observable<ManagerDTO> {
+  saveManager(post: ManagerDTO): Observable<ManagerDTO> {
     return this.http.post<ManagerDTO>(this.api, post);
   }
   /*
@@ -30,7 +30,7 @@ export class ManagerService {
   searchCedula(cedula: string): Observable<any> {
     return this.http.get<any>(this.api + 'searchcedula/' + cedula);
   }
-  */
+  
   searchEmail(email: string): Observable<any> {
     return this.http.get<any>(this.api + 'searchemail/' + email);
   }

@@ -11,11 +11,13 @@ import { RegistrationsComponent } from './components/registrations/registrations
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserManagerComponent } from './components/user-manager/user-manager.component';
 import { FilterUsuarioPipe } from './pipes/filter-usuario.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { SharedModule } from '../shared/shared.module';
+import { UserManagerFormComponent } from './components/user-manager/user-manager-form/user-manager-form.component';
+import { UserManagerListComponent } from './components/user-manager/user-manager-list/user-manager-list.component';
+import { UserManagerSearchComponent } from './components/user-manager/user-manager-search/user-manager-search.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,10 @@ import { SharedModule } from '../shared/shared.module';
     ApprovalsComponent,
     ReportsComponent,
     DashboardComponent,
-    UserManagerComponent,
-    FilterUsuarioPipe
+    FilterUsuarioPipe,
+    UserManagerFormComponent,
+    UserManagerListComponent,
+    UserManagerSearchComponent
   ],
   imports: [
     CommonModule,

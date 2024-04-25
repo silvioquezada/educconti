@@ -7,7 +7,7 @@ import { RegistrationsComponent } from './components/registrations/registrations
 import { ReportsComponent } from './components/reports/reports.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { UserManagerComponent } from './components/user-manager/user-manager.component';
+import { UserManagerListComponent } from './components/user-manager/user-manager-list/user-manager-list.component';
 
 const routes: Routes = [
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'usuario',
-    component: UserManagerComponent
+    component: UserManagerListComponent
   },
   {
     path: 'periodo',
