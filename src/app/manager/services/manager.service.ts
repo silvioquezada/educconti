@@ -14,33 +14,16 @@ export class ManagerService {
   listUserManager(): Observable<ManagerDTO[]> {
     return this.http.get<ManagerDTO[]>(this.api);
   }
-  /*
-  login(post: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.post<ManagerDTO>(this.api + 'login/', post);
-  }
-  */
+
   saveManager(post: ManagerDTO): Observable<ManagerDTO> {
     return this.http.post<ManagerDTO>(this.api, post);
   }
-  /*
-  update(put: ManagerDTO): Observable<ManagerDTO> {
+  
+  updateManager(put: ManagerDTO): Observable<ManagerDTO> {
     return this.http.put<ManagerDTO>(this.api, put);
   }
 
-  searchCedula(cedula: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcedula/' + cedula);
+  deleteManager(destroy: ManagerDTO): Observable<ManagerDTO> {
+    return this.http.put<ManagerDTO>(this.api + 'delete', destroy);
   }
-  
-  searchEmail(email: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchemail/' + email);
-  }
-  
-  searchUser(user: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchuser/' + user);
-  }
-  /*
-  searchRowUser(post: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.post<ManagerDTO>(this.api + 'searchrowuser/', post);
-  }
-  */
 }

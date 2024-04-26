@@ -35,6 +35,8 @@ export class UserManagerFormComponent implements OnInit {
   correoTemporal: string = '';
   usuarioTemporal: string = '';
   loading: boolean = false;
+  ban: boolean = true;
+  textButton: string = '';
 
   filterpost = "";
   page = 1;
@@ -95,6 +97,8 @@ export class UserManagerFormComponent implements OnInit {
     this.isValidForm = true;
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
+    this.ban = true;
+    this.textButton = 'Guardar';
   }
 
   assignValues(managerDTO: ManagerDTO): void {
@@ -109,6 +113,8 @@ export class UserManagerFormComponent implements OnInit {
     this.password2.setValue("");
     this.correoTemporal = managerDTO.correo;
     this.usuarioTemporal = managerDTO.usuario;
+    this.ban = false;
+    this.textButton = 'Actualizar';
   }
 
   passwordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -157,7 +163,11 @@ export class UserManagerFormComponent implements OnInit {
     Promise.all([promise1, promise2])
     .then(() => {
       if(this.isValidFormEmail && this.isValidFormUser) {
-        this.save();
+        if(this.ban) {
+          this.save();
+        } else {
+          this.update();
+        }
       } else {
         Swal.fire({
           icon: 'error',
@@ -180,56 +190,65 @@ export class UserManagerFormComponent implements OnInit {
   searchEmail() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-      this.usuarioService.searchEmail(this.correo.value)
-      .subscribe( (data : any) =>
-      {
-        this.loading = false;
-        const dataResult = data;
-        if (dataResult.estado) {
-          this.isValidFormEmail = false;
-        } else {
-          this.isValidFormEmail = true;
-        }
+
+      if(this.correoTemporal === this.correo.value && this.ban === false) {
         resolve(true);
-      }, (error: HttpErrorResponse) => {
-        this.loading = false;
-        this.isValidFormEmail = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
+      } else {
+        this.usuarioService.searchEmail(this.correo.value)
+        .subscribe( (data : any) =>
+        {
+          this.loading = false;
+          const dataResult = data;
+          if (dataResult.estado) {
+            this.isValidFormEmail = false;
+          } else {
+            this.isValidFormEmail = true;
+          }
+          resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          this.isValidFormEmail = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error enla conexión intente mas tarde',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reject(false);
         });
-        reject(false);
-      });
+      }
     });
   }
 
   searchUser() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-      this.usuarioService.searchUser(this.usuario.value)
-      .subscribe( (data : any) =>
-      {
-        this.loading = false;
-        const dataResult = data;
-        if (dataResult.estado) {
-          this.isValidFormUser = false;
-        } else {
-          this.isValidFormUser = true;
-        }
+      if(this.usuarioTemporal === this.usuario.value && this.ban === false) {
         resolve(true);
-      }, (error: HttpErrorResponse) => {
-        this.loading = false;
-        this.isValidFormUser = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
+      } else {
+        this.usuarioService.searchUser(this.usuario.value)
+        .subscribe( (data : any) =>
+        {
+          this.loading = false;
+          const dataResult = data;
+          if (dataResult.estado) {
+            this.isValidFormUser = false;
+          } else {
+            this.isValidFormUser = true;
+          }
+          resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          this.isValidFormUser = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Error enla conexión intente mas tarde',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          reject(false);
         });
-        reject(false);
-      });
+      }
     });
   }
 
@@ -244,7 +263,7 @@ export class UserManagerFormComponent implements OnInit {
         {
           await Swal.fire({
             icon: 'success',
-            title: 'Se ha registrado correctamente',
+            title: 'Se ha creado el registrado satisfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
@@ -255,7 +274,47 @@ export class UserManagerFormComponent implements OnInit {
         {
           Swal.fire({
             icon: 'error',
-            title: 'Registro no se pudo Almacenar, vuelva a intertarlo por favor',
+            title: 'Registro no se pudo almacenar, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
+  }
+
+  update(): void {
+    this.loading = true;
+    this.managerService.updateManager(this.managerDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se actualizado el registro satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          $("#modalForm").modal("hide");
+          this.dataSend.emit();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro no se pudo actualizar, vuelva a intertarlo por favor',
             showConfirmButton: false,
             timer: 1500
           });

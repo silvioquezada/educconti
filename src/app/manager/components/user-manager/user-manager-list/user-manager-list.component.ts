@@ -74,4 +74,60 @@ export class UserManagerListComponent implements OnInit {
     this.userManagerSearchForm.assignValues(managerDTO);
   }
 
+  deleteRow(managerDTO: ManagerDTO): void {
+    Swal.fire({
+      title: managerDTO.nombre + ' ' + managerDTO.apellido,
+      text: '¿Estás seguro de eliminar registro?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, eliminar',
+      cancelButtonText: 'No, Cerrar'
+    }).then((result) => {
+      if (result.value) {
+        this.delete(managerDTO);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }
+    });
+  }
+
+  delete(managerDTO: ManagerDTO) : void {
+    this.loading = true;
+    this.managerService.deleteManager(managerDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se ha eliminado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.listUserManager();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro no se pudo eliminar, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
+  }
+
 }

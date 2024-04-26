@@ -277,7 +277,7 @@ export class ProfileComponent implements OnInit {
     Promise.all([promise1, promise2, promise3])
     .then(() => {
       if(this.isValidFormCedula && this.isValidFormEmail && this.isValidFormUser) {
-        this.save();
+        this.update();
       } else {
         Swal.fire({
           icon: 'error',
@@ -395,7 +395,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  save(): void {
+  update(): void {
 
     this.loading = true;
 
