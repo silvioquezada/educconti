@@ -80,7 +80,7 @@ export class UserManagerListComponent implements OnInit {
       text: '¿Estás seguro de eliminar registro?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar',
+      confirmButtonText: 'Si, Eliminar',
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
