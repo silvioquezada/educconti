@@ -1,0 +1,47 @@
+<div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <label class="text-weight">Registro del Usuario</label>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-modal">
+
+          <div class="panel panel-col-p50">
+            
+            <div class="input-group">
+              <label class="form-label" for="apellidos">Apellidos:</label>
+              <label class="label-control">{{managerDTO.apellido}}</label>
+            </div>
+            <div class="input-group">
+              <label class="form-label" for="nombres">Nombres:</label>
+              <label class="label-control">{{managerDTO.nombre}}</label>
+            </div>
+            <div class="input-group">
+              <label class="form-label" for="celular">Celular:</label>
+              <label class="label-control">{{managerDTO.celular}}</label>
+            </div>
+          </div>
+  
+          <div class="panel panel-col-p50">
+            <div class="input-group">
+              <label class="form-label" for="correo">Correo:</label>
+              <label class="label-control">{{managerDTO.correo}}</label>
+            </div>
+            <div class="input-group">
+              <label class="form-label" for="usuario">Usuario:</label>
+              <label class="label-control">{{managerDTO.usuario}}</label>
+            </div>
+          </div>
+
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal"><i class="fa-solid fa-rectangle-xmark"></i> Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>

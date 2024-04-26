@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PeriodComponent } from './components/period/period.component';
-import { CategoryComponent } from './components/category/category.component';
-import { CourseComponent } from './components/course/course.component';
 import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { UserManagerListComponent } from './components/user-manager/user-manager-list/user-manager-list.component';
+import { PeriodListComponent } from './components/period/period-list/period-list.component';
+import { CategoryListComponent } from './components/category/category-list/category-list.component';
+import { CourseListComponent } from './components/course/course-list/course-list.component';
 
 const routes: Routes = [
   {
@@ -20,15 +20,15 @@ const routes: Routes = [
   },
   {
     path: 'periodo',
-    component: PeriodComponent
+    component: PeriodListComponent
   },
   {
     path: 'categoria',
-    component: CategoryComponent
+    component: CategoryListComponent
   },
   {
     path: 'cursos',
-    component: CourseComponent
+    component: CourseListComponent
   },
   {
     path: 'inscripciones',

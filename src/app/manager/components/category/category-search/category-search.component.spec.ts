@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PeriodComponent } from './period.component';
+import { CategorySearchComponent } from './category-search.component';
 
-describe('PeriodComponent', () => {
-  let component: PeriodComponent;
-  let fixture: ComponentFixture<PeriodComponent>;
+describe('CategorySearchComponent', () => {
+  let component: CategorySearchComponent;
+  let fixture: ComponentFixture<CategorySearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PeriodComponent ]
+      declarations: [ CategorySearchComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PeriodComponent);
+    fixture = TestBed.createComponent(CategorySearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
