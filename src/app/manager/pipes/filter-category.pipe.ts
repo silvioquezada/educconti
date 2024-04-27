@@ -19,7 +19,7 @@ export class FilterCategoryPipe implements PipeTransform {
       
       if (frases.length===1)
       {
-        this.data = item.cedula.toLowerCase().includes(texto) || item.apellido.toLowerCase().includes(texto) || item.nombre.toLowerCase().includes(texto);
+        this.data = item.categoria.toLowerCase().includes(texto);
         return this.data;
       }
       else
@@ -28,7 +28,7 @@ export class FilterCategoryPipe implements PipeTransform {
         let coincidencia = 0;
         for(let c=0; c<frases.length; c++) {
 
-          this.data = item.cedula.toLowerCase().includes(frases[c]) || item.apellido.toLowerCase().includes(frases[c]) || item.nombre.toLowerCase().includes(frases[c]);
+          this.data = item.categoria.toLowerCase().includes(frases[c]);
          
          if(this.data)
          {

@@ -15,8 +15,8 @@ export class PeriodService {
     return this.http.get<PeriodDTO[]>(this.api);
   }
 
-  searchCodePeriod(codePeriod: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcodeperiod/' + codePeriod);
+  searchCodePeriod(codigo_periodo: string): Observable<any> {
+    return this.http.get<any>(this.api + 'searchcodeperiod/' + codigo_periodo);
   }
 
   save(post: PeriodDTO): Observable<PeriodDTO> {

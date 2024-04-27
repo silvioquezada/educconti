@@ -21,5 +21,4 @@ export class PeriodSearchComponent implements OnInit {
   assignValues(periodDTO: PeriodDTO): void {
     this.periodDTO = periodDTO;
   }
-
 }

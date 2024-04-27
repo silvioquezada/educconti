@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ManagerDTO } from 'src/app/manager/models/manager.dto';
+import { CategoryDTO } from 'src/app/manager/models/category.dto';
 
 @Component({
   selector: 'app-category-search',
@@ -7,7 +7,7 @@ import { ManagerDTO } from 'src/app/manager/models/manager.dto';
   styleUrls: ['./category-search.component.scss']
 })
 export class CategorySearchComponent implements OnInit {
-  managerDTO: ManagerDTO;
+  categoryDTO: CategoryDTO;
   constructor() {
     this.formNormal();
   }
@@ -16,11 +16,11 @@ export class CategorySearchComponent implements OnInit {
   }
 
   formNormal() : void {
-    this.managerDTO = new ManagerDTO(0, '', '', '', '', '', '', 1, '', '');
+    this.categoryDTO = new CategoryDTO(0, '', 1);
   }
 
-  assignValues(managerDTO: ManagerDTO): void {
-    this.managerDTO = managerDTO;
+  assignValues(categoryDTO: CategoryDTO): void {
+    this.categoryDTO = categoryDTO;
   }
 
 }

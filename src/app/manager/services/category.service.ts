@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ManagerDTO } from '../models/manager.dto';
+import { CategoryDTO } from '../models/category.dto';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
-  api = environment.baseUrl + 'category/';
+  api = environment.baseUrl + 'categoria/';
   constructor(private http:HttpClient) { }
 
-  list(): Observable<ManagerDTO[]> {
-    return this.http.get<ManagerDTO[]>(this.api);
+  list(): Observable<CategoryDTO[]> {
+    return this.http.get<CategoryDTO[]>(this.api);
   }
 
-  searchCategory(category: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcategory/' + category);
+  searchCategory(categoria: string): Observable<any> {
+    return this.http.get<any>(this.api + 'searchcategory/' + categoria);
   }
 
-  save(post: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.post<ManagerDTO>(this.api, post);
+  save(post: CategoryDTO): Observable<CategoryDTO> {
+    return this.http.post<CategoryDTO>(this.api, post);
   }
   
-  update(put: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.put<ManagerDTO>(this.api, put);
+  update(put: CategoryDTO): Observable<CategoryDTO> {
+    return this.http.put<CategoryDTO>(this.api, put);
   }
 
-  delete(destroy: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.put<ManagerDTO>(this.api + 'delete', destroy);
+  delete(destroy: CategoryDTO): Observable<CategoryDTO> {
+    return this.http.put<CategoryDTO>(this.api + 'delete', destroy);
   }
 }

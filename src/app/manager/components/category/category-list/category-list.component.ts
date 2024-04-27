@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ManagerDTO } from 'src/app/manager/models/manager.dto';
-import { ManagerService } from 'src/app/manager/services/manager.service';
+import { CategoryDTO } from 'src/app/manager/models/category.dto';
+import { CategoryService } from 'src/app/manager/services/category.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { UserManagerFormComponent } from '../../user-manager/user-manager-form/user-manager-form.component';
-import { UserManagerSearchComponent } from '../../user-manager/user-manager-search/user-manager-search.component';
+import { CategoryFormComponent } from '../category-form/category-form.component';
+import { CategorySearchComponent } from '../category-search/category-search.component';
 
 @Component({
   selector: 'app-category-list',
@@ -12,16 +12,16 @@ import { UserManagerSearchComponent } from '../../user-manager/user-manager-sear
   styleUrls: ['./category-list.component.scss']
 })
 export class CategoryListComponent implements OnInit {
-  @ViewChild(UserManagerFormComponent) userManagerForm: any;
-  @ViewChild(UserManagerSearchComponent) userManagerSearchForm: any;
+  @ViewChild(CategoryFormComponent) categoryFormComponent: any;
+  @ViewChild(CategorySearchComponent) categorySearchComponent: any;
   loading: boolean = false;
-  managersDTO: ManagerDTO[];
+  categoriesDTO: CategoryDTO[];
   filterpost = "";
   page = 1;
   count = 0;
   pagesize = 5;
 
-  constructor(private managerService: ManagerService) {
+  constructor(private categoryService: CategoryService) {
   }
 
   ngOnInit(): void {
@@ -31,10 +31,10 @@ export class CategoryListComponent implements OnInit {
   listUserManager(): void {
     this.loading = true;
 
-    this.managerService.listUserManager()
+    this.categoryService.list()
     .subscribe( (data) => {
         this.loading = false;
-        this.managersDTO = data;
+        this.categoriesDTO = data;
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -48,7 +48,7 @@ export class CategoryListComponent implements OnInit {
     );
   }
 
-  receiveManagerData(): void {
+  receiveCategoryData(): void {
     this.listUserManager();
   }
 
@@ -61,22 +61,22 @@ export class CategoryListComponent implements OnInit {
   }
 
   newRow(): void {
-    this.userManagerForm.formNormal();
+    this. categoryFormComponent.formNormal();
   }
 
-  editRow(managerDTO: ManagerDTO): void {
-    this.userManagerForm.formNormal();
-    this.userManagerForm.assignValues(managerDTO);
+  editRow(categoryDTO: CategoryDTO): void {
+    this. categoryFormComponent.formNormal();
+    this. categoryFormComponent.assignValues(categoryDTO);
   }
 
-  viewRow(managerDTO: ManagerDTO): void {
-    this.userManagerSearchForm.formNormal();
-    this.userManagerSearchForm.assignValues(managerDTO);
+  viewRow(categoryDTO: CategoryDTO): void {
+    this.categorySearchComponent.formNormal();
+    this.categorySearchComponent.assignValues(categoryDTO);
   }
 
-  deleteRow(managerDTO: ManagerDTO): void {
+  deleteRow(categoryDTO: CategoryDTO): void {
     Swal.fire({
-      title: managerDTO.nombre + ' ' + managerDTO.apellido,
+      title: categoryDTO.categoria,
       text: '¿Estás seguro de eliminar registro?',
       icon: 'warning',
       showCancelButton: true,
@@ -84,16 +84,16 @@ export class CategoryListComponent implements OnInit {
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
-        this.delete(managerDTO);
+        this.delete(categoryDTO);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         
       }
     });
   }
 
-  delete(managerDTO: ManagerDTO) : void {
+  delete(categoryDTO: CategoryDTO) : void {
     this.loading = true;
-    this.managerService.deleteManager(managerDTO)
+    this.categoryService.delete(categoryDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;

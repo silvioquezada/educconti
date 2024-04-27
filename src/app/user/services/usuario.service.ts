@@ -27,12 +27,12 @@ export class UsuarioService {
     return this.http.get<any>(this.api + 'searchcedula/' + cedula);
   }
 
-  searchEmail(email: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchemail/' + email);
+  searchEmail(correo: string): Observable<any> {
+    return this.http.get<any>(this.api + 'searchemail/' + correo);
   }
 
-  searchUser(user: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchuser/' + user);
+  searchUser(usuario: string): Observable<any> {
+    return this.http.get<any>(this.api + 'searchuser/' + usuario);
   }
 
   searchRowUser(post: UsuarioDTO): Observable<UsuarioDTO> {
