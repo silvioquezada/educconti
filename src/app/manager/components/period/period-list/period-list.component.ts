@@ -3,8 +3,8 @@ import { PeriodDTO } from 'src/app/manager/models/period.dto';
 import { PeriodService } from 'src/app/manager/services/period.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { UserManagerFormComponent } from '../../user-manager/user-manager-form/user-manager-form.component';
-import { UserManagerSearchComponent } from '../../user-manager/user-manager-search/user-manager-search.component';
+import { PeriodFormComponent } from '../period-form/period-form.component';
+import { PeriodSearchComponent } from '../period-search/period-search.component';
 
 @Component({
   selector: 'app-period-list',
@@ -12,8 +12,8 @@ import { UserManagerSearchComponent } from '../../user-manager/user-manager-sear
   styleUrls: ['./period-list.component.scss']
 })
 export class PeriodListComponent implements OnInit {
-  @ViewChild(UserManagerFormComponent) userManagerForm: any;
-  @ViewChild(UserManagerSearchComponent) userManagerSearchForm: any;
+  @ViewChild(PeriodFormComponent)  periodFormComponent: any;
+  @ViewChild(PeriodSearchComponent) periodSearchComponent: any;
   loading: boolean = false;
   periodsDTO: PeriodDTO[];
   filterpost = "";
@@ -61,17 +61,17 @@ export class PeriodListComponent implements OnInit {
   }
 
   newRow(): void {
-    this.userManagerForm.formNormal();
+    this. periodFormComponent.formNormal();
   }
 
   editRow(periodDTO: PeriodDTO): void {
-    this.userManagerForm.formNormal();
-    this.userManagerForm.assignValues(periodDTO);
+    this. periodFormComponent.formNormal();
+    this. periodFormComponent.assignValues(periodDTO);
   }
 
   viewRow(periodDTO: PeriodDTO): void {
-    this.userManagerSearchForm.formNormal();
-    this.userManagerSearchForm.assignValues(periodDTO);
+    this.periodSearchComponent.formNormal();
+    this.periodSearchComponent.assignValues(periodDTO);
   }
 
   deleteRow(periodDTO: PeriodDTO): void {
