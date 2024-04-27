@@ -29,23 +29,21 @@
           <table class="content-table resp">
             <thead>
               <tr>
-                <th scope="col">Usuario</th>
-                <th scope="col">Gestor</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Celular</th>
+                <th scope="col">Código</th>
+                <th scope="col">Año</th>
+                <th scope="col">Descripción</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (managersDTO | filterUsuario: filterpost) | paginate : {
+              <tr *ngFor="let item of (periodsDTO | filterUsuario: filterpost) | paginate : {
                 itemsPerPage: pagesize,
                 currentPage: page,
                 totalItems: count
               }">
-                <td>{{item.usuario}}</td>
-                <td>{{item.nombre}}</td>
-                <td>{{item.correo}}</td>
-                <td>{{item.celular}}</td>
+                <td>{{item.codigo_periodo}}</td>
+                <td>{{item.anio}}</td>
+                <td>{{item.descripcion}}</td>
                 <td>
                   <div class="flex-content-right">
                     <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" (click)="editRow(item)"><i class="fas fa-edit"></i></button>

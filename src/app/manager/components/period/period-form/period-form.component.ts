@@ -1,9 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
-import { ManagerDTO } from 'src/app/manager/models/manager.dto';
-import { ManagerService } from 'src/app/manager/services/manager.service';
-import { UsuarioService } from 'src/app/user/services/usuario.service';
+import { PeriodDTO } from 'src/app/manager/models/period.dto';
+import { PeriodService } from 'src/app/manager/services/period.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -17,23 +16,16 @@ declare var $:any;
 export class PeriodFormComponent implements OnInit {
   @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
   title: string = "";
-  managerDTO: ManagerDTO;
-  cod_usuario: number = 0;
-  apellido: FormControl;
-  nombre: FormControl;
-  celular: FormControl;
-  correo: FormControl;
-  usuario: FormControl;
-  password: FormControl;
-  password2: FormControl;
+  periodDTO: PeriodDTO;
+  cod_periodo: number = 0;
+  codigo_periodo: FormControl;
+  anio: FormControl;
+  descripcion: FormControl;
   registerForm: FormGroup;
   isValidForm!: boolean | null;
-  isValidFormEmail: boolean;
-  isValidFormUser: boolean;
-  messagueEmail: string = '';
-  messaguePassword: string = '';
-  correoTemporal: string = '';
-  usuarioTemporal: string = '';
+  isValidFormPeriod: boolean;
+  messaguePeriod: string = '';
+  periodTemporal: string = '';
   loading: boolean = false;
   ban: boolean = true;
   textButton: string = '';
@@ -43,100 +35,53 @@ export class PeriodFormComponent implements OnInit {
   count = 0;
   pagesize = 5;
 
-  constructor(private formBuilder: FormBuilder, private managerService: ManagerService, private router: Router, private usuarioService: UsuarioService) {
+  constructor(private formBuilder: FormBuilder, private periodService: PeriodService, private router: Router) {
     this.formNormal();
   }
 
   formNormal() : void {
     this.title = "Nuevo Registro";
-    this.managerDTO = new ManagerDTO(0, '', '', '', '', '', '', 1, '', '');
+    this.periodDTO = new PeriodDTO(0, '', '', '', 1);
 
-    this.apellido = new FormControl(this.managerDTO.apellido, [
+    this.codigo_periodo = new FormControl(this.periodDTO.codigo_periodo, [
       Validators.required
     ]);
 
-    this.nombre = new FormControl(this.managerDTO.nombre, [
+    this.anio = new FormControl(this.periodDTO.anio, [
       Validators.required
     ]);
 
-    this.celular = new FormControl(this.managerDTO.celular, [
+    this.descripcion = new FormControl(this.periodDTO.descripcion, [
       Validators.required
-    ]);
-
-    this.correo = new FormControl(this.managerDTO.correo, [
-      Validators.required,
-      Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
-    ]);
-
-
-    this.usuario = new FormControl(this.managerDTO.usuario, [
-      Validators.required
-    ]);
-
-    this.password = new FormControl(this.managerDTO.password, [
-      Validators.required,
-      Validators.pattern(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]).{8,}$/)
-    ]);
-
-    this.password2 = new FormControl('', [
-      this.passwordValidator
     ]);
 
     this.registerForm = this.formBuilder.group({
-      apellido: this.apellido,
-      nombre: this.nombre,
-      celular: this.celular,
-      correo: this.correo,
-      usuario: this.usuario,
-      password: this.password,
-      password2: this.password2
+      codigo_periodo: this.codigo_periodo,
+      anio: this.anio,
+      descripcion: this.descripcion
     });
 
-    this.cod_usuario = Number(moment().unix().toString());
+    this.cod_periodo = Number(moment().unix().toString());
 
     this.isValidForm = true;
-    this.isValidFormEmail = true;
-    this.isValidFormUser = true;
+    this.isValidFormPeriod = true;
     this.ban = true;
     this.textButton = 'Guardar';
   }
 
-  assignValues(managerDTO: ManagerDTO): void {
+  assignValues(periodDTO: PeriodDTO): void {
     this.title = "Editar Registro";
-    this.cod_usuario = Number(managerDTO.cod_usuario);
-    this.apellido.setValue(managerDTO.apellido);
-    this.nombre.setValue(managerDTO.nombre);
-    this.celular.setValue(managerDTO.celular);
-    this.correo.setValue(managerDTO.correo);
-    this.usuario.setValue(managerDTO.usuario);
-    this.password.setValue("");
-    this.password2.setValue("");
-    this.correoTemporal = managerDTO.correo;
-    this.usuarioTemporal = managerDTO.usuario;
+    this.cod_periodo = Number(periodDTO.cod_periodo);
+    this.codigo_periodo.setValue(periodDTO.codigo_periodo);
+    this.anio.setValue(periodDTO.anio);
+    this.descripcion.setValue(periodDTO.descripcion);
+    this.periodTemporal = periodDTO.codigo_periodo;
     this.ban = false;
     this.textButton = 'Actualizar';
   }
 
-  passwordValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    this.messaguePassword = '';
-    let password2 = control.value;
-    
-    if(password2 === ''){
-      this.messaguePassword = 'Contraseña de confirmación es requerida';
-      return { isValid: true }
-    }
-
-    if (this.password.value != password2){
-      this.messaguePassword = 'Las contraseñas no coinciden';
-      return { isValid: true }
-    }
-  
-    return null;
-  }
-
   ngOnInit(): void {
-    this.isValidFormEmail = true;
-    this.isValidFormUser = true;
+    this.isValidFormPeriod = true;
   }
 
   register() {
@@ -152,17 +97,14 @@ export class PeriodFormComponent implements OnInit {
     }
 
     this.isValidForm = true;
-    this.isValidFormEmail = true;
-    this.isValidFormUser = true;
-    this.managerDTO = this.registerForm.value;
-    this.managerDTO.tipo_usuario = 'GESTOR';
-    this.managerDTO.cod_usuario = this.cod_usuario;
+    this.isValidFormPeriod = true;
+    this.periodDTO = this.registerForm.value;
+    this.periodDTO.cod_periodo = this.cod_periodo;
 
     const promise1 = this.searchEmail().then();
-    const promise2 = this.searchUser().then();
-    Promise.all([promise1, promise2])
+    Promise.all([promise1])
     .then(() => {
-      if(this.isValidFormEmail && this.isValidFormUser) {
+      if(this.isValidFormPeriod) {
         if(this.ban) {
           this.save();
         } else {
@@ -191,55 +133,23 @@ export class PeriodFormComponent implements OnInit {
     this.loading = true;
     return new Promise((resolve, reject) => {
 
-      if(this.correoTemporal === this.correo.value && this.ban === false) {
+      if(this.periodTemporal === this.codigo_periodo.value && this.ban === false) {
         resolve(true);
       } else {
-        this.usuarioService.searchEmail(this.correo.value)
+        this.periodService.searchCodePeriod(this.codigo_periodo.value)
         .subscribe( (data : any) =>
         {
           this.loading = false;
           const dataResult = data;
           if (dataResult.estado) {
-            this.isValidFormEmail = false;
+            this.isValidFormPeriod = false;
           } else {
-            this.isValidFormEmail = true;
+            this.isValidFormPeriod = true;
           }
           resolve(true);
         }, (error: HttpErrorResponse) => {
           this.loading = false;
-          this.isValidFormEmail = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error enla conexión intente mas tarde',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          reject(false);
-        });
-      }
-    });
-  }
-
-  searchUser() {
-    this.loading = true;
-    return new Promise((resolve, reject) => {
-      if(this.usuarioTemporal === this.usuario.value && this.ban === false) {
-        resolve(true);
-      } else {
-        this.usuarioService.searchUser(this.usuario.value)
-        .subscribe( (data : any) =>
-        {
-          this.loading = false;
-          const dataResult = data;
-          if (dataResult.estado) {
-            this.isValidFormUser = false;
-          } else {
-            this.isValidFormUser = true;
-          }
-          resolve(true);
-        }, (error: HttpErrorResponse) => {
-          this.loading = false;
-          this.isValidFormUser = false;
+          this.isValidFormPeriod = false;
           Swal.fire({
             icon: 'error',
             title: 'Error enla conexión intente mas tarde',
@@ -254,7 +164,7 @@ export class PeriodFormComponent implements OnInit {
 
   save(): void {
     this.loading = true;
-    this.managerService.saveManager(this.managerDTO)
+    this.periodService.save(this.periodDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -294,7 +204,7 @@ export class PeriodFormComponent implements OnInit {
 
   update(): void {
     this.loading = true;
-    this.managerService.updateManager(this.managerDTO)
+    this.periodService.update(this.periodDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;

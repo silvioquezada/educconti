@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ManagerDTO } from 'src/app/manager/models/manager.dto';
-import { ManagerService } from 'src/app/manager/services/manager.service';
+import { PeriodDTO } from 'src/app/manager/models/period.dto';
+import { PeriodService } from 'src/app/manager/services/period.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { UserManagerFormComponent } from '../../user-manager/user-manager-form/user-manager-form.component';
@@ -15,13 +15,13 @@ export class PeriodListComponent implements OnInit {
   @ViewChild(UserManagerFormComponent) userManagerForm: any;
   @ViewChild(UserManagerSearchComponent) userManagerSearchForm: any;
   loading: boolean = false;
-  managersDTO: ManagerDTO[];
+  periodsDTO: PeriodDTO[];
   filterpost = "";
   page = 1;
   count = 0;
   pagesize = 5;
 
-  constructor(private managerService: ManagerService) {
+  constructor(private periodService: PeriodService) {
   }
 
   ngOnInit(): void {
@@ -31,10 +31,10 @@ export class PeriodListComponent implements OnInit {
   listUserManager(): void {
     this.loading = true;
 
-    this.managerService.listUserManager()
+    this.periodService.list()
     .subscribe( (data) => {
         this.loading = false;
-        this.managersDTO = data;
+        this.periodsDTO = data;
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -64,19 +64,19 @@ export class PeriodListComponent implements OnInit {
     this.userManagerForm.formNormal();
   }
 
-  editRow(managerDTO: ManagerDTO): void {
+  editRow(periodDTO: PeriodDTO): void {
     this.userManagerForm.formNormal();
-    this.userManagerForm.assignValues(managerDTO);
+    this.userManagerForm.assignValues(periodDTO);
   }
 
-  viewRow(managerDTO: ManagerDTO): void {
+  viewRow(periodDTO: PeriodDTO): void {
     this.userManagerSearchForm.formNormal();
-    this.userManagerSearchForm.assignValues(managerDTO);
+    this.userManagerSearchForm.assignValues(periodDTO);
   }
 
-  deleteRow(managerDTO: ManagerDTO): void {
+  deleteRow(periodDTO: PeriodDTO): void {
     Swal.fire({
-      title: managerDTO.nombre + ' ' + managerDTO.apellido,
+      title: periodDTO.descripcion + ' ' + periodDTO.anio,
       text: '¿Estás seguro de eliminar registro?',
       icon: 'warning',
       showCancelButton: true,
@@ -84,16 +84,16 @@ export class PeriodListComponent implements OnInit {
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
-        this.delete(managerDTO);
+        this.delete(periodDTO);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         
       }
     });
   }
 
-  delete(managerDTO: ManagerDTO) : void {
+  delete(periodDTO: PeriodDTO) : void {
     this.loading = true;
-    this.managerService.deleteManager(managerDTO)
+    this.periodService.delete(periodDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
