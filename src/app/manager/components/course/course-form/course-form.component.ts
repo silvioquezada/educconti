@@ -18,12 +18,14 @@ declare var $:any;
   styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent implements OnInit {
+  courseDTO: CourseDTO;
   @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
   title: string = "";
   periodDTO: PeriodDTO;
   periodsDTO: PeriodDTO[];
   categoriesDTO: CategoryDTO[];
   cod_periodo: number = 0;
+  periodo: FormControl;
   codigo_periodo: FormControl;
   anio: FormControl;
   descripcion: FormControl;
@@ -47,12 +49,18 @@ export class CourseFormComponent implements OnInit {
 
   formNormal() : void {
     this.title = "Nuevo Registro";
+    this.courseDTO = new CourseDTO(0, 0, 0, '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
     this.periodDTO = new PeriodDTO(0, '', '', '', 1);
 
-    this.codigo_periodo = new FormControl(this.periodDTO.codigo_periodo, [
+    this.periodo = new FormControl(this.periodDTO, [
       Validators.required
     ]);
 
+    this.codigo_periodo = new FormControl(this.courseDTO.descripcion, [
+      Validators.required
+    ]);
+
+    
     this.anio = new FormControl(this.periodDTO.anio, [
       Validators.required
     ]);
@@ -62,19 +70,31 @@ export class CourseFormComponent implements OnInit {
     ]);
 
     this.registerForm = this.formBuilder.group({
+      periodo: this.periodo,
       codigo_periodo: this.codigo_periodo,
       anio: this.anio,
       descripcion: this.descripcion
     });
 
-    this.cod_periodo = Number(moment().unix().toString());
-
+    //this.cod_curso = Number(moment().unix().toString());
+    
+    //alert(this.periodo.value);
+    
     this.isValidForm = true;
     this.isValidFormPeriod = true;
     this.ban = true;
     this.textButton = 'Guardar';
+
+    this.listPeriod();
+    this.listCategories();
   }
 
+  /*
+  changePeriod(event: any): void {
+    const elemento = event.target.value;
+    this.cod_periodo = elemento;
+  }
+*/
   assignValues(periodDTO: PeriodDTO): void {
     this.title = "Editar Registro";
     this.cod_periodo = Number(periodDTO.cod_periodo);
@@ -91,6 +111,8 @@ export class CourseFormComponent implements OnInit {
   }
 
   register() {
+    alert(this.periodo.value);
+ 
     this.isValidForm = false;
     if (this.registerForm.status == 'INVALID') {
       Swal.fire({

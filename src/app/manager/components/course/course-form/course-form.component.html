@@ -28,10 +28,15 @@
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Periodo:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <select class="form-control form-control-select" id="apellidos" [formControl]="periodo" [ngClass]="{'is-invalid': periodo.errors && isValidForm != null && !isValidForm}">
+                <option></option>
+                <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO"><!--[selected]="item.cod_periodo === cod_periodo"-->
+                  {{item.descripcion}}
+                </option>
+              </select>
+              <div *ngIf="periodo.errors">
+                <div *ngIf="periodo.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="periodo?.hasError('required')">Periodo es requerido</small>
                 </div>
               </div>
             </div>

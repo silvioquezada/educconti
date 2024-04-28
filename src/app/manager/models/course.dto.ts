@@ -1,7 +1,7 @@
 export class CourseDTO {
   cod_usuario: number;
-  cod_periodo: string;
-  cod_categoria: string;
+  cod_periodo: number;
+  cod_categoria: number;
   codigo_curso: string;
   nombre_curso: string;
   fecha_inicio_inscripcion: Date;
@@ -14,7 +14,7 @@ export class CourseDTO {
   documento_descripcion: string;
   estado: number;
 
-  constructor(cod_usuario: number, cod_periodo: string, cod_categoria: string, codigo_curso: string, nombre_curso: string, fecha_inicio_inscripcion: Date, fecha_fin_inscripcion: Date, fecha_inicio: Date, fecha_fin: Date, modalidad: string, cupo: number, descripcion: string, documento_descripcion: string, estado: number) {
+  constructor(cod_usuario: number, cod_periodo: number, cod_categoria: number, codigo_curso: string, nombre_curso: string, fecha_inicio_inscripcion: Date, fecha_fin_inscripcion: Date, fecha_inicio: Date, fecha_fin: Date, modalidad: string, cupo: number, descripcion: string, documento_descripcion: string, estado: number) {
     this.cod_usuario = cod_usuario;
     this.cod_periodo = cod_periodo;
     this.cod_categoria = cod_categoria;

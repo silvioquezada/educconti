@@ -16,7 +16,7 @@ export class CourseSearchComponent implements OnInit {
   }
 
   formNormal() : void {
-    this.courseDTO = new CourseDTO(0, '', '', '', '', '', '', 1, '', '');
+    this.courseDTO = new CourseDTO(0, 0, 0, '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
   }
 
   assignValues(managerDTO: CourseDTO): void {
