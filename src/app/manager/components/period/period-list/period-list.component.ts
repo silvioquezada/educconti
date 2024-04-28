@@ -25,10 +25,10 @@ export class PeriodListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listUserManager();
+    this.listPeriod();
   }
 
-  listUserManager(): void {
+  listPeriod(): void {
     this.loading = true;
 
     this.periodService.list()
@@ -48,8 +48,8 @@ export class PeriodListComponent implements OnInit {
     );
   }
 
-  receiveManagerData(): void {
-    this.listUserManager();
+  receivePeriodData(): void {
+    this.listPeriod();
   }
 
   keyFilter() {
@@ -106,7 +106,7 @@ export class PeriodListComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          this.listUserManager();
+          this.listPeriod();
         }
         else
         {

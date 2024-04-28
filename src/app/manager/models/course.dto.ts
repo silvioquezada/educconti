@@ -1,25 +1,33 @@
-export class ManagerDTO {
+export class CourseDTO {
   cod_usuario: number;
-  apellido: string;
-  nombre: string;
-  celular: string;
-  correo: string;
-  usuario: string;
-  password: string;
+  cod_periodo: string;
+  cod_categoria: string;
+  codigo_curso: string;
+  nombre_curso: string;
+  fecha_inicio_inscripcion: Date;
+  fecha_fin_inscripcion: Date;
+  fecha_inicio: Date;
+  fecha_fin: Date;
+  modalidad: string;
+  cupo: number;
+  descripcion: string;
+  documento_descripcion: string;
   estado: number;
-  tipo_usuario: string;
-  token: string;
 
-  constructor(cod_usuario: number, apellido: string, nombre: string, celular: string, correo: string, usuario: string, password: string, estado: number, tipo_usuario: string, token: string) {
+  constructor(cod_usuario: number, cod_periodo: string, cod_categoria: string, codigo_curso: string, nombre_curso: string, fecha_inicio_inscripcion: Date, fecha_fin_inscripcion: Date, fecha_inicio: Date, fecha_fin: Date, modalidad: string, cupo: number, descripcion: string, documento_descripcion: string, estado: number) {
     this.cod_usuario = cod_usuario;
-    this.apellido = apellido;
-    this.nombre = nombre;
-    this.celular = celular;
-    this.correo = correo;
-    this.usuario = usuario;
-    this.password = password;
+    this.cod_periodo = cod_periodo;
+    this.cod_categoria = cod_categoria;
+    this.codigo_curso = codigo_curso;
+    this.nombre_curso = nombre_curso;
+    this.fecha_inicio_inscripcion = fecha_inicio_inscripcion;
+    this.fecha_fin_inscripcion = fecha_fin_inscripcion;
+    this.fecha_inicio = fecha_inicio;
+    this.fecha_fin = fecha_fin;
+    this.modalidad = modalidad;
+    this.cupo = cupo;
+    this.descripcion = descripcion;
+    this.documento_descripcion = documento_descripcion;
     this.estado = estado;
-    this.tipo_usuario = tipo_usuario;
-    this.token = token;
   }
 }

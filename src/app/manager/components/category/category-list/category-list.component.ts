@@ -25,10 +25,10 @@ export class CategoryListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listUserManager();
+    this.listCategories();
   }
 
-  listUserManager(): void {
+  listCategories(): void {
     this.loading = true;
 
     this.categoryService.list()
@@ -49,7 +49,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   receiveCategoryData(): void {
-    this.listUserManager();
+    this.listCategories();
   }
 
   keyFilter() {
@@ -106,7 +106,7 @@ export class CategoryListComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          this.listUserManager();
+          this.listCategories();
         }
         else
         {

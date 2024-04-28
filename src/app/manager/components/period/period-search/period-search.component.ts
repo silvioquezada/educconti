@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PeriodDTO } from 'src/app/manager/models/period.dto';
+
 @Component({
   selector: 'app-period-search',
   templateUrl: './period-search.component.html',

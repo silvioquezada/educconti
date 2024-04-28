@@ -1,15 +1,15 @@
 <app-loader [loading] = "loading"></app-loader>
 
-<app-user-manager-form (dataSend)="receiveManagerData()"></app-user-manager-form>
+<app-course-form (dataSend)="receiveManagerData()"></app-course-form>
 
-<app-user-manager-search></app-user-manager-search>
+<app-course-search></app-course-search>
 
 <main>
   
   <section class="container" aria-label="Listado de usuarios">
 
       <div class="content-title">
-        <h1>Listado de Usuarios</h1>
+        <h1>Listado de Cursos</h1>
       </div>
       
   
@@ -29,28 +29,26 @@
           <table class="content-table resp">
             <thead>
               <tr>
-                <th scope="col">Usuario</th>
-                <th scope="col">Gestor</th>
-                <th scope="col">Correo</th>
-                <th scope="col">Celular</th>
+                <th scope="col">Código</th>
+                <th scope="col">Año</th>
+                <th scope="col">Descripción</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (managersDTO | filterUsuario: filterpost) | paginate : {
+              <tr *ngFor="let item of (periodsDTO | filterPeriod: filterpost) | paginate : {
                 itemsPerPage: pagesize,
                 currentPage: page,
                 totalItems: count
               }">
-                <td>{{item.usuario}}</td>
-                <td>{{item.nombre}}</td>
-                <td>{{item.correo}}</td>
-                <td>{{item.celular}}</td>
+                <td>{{item.codigo_periodo}}</td>
+                <td>{{item.anio}}</td>
+                <td>{{item.descripcion}}</td>
                 <td>
                   <div class="flex-content-right">
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" (click)="viewRow(item)"><i class="fas fa-search"></i></button>
-                    <button class="btn btn-danger btn-sm" (click)="deleteRow(item)"><i class="fa fa-trash"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" toggle="tooltip" data-bs-placement="top" title="Editar registro" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" toggle="tooltip" data-bs-placement="top" title="Ver registro" (click)="viewRow(item)"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-danger btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa fa-trash"></i></button>
                   </div>
                 </td>
               </tr>

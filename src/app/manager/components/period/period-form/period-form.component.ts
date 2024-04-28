@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { PeriodDTO } from 'src/app/manager/models/period.dto';
 import { PeriodService } from 'src/app/manager/services/period.service';
 import { HttpErrorResponse } from '@angular/common/http';
