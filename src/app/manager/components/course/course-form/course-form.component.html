@@ -30,7 +30,7 @@
               <label class="form-label" for="periodos">Periodo:</label>
               <select class="form-control form-control-select" id="periodos" [formControl]="periodo" [ngClass]="{'is-invalid': periodo.errors && isValidForm != null && !isValidForm}">
                 <option></option>
-                <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO"><!--[selected]="item.cod_periodo === cod_periodo"-->
+                <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO">
                   {{item.descripcion}}
                 </option>
               </select>
@@ -67,13 +67,23 @@
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Imagen:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Suba imagen" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="nombre_curso.errors">
-                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
+
+
+              
+              
+
+
+              <label class="form-label" for="imagen_curso">Imagen:</label>
+              <!-- <input class="form-control" id="imagen_curso" type="text" placeholder="Suba imagen_curso" maxlength="50" [formControl]="imagen_curso" [ngClass]="{ 'is-invalid': imagen_curso.errors && isValidForm != null && !isValidForm}"> -->
+              <input type="file" name="image" [formControl]="imagen_curso" (change)="selectImagen($event)">
+              <div *ngIf="imagen_curso.errors">
+                <div *ngIf="imagen_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="imagen_curso?.hasError('required')">Imagen es requerido</small>
                 </div>
               </div>
+
+
+
             </div>
 
             <div class="input-group">
@@ -142,10 +152,10 @@
 
             <div class="input-group">
               <label class="form-label" for="descripcion">Descripción:</label>
-              <input class="form-control" id="descripcion" type="text" placeholder="Ingrese descripcion" maxlength="500" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="nombre_curso.errors">
-                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="descripcion" type="text" placeholder="Ingrese descripcion" maxlength="500" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="descripcion.errors">
+                <div *ngIf="descripcion.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="descripcion?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>

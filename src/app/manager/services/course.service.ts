@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CourseDTO } from '../models/course.dto';
 import { Observable } from 'rxjs';
@@ -29,5 +29,18 @@ export class CourseService {
 
   delete(destroy: CourseDTO): Observable<CourseDTO> {
     return this.http.put<CourseDTO>(this.api + 'delete', destroy);
+  }
+
+  uploadImage(form:FormData):Observable<any>{
+    const headers = new HttpHeaders();
+    //headers.append('Accept', 'application/json');
+    //headers.append("enctype", "multipart/form-data");
+
+    //Content-Type: application / x-www-form-urlencoded
+    //return this.http.post(this.api + "image", form);
+
+    return this.http.post(this.api + "image",form, {
+      headers: headers
+    })
   }
 }

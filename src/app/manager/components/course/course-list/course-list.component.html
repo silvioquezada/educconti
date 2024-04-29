@@ -30,8 +30,9 @@
             <thead>
               <tr>
                 <th scope="col">Código</th>
+                <th scope="col">Año</th>
+                <th scope="col">Categoría</th>
                 <th scope="col">Nombre Curso</th>
-                <th scope="col">Descripción</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -42,8 +43,9 @@
                 totalItems: count
               }">
                 <td>{{item.codigo_curso}}</td>
+                <td>{{item.anio}}</td>
+                <td>{{item.categoria}}</td>
                 <td>{{item.nombre_curso}}</td>
-                <td>{{item.descripcion}}</td>
                 <td>
                   <div class="flex-content-right">
                     <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" toggle="tooltip" data-bs-placement="top" title="Editar registro" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
