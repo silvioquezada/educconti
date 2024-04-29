@@ -370,7 +370,7 @@ export class CourseFormComponent implements OnInit {
     //this.selectedFile=<File>event.target.files[0]
     //this.selectedImge = event.target;
     this.selectedImge = <File>event.target.files[0]
-    console.log(this.selectedImge);
+    //console.log(this.selectedImge);
   }
 
   uploadImage() {

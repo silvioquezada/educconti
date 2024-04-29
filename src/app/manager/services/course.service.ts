@@ -32,15 +32,6 @@ export class CourseService {
   }
 
   uploadImage(form:FormData):Observable<any>{
-    const headers = new HttpHeaders();
-    //headers.append('Accept', 'application/json');
-    //headers.append("enctype", "multipart/form-data");
-
-    //Content-Type: application / x-www-form-urlencoded
-    //return this.http.post(this.api + "image", form);
-
-    return this.http.post(this.api + "image",form, {
-      headers: headers
-    })
+    return this.http.post(this.api + "image",form);
   }
 }
