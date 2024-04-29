@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PeriodDTO } from 'src/app/manager/models/period.dto';
-import { PeriodService } from 'src/app/manager/services/period.service';
+import { CourseDTO } from 'src/app/manager/models/course.dto';
+import { CourseService } from 'src/app/manager/services/course.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CourseFormComponent } from '../course-form/course-form.component';
@@ -15,13 +15,13 @@ export class CourseListComponent implements OnInit {
   @ViewChild(CourseFormComponent)  periodFormComponent: any;
   @ViewChild(CourseSearchComponent) periodSearchComponent: any;
   loading: boolean = false;
-  periodsDTO: PeriodDTO[];
+  coursesDTO: CourseDTO[];
   filterpost = "";
   page = 1;
   count = 0;
   pagesize = 5;
 
-  constructor(private periodService: PeriodService) {
+  constructor(private courseService: CourseService) {
   }
 
   ngOnInit(): void {
@@ -31,10 +31,10 @@ export class CourseListComponent implements OnInit {
   listUserManager(): void {
     this.loading = true;
 
-    this.periodService.list()
+    this.courseService.list()
     .subscribe( (data) => {
         this.loading = false;
-        this.periodsDTO = data;
+        this.coursesDTO = data;
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -64,19 +64,19 @@ export class CourseListComponent implements OnInit {
     this. periodFormComponent.formNormal();
   }
 
-  editRow(periodDTO: PeriodDTO): void {
-    this. periodFormComponent.formNormal();
-    this. periodFormComponent.assignValues(periodDTO);
+  editRow(courseDTO: CourseDTO) {
+    this.periodFormComponent.formNormal();
+    this.periodFormComponent.assignValues(courseDTO);
   }
 
-  viewRow(periodDTO: PeriodDTO): void {
+  viewRow(courseDTO: CourseDTO): void {
     this.periodSearchComponent.formNormal();
-    this.periodSearchComponent.assignValues(periodDTO);
+    this.periodSearchComponent.assignValues(courseDTO);
   }
 
-  deleteRow(periodDTO: PeriodDTO): void {
+  deleteRow(courseDTO: CourseDTO): void {
     Swal.fire({
-      title: periodDTO.descripcion + ' ' + periodDTO.anio,
+      title: courseDTO.nombre_curso,
       text: '¿Estás seguro de eliminar registro?',
       icon: 'warning',
       showCancelButton: true,
@@ -84,16 +84,16 @@ export class CourseListComponent implements OnInit {
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
-        this.delete(periodDTO);
+        this.delete(courseDTO);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         
       }
     });
   }
 
-  delete(periodDTO: PeriodDTO) : void {
+  delete(courseDTO: CourseDTO) : void {
     this.loading = true;
-    this.periodService.delete(periodDTO)
+    this.courseService.delete(courseDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;

@@ -30,19 +30,19 @@
             <thead>
               <tr>
                 <th scope="col">Código</th>
-                <th scope="col">Año</th>
+                <th scope="col">Nombre Curso</th>
                 <th scope="col">Descripción</th>
                 <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let item of (periodsDTO | filterPeriod: filterpost) | paginate : {
+              <tr *ngFor="let item of (coursesDTO | filterPeriod: filterpost) | paginate : {
                 itemsPerPage: pagesize,
                 currentPage: page,
                 totalItems: count
               }">
-                <td>{{item.codigo_periodo}}</td>
-                <td>{{item.anio}}</td>
+                <td>{{item.codigo_curso}}</td>
+                <td>{{item.nombre_curso}}</td>
                 <td>{{item.descripcion}}</td>
                 <td>
                   <div class="flex-content-right">

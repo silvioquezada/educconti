@@ -23,12 +23,20 @@ export class CourseFormComponent implements OnInit {
   title: string = "";
   periodDTO: PeriodDTO;
   periodsDTO: PeriodDTO[];
+  categoryDTO: CategoryDTO;
   categoriesDTO: CategoryDTO[];
+
   cod_periodo: number = 0;
+  cod_categoria: number =0;
+
+  codigo_curso: FormControl;
   periodo: FormControl;
-  codigo_periodo: FormControl;
-  anio: FormControl;
-  descripcion: FormControl;
+  categoria: FormControl;
+  nombre_curso: FormControl;
+  modalidad: FormControl;
+
+  cod_curso: number = 0;
+
   registerForm: FormGroup;
   isValidForm!: boolean | null;
   isValidFormPeriod: boolean;
@@ -44,75 +52,106 @@ export class CourseFormComponent implements OnInit {
   pagesize = 5;
 
   constructor(private formBuilder: FormBuilder, private periodService: PeriodService, private router: Router, private categoryService: CategoryService, private courseService: CourseService) {
+    this.listPeriod();
+    this.listCategories();
     this.formNormal();
   }
 
-  formNormal() : void {
-    this.title = "Nuevo Registro";
-    this.courseDTO = new CourseDTO(0, 0, 0, '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
-    this.periodDTO = new PeriodDTO(0, '', '', '', 1);
+  formNormal() {
+    /*
+    const promise1 = this.listPeriod().then();
+    const promise2 = this.listCategories().then();
+    Promise.all([promise1, promise2])
+    .then(() => {
+      
 
-    this.periodo = new FormControl(this.periodDTO, [
-      Validators.required
-    ]);
 
-    this.codigo_periodo = new FormControl(this.courseDTO.descripcion, [
-      Validators.required
-    ]);
+
+
+
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error enla conexión intente mas tarde',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
+  */
+
 
     
-    this.anio = new FormControl(this.periodDTO.anio, [
+    this.title = "Nuevo Registro";
+    this.courseDTO = new CourseDTO(0, 0, 0, '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
+    //this.periodDTO = new PeriodDTO(0, '', '', '', 1);
+    //this.categoryDTO = new CategoryDTO(0, '', 1);
+
+    this.cod_periodo = null;
+    this.cod_categoria = null;
+
+    this.periodo = new FormControl(this.cod_periodo, [
       Validators.required
     ]);
 
-    this.descripcion = new FormControl(this.periodDTO.descripcion, [
+    this.categoria = new FormControl(this.cod_categoria, [
+      Validators.required
+    ]);
+
+    this.codigo_curso = new FormControl(this.courseDTO.codigo_curso, [
+      Validators.required
+    ]);
+
+    this.nombre_curso = new FormControl(this.courseDTO.nombre_curso, [
+      Validators.required
+    ]);
+
+    this.modalidad = new FormControl(this.courseDTO.modalidad, [
       Validators.required
     ]);
 
     this.registerForm = this.formBuilder.group({
       periodo: this.periodo,
-      codigo_periodo: this.codigo_periodo,
-      anio: this.anio,
-      descripcion: this.descripcion
+      categoria: this.categoria,
+      codigo_curso: this.codigo_curso,
+      nombre_curso: this.nombre_curso,
+      modalidad: this.modalidad
     });
 
-    //this.cod_curso = Number(moment().unix().toString());
-    
-    //alert(this.periodo.value);
+    this.cod_curso = Number(moment().unix().toString());
     
     this.isValidForm = true;
     this.isValidFormPeriod = true;
     this.ban = true;
     this.textButton = 'Guardar';
 
-    this.listPeriod();
-    this.listCategories();
+    
+
+    console.log(1);
   }
 
-  /*
-  changePeriod(event: any): void {
-    const elemento = event.target.value;
-    this.cod_periodo = elemento;
-  }
-*/
-  assignValues(periodDTO: PeriodDTO): void {
+  assignValues(courseDTO: CourseDTO): void {
+    console.log(2);
     this.title = "Editar Registro";
-    this.cod_periodo = Number(periodDTO.cod_periodo);
-    this.codigo_periodo.setValue(periodDTO.codigo_periodo);
-    this.anio.setValue(periodDTO.anio);
-    this.descripcion.setValue(periodDTO.descripcion);
-    this.periodTemporal = periodDTO.codigo_periodo;
+    this.cod_curso = Number(courseDTO.cod_curso);
+    this.codigo_curso.setValue(courseDTO.codigo_curso);
+    this.periodo.setValue(courseDTO.cod_periodo);
+    this.categoria.setValue(courseDTO.cod_categoria);
+    this.nombre_curso.setValue(courseDTO.nombre_curso);
+    this.modalidad.setValue(courseDTO.modalidad);
+    this.periodTemporal = courseDTO.codigo_curso;
     this.ban = false;
     this.textButton = 'Actualizar';
+
+    //this.cod_periodo = courseDTO.cod_periodo;
+    //this.cod_categoria = courseDTO.cod_categoria;
   }
 
   ngOnInit(): void {
     this.isValidFormPeriod = true;
   }
 
-  register() {
-    alert(this.periodo.value);
- 
+  register() { 
     this.isValidForm = false;
     if (this.registerForm.status == 'INVALID') {
       Swal.fire({
@@ -126,8 +165,8 @@ export class CourseFormComponent implements OnInit {
 
     this.isValidForm = true;
     this.isValidFormPeriod = true;
-    this.periodDTO = this.registerForm.value;
-    this.periodDTO.cod_periodo = this.cod_periodo;
+    this.courseDTO = this.registerForm.value;
+    this.courseDTO.cod_curso = this.cod_curso;
 
     const promise1 = this.searchEmail().then();
     Promise.all([promise1])
@@ -161,10 +200,10 @@ export class CourseFormComponent implements OnInit {
     this.loading = true;
     return new Promise((resolve, reject) => {
 
-      if(this.periodTemporal === this.codigo_periodo.value && this.ban === false) {
+      if(this.periodTemporal === this.codigo_curso.value && this.ban === false) {
         resolve(true);
       } else {
-        this.periodService.searchCodePeriod(this.codigo_periodo.value)
+        this.periodService.searchCodePeriod(this.codigo_curso.value)
         .subscribe( (data : any) =>
         {
           this.loading = false;
@@ -192,7 +231,7 @@ export class CourseFormComponent implements OnInit {
 
   save(): void {
     this.loading = true;
-    this.periodService.save(this.periodDTO)
+    this.courseService.save(this.courseDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -232,7 +271,7 @@ export class CourseFormComponent implements OnInit {
 
   update(): void {
     this.loading = true;
-    this.periodService.update(this.periodDTO)
+    this.courseService.update(this.courseDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -270,44 +309,51 @@ export class CourseFormComponent implements OnInit {
     );
   }
 
-  listCategories(): void {
-    this.loading = true;
+  listCategories() {
 
-    this.categoryService.list()
-    .subscribe( (data) => {
-        this.loading = false;
-        this.categoriesDTO = data;
-      },
-      (error: HttpErrorResponse) => {
-        this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Se ha originado un error en el servidor',
-          showConfirmButton: false,
-          timer: 1500
+    //return new Promise((resolve, reject) => {
+      this.loading = true;
+        this.categoryService.list()
+        .subscribe( (data) => {
+            this.loading = false;
+            this.categoriesDTO = data;
+          //resolve(true);
+        }, (error: HttpErrorResponse) => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Se ha originado un error en el servidor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          //reject(false);
         });
-      }
-    );
+    //});
+
   }
 
-  listPeriod(): void {
-    this.loading = true;
+  listPeriod() {
+    //return new Promise((resolve, reject) => {
+      this.loading = true;
 
-    this.periodService.list()
-    .subscribe( (data) => {
-        this.loading = false;
-        this.periodsDTO = data;
-      },
-      (error: HttpErrorResponse) => {
-        this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Se ha originado un error en el servidor',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    );
+      this.periodService.list()
+      .subscribe( (data) => {
+          this.loading = false;
+          this.periodsDTO = data;
+          //resolve(true);
+        },
+        (error: HttpErrorResponse) => {
+          this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Se ha originado un error en el servidor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          //reject(false);
+        }
+      );
+    //});
   }
 
   keyFilter() {

@@ -14,11 +14,11 @@
 
           <div class="panel panel-col-p50">
             <div class="input-group">
-              <label class="form-label" for="codigo_periodo">Código:</label>
-              <input class="form-control" id="codigo_periodo" type="text" placeholder="Ingrese codigo" maxlength="100" [formControl]="codigo_periodo" [ngClass]="{ 'is-invalid': (codigo_periodo.errors && isValidForm != null && !isValidForm) || !isValidFormPeriod}">
-              <div *ngIf="codigo_periodo.errors || !isValidFormPeriod">
-                <div *ngIf="codigo_periodo.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="codigo_periodo?.hasError('required')">Código es requerido</small>
+              <label class="form-label" for="codigo_curso">Código:</label>
+              <input class="form-control" id="codigo_curso" type="text" placeholder="Ingrese codigo" maxlength="100" [formControl]="codigo_curso" [ngClass]="{ 'is-invalid': (codigo_curso.errors && isValidForm != null && !isValidForm) || !isValidFormPeriod}">
+              <div *ngIf="codigo_curso.errors || !isValidFormPeriod">
+                <div *ngIf="codigo_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="codigo_curso?.hasError('required')">Código es requerido</small>
                 </div>
                 <div *ngIf="!isValidFormPeriod">
                   <small class="text-color-red">Código ya está registrado</small>
@@ -27,8 +27,8 @@
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Periodo:</label>
-              <select class="form-control form-control-select" id="apellidos" [formControl]="periodo" [ngClass]="{'is-invalid': periodo.errors && isValidForm != null && !isValidForm}">
+              <label class="form-label" for="periodos">Periodo:</label>
+              <select class="form-control form-control-select" id="periodos" [formControl]="periodo" [ngClass]="{'is-invalid': periodo.errors && isValidForm != null && !isValidForm}">
                 <option></option>
                 <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO"><!--[selected]="item.cod_periodo === cod_periodo"-->
                   {{item.descripcion}}
@@ -42,51 +42,56 @@
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="nombres">Categoria:</label>
-              <input class="form-control" id="nombres" type="text" placeholder="Ingrese descripción" maxlength="50" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="descripcion.errors">
-                <div *ngIf="descripcion.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="descripcion?.hasError('required')">Descripción es requerido</small>
+              <label class="form-label" for="categorias">Categoria:</label>
+              <select class="form-control form-control-select" id="categorias" [formControl]="categoria" [ngClass]="{'is-invalid': categoria.errors && isValidForm != null && !isValidForm}">
+                <option></option>
+                <option [value]="item.cod_categoria" *ngFor="let item of categoriesDTO">
+                  {{item.categoria}}
+                </option>
+              </select>
+              <div *ngIf="categoria.errors">
+                <div *ngIf="categoria.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="categoria?.hasError('required')">Categoría es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Nombre curso:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <label class="form-label" for="curso">Nombre curso:</label>
+              <input class="form-control" id="curso" type="text" placeholder="Ingrese nombre curso" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Nombre del curso es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Imagen:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Fecha inicio inscripción:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Fecha fin inscripción:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
@@ -97,60 +102,60 @@
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Fecha inicio curso:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Fecha fin curso:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Modalidad:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <label class="form-label" for="modalidad">Modalidad:</label>
+              <input class="form-control" id="modalidad" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="modalidad" [ngClass]="{ 'is-invalid': modalidad.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="modalidad.errors">
+                <div *ngIf="modalidad.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="modalidad?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Cupo:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Documento descripción:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="apellidos">Descripción:</label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
-              <div *ngIf="anio.errors">
-                <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
-                  <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
+              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="nombre_curso" [ngClass]="{ 'is-invalid': nombre_curso.errors && isValidForm != null && !isValidForm}">
+              <div *ngIf="nombre_curso.errors">
+                <div *ngIf="nombre_curso.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="nombre_curso?.hasError('required')">Año es requerido</small>
                 </div>
               </div>
             </div>
