@@ -33,7 +33,15 @@ export class CourseFormComponent implements OnInit {
   periodo: FormControl;
   categoria: FormControl;
   nombre_curso: FormControl;
+  imagen: FormControl;
+  fecha_inicio_inscripcion: FormControl;
+  fecha_fin_inscripcion: FormControl;
+  fecha_inicio: FormControl;
+  fecha_fin: FormControl;
   modalidad: FormControl;
+  cupo: FormControl;
+  descripcion: FormControl;
+  documento_descripcion: FormControl;
 
   cod_curso: number = 0;
 
@@ -83,7 +91,7 @@ export class CourseFormComponent implements OnInit {
 
     
     this.title = "Nuevo Registro";
-    this.courseDTO = new CourseDTO(0, 0, 0, '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
+    this.courseDTO = new CourseDTO(0, 0, 0, '', '', '', new Date(), new Date(), new Date(), new Date(), '', 0, '', '', 1);
     //this.periodDTO = new PeriodDTO(0, '', '', '', 1);
     //this.categoryDTO = new CategoryDTO(0, '', 1);
 
@@ -103,6 +111,26 @@ export class CourseFormComponent implements OnInit {
     ]);
 
     this.nombre_curso = new FormControl(this.courseDTO.nombre_curso, [
+      Validators.required
+    ]);
+
+    this.imagen = new FormControl(this.courseDTO.imagen, [
+      Validators.required
+    ]);
+
+    this.fecha_inicio_inscripcion = new FormControl(this.courseDTO.fecha_inicio_inscripcion, [
+      Validators.required
+    ]);
+
+    this.fecha_fin_inscripcion = new FormControl(this.courseDTO.fecha_fin_inscripcion, [
+      Validators.required
+    ]);
+
+    this.fecha_inicio = new FormControl(this.courseDTO.fecha_inicio, [
+      Validators.required
+    ]);
+
+    this.fecha_fin = new FormControl(this.courseDTO.fecha_fin, [
       Validators.required
     ]);
 
@@ -138,6 +166,11 @@ export class CourseFormComponent implements OnInit {
     this.periodo.setValue(courseDTO.cod_periodo);
     this.categoria.setValue(courseDTO.cod_categoria);
     this.nombre_curso.setValue(courseDTO.nombre_curso);
+
+    this.imagen.setValue(courseDTO.imagen);
+    this.fecha_inicio_inscripcion.setValue(courseDTO.fecha_inicio_inscripcion);
+    this.fecha_fin_inscripcion.setValue(courseDTO.fecha_fin_inscripcion);
+
     this.modalidad.setValue(courseDTO.modalidad);
     this.periodTemporal = courseDTO.codigo_curso;
     this.ban = false;
