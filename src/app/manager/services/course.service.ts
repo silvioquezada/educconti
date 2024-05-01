@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { CourseDTO } from '../models/course.dto';
 import { Observable } from 'rxjs';
@@ -31,11 +31,11 @@ export class CourseService {
     return this.http.put<CourseDTO>(this.api + 'delete', destroy);
   }
 
-  uploadImage(form:FormData):Observable<any>{
+  uploadImage(form: FormData):Observable<any>{
     return this.http.post(this.api + "image",form);
   }
 
-  uploadPdf(form:FormData):Observable<any>{
+  uploadPdf(form: FormData):Observable<any>{
     return this.http.post(this.api + "pdf",form);
   }
 }

@@ -26,7 +26,7 @@ export class AuthInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.token = this.localStorageService.getData('token');
-    if (this.token && req.url!=this.api + 'image') {
+    if (this.token && req.url!=this.api + 'image' && req.url!=this.api + 'pdf') {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -37,7 +37,7 @@ export class AuthInterceptorService {
     } else {
       req = req.clone({
         setHeaders: {
-          Authorization: `Bearer ${this.token}`,
+          Authorization: `Bearer ${this.token}`
         },
       });
     }

@@ -237,7 +237,7 @@ export class SignUpComponent implements OnInit {
     .catch(() => {
       Swal.fire({
         icon: 'error',
-        title: 'Error enla conexión intente mas tarde',
+        title: 'Error en la conexión intente mas tarde',
         showConfirmButton: false,
         timer: 1500
       });
@@ -264,7 +264,7 @@ export class SignUpComponent implements OnInit {
         this.isValidFormCedula = false;
         Swal.fire({
           icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
+          title: 'Error en la conexión intente mas tarde',
           showConfirmButton: false,
           timer: 1500
         });
@@ -292,7 +292,7 @@ export class SignUpComponent implements OnInit {
         this.isValidFormEmail = false;
         Swal.fire({
           icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
+          title: 'Error en la conexión intente mas tarde',
           showConfirmButton: false,
           timer: 1500
         });
@@ -320,7 +320,7 @@ export class SignUpComponent implements OnInit {
         this.isValidFormUser = false;
         Swal.fire({
           icon: 'error',
-          title: 'Error enla conexión intente mas tarde',
+          title: 'Error en la conexión intente mas tarde',
           showConfirmButton: false,
           timer: 1500
         });

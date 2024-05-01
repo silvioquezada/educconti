@@ -122,7 +122,7 @@ export class PeriodFormComponent implements OnInit {
     .catch(() => {
       Swal.fire({
         icon: 'error',
-        title: 'Error enla conexión intente mas tarde',
+        title: 'Error en la conexión intente mas tarde',
         showConfirmButton: false,
         timer: 1500
       });
@@ -152,7 +152,7 @@ export class PeriodFormComponent implements OnInit {
           this.isValidFormPeriod = false;
           Swal.fire({
             icon: 'error',
-            title: 'Error enla conexión intente mas tarde',
+            title: 'Error en la conexión intente mas tarde',
             showConfirmButton: false,
             timer: 1500
           });
