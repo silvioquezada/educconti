@@ -379,6 +379,7 @@ export class CourseFormComponent implements OnInit {
       let formImage = new FormData();
       //formImage.append("image", this.selectedImge.files[0]);
       formImage.append("image", this.selectedImge);
+      formImage.append("name_image", String(this.cod_curso));
       console.log(formImage);
       this.courseService.uploadImage(formImage).subscribe( (data : any) => {
         this.loading = false;

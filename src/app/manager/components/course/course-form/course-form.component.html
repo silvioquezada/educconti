@@ -75,7 +75,7 @@
 
               <label class="form-label" for="imagen_curso">Imagen:</label>
               <!-- <input class="form-control" id="imagen_curso" type="text" placeholder="Suba imagen_curso" maxlength="50" [formControl]="imagen_curso" [ngClass]="{ 'is-invalid': imagen_curso.errors && isValidForm != null && !isValidForm}"> -->
-              <input type="file" name="image" [formControl]="imagen_curso" (change)="selectImagen($event)">
+              <input type="file" accept=".jpg,.png" name="image" [formControl]="imagen_curso" (change)="selectImagen($event)">
               <div *ngIf="imagen_curso.errors">
                 <div *ngIf="imagen_curso.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="imagen_curso?.hasError('required')">Imagen es requerido</small>
