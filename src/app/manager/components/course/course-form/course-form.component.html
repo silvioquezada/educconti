@@ -1,3 +1,29 @@
+<div class="modal fade" id="myModaledit" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <label class="text-weight">DESCCRIPCIÓN</label>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-modal">
+          
+          <div class="panel panel-col-p50">
+            
+            
+          </div>
+
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="button" data-bs-dismiss="modal"><i class="fa-solid fa-rectangle-xmark"></i> Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <form class="modal fade" id="modalForm" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" [formGroup]="registerForm" (ngSubmit)="register()">
   <app-loader [loading] = "loading"></app-loader>
 
@@ -68,7 +94,7 @@
 
             <div class="input-group">
               <div *ngIf="!ban">
-                <img width="100" height="100" src={{urlImage}}>
+                <img width="170" height="120" src={{urlImage}}>
               </div>
             </div>
 
@@ -152,6 +178,7 @@
             <div class="input-group">
               <label class="form-label" for="descripcion">Descripción:</label>
               <input class="form-control" id="descripcion" type="text" placeholder="Ingrese descripcion" maxlength="500" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && isValidForm != null && !isValidForm}">
+              <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#myModaledit" title="Editar registro"><i class="fas fa-edit"></i></button>
               <div *ngIf="descripcion.errors">
                 <div *ngIf="descripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="descripcion?.hasError('required')">Año es requerido</small>
