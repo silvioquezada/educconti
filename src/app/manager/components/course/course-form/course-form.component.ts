@@ -41,6 +41,7 @@ export class CourseFormComponent implements OnInit {
   documento_descripcion: FormControl;
 
   selectedImge:any;
+  selectedPdf:any;
 
   cod_curso: number = 0;
 
@@ -169,8 +170,7 @@ export class CourseFormComponent implements OnInit {
     this.isValidFormPeriod = true;
   }
 
-  register() {
-    this.uploadImage();
+  register(): void {
     /*
     this.isValidForm = false;
     if (this.registerForm.status == 'INVALID') {
@@ -187,15 +187,19 @@ export class CourseFormComponent implements OnInit {
     this.isValidFormPeriod = true;
     this.courseDTO = this.registerForm.value;
     this.courseDTO.cod_curso = this.cod_curso;
-
-    const promise1 = this.searchEmail().then();
-    Promise.all([promise1])
+    */
+    const promise1 = this.uploadImage().then();
+    const promise2 = this.uploadPdf().then();
+    const promise3 = this.searchEmail().then();
+    Promise.all([promise1, promise2, promise3])
     .then(() => {
       if(this.isValidFormPeriod) {
         if(this.ban) {
-          this.save();
+          alert("Guardar");
+          //this.save();
         } else {
-          this.update();
+          //this.update();
+          alert("Modificar");
         }
       } else {
         Swal.fire({
@@ -214,7 +218,6 @@ export class CourseFormComponent implements OnInit {
         timer: 1500
       });
     });
-    */
   }
 
   searchEmail() {
@@ -367,29 +370,26 @@ export class CourseFormComponent implements OnInit {
   }
 
   selectImagen(event) {
-    //this.selectedFile=<File>event.target.files[0]
-    //this.selectedImge = event.target;
     this.selectedImge = <File>event.target.files[0]
-    //console.log(this.selectedImge);
+  }
+
+  selectPdf(event) {
+    this.selectedPdf = <File>event.target.files[0]
   }
 
   uploadImage() {
-    this.loading = true;
-    //if(this.selectedImge.files.length > 0) {
-      let formImage = new FormData();
-      //formImage.append("image", this.selectedImge.files[0]);
-      formImage.append("image", this.selectedImge);
-      formImage.append("name_image", String(this.cod_curso));
-      console.log(formImage);
-      this.courseService.uploadImage(formImage).subscribe( (data : any) => {
-        this.loading = false;
-        console.log(data);
-        /*
-        if(data.estado==true) {
-          localStorage.setItem("foto", data.nombrearchivo);
-          window.location.href="/perfil";
-        }
-        */  
+    return new Promise((resolve, reject) => {
+      this.loading = true;
+        let formImage = new FormData();
+        formImage.append("image", this.selectedImge);
+        formImage.append("name_image", String(this.cod_curso));
+        this.courseService.uploadImage(formImage).subscribe( (data : any) => {
+          this.loading = false;
+          if(data.estado) {
+            resolve(true);
+          } else {
+            reject(false);
+          }
       }, (error: HttpErrorResponse) => {
         this.loading = false;
         Swal.fire({
@@ -398,8 +398,35 @@ export class CourseFormComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         });
+        reject(false);
       });
-    //}
+    });
+  }
+
+  uploadPdf() {
+    return new Promise((resolve, reject) => {
+      this.loading = true;
+        let formPdf = new FormData();
+        formPdf.append("pdf", this.selectedImge);
+        formPdf.append("name_pdf", String(this.cod_curso));
+        this.courseService.uploadImage(formPdf).subscribe( (data : any) => {
+          this.loading = false;
+          if(data.estado) {
+            resolve(true);
+          } else {
+            reject(false);
+          }
+      }, (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        reject(false);
+      });
+    });
   }
 
   keyFilter() {

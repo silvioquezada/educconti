@@ -34,4 +34,8 @@ export class CourseService {
   uploadImage(form:FormData):Observable<any>{
     return this.http.post(this.api + "image",form);
   }
+
+  uploadPdf(form:FormData):Observable<any>{
+    return this.http.post(this.api + "pdf",form);
+  }
 }

@@ -162,7 +162,8 @@
 
             <div class="input-group">
               <label class="form-label" for="subir_programa">Subir programa pdf:</label>
-              <input class="form-control" id="subir_programa" type="text" placeholder="Subir programa" maxlength="50" [formControl]="documento_descripcion" [ngClass]="{ 'is-invalid': documento_descripcion.errors && isValidForm != null && !isValidForm}">
+              <!-- <input class="form-control" id="subir_programa" type="text" placeholder="Subir programa" maxlength="50" [formControl]="documento_descripcion" [ngClass]="{ 'is-invalid': documento_descripcion.errors && isValidForm != null && !isValidForm}"> -->
+              <input type="file" accept=".pdf" name="image" [formControl]="documento_descripcion" (change)="selectPdf($event)">
               <div *ngIf="documento_descripcion.errors">
                 <div *ngIf="documento_descripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="documento_descripcion?.hasError('required')">Año es requerido</small>
