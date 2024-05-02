@@ -187,7 +187,8 @@ export class CourseFormComponent implements OnInit {
     this.periodo.setValue(courseDTO.cod_periodo);
     this.categoria.setValue(courseDTO.cod_categoria);
     this.nombre_curso.setValue(courseDTO.nombre_curso);
-    this.imagen_curso.setValue(null);
+    //this.imagen_curso.setValue(null);
+    this.imagen_curso.setValue(courseDTO.imagen_curso);
     this.urlImage = environment.baseUrlFile + 'img/' + courseDTO.imagen_curso;
     this.fecha_inicio_inscripcion.setValue(courseDTO.fecha_inicio_inscripcion);
     this.fecha_fin_inscripcion.setValue(courseDTO.fecha_fin_inscripcion);
@@ -196,9 +197,12 @@ export class CourseFormComponent implements OnInit {
     this.modalidad.setValue(courseDTO.modalidad);
     this.cupo.setValue(courseDTO.cupo);
     this.descripcion.setValue(courseDTO.descripcion);
-    this.documento_descripcion.setValue(null);
+    //this.documento_descripcion.setValue(null);
+    this.documento_descripcion.setValue(courseDTO.documento_descripcion);
     this.codigoCursoTemporal = courseDTO.codigo_curso;
     this.ban = false;
+    //this.courseDTO.imagen_curso = courseDTO.imagen_curso;
+    //this.courseDTO.documento_descripcion = courseDTO.descripcion;
     this.textButton = 'Actualizar';
   }
 
@@ -209,13 +213,28 @@ export class CourseFormComponent implements OnInit {
   register(): void {
     this.isValidForm = false;
     if (this.registerForm.status == 'INVALID') {
-      Swal.fire({
-        icon: 'error',
-        title: 'Algunos datos son inválidos, revise por favor',
-        showConfirmButton: false,
-        timer: 1500
-      });
-      return;
+
+      //if (this.ban) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Algunos datos son inválidos, revise por favor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      //}
+      /*
+      if (this.ban === false && this.imagen_curso.value !== null) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Algunos datos son inválidos, revise por favor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+        return;
+      }
+      */
+      
     }
 
     this.isValidForm = true;
@@ -262,8 +281,6 @@ export class CourseFormComponent implements OnInit {
   }
 
   uploadFile() {
-    this.courseDTO.imagen_curso = 'defecto.png';
-    this.courseDTO.documento_descripcion = 'NA';
     const promise1 = this.uploadImage().then();
     const promise2 = this.uploadPdf().then();
     Promise.all([promise1, promise2])
@@ -411,10 +428,12 @@ export class CourseFormComponent implements OnInit {
 
   selectImagen(event) {
     this.selectedImge = <File>event.target.files[0];
+    this.imagen_curso.setValue(this.cod_curso);
   }
 
   selectPdf(event) {
     this.selectedPdf = <File>event.target.files[0];
+    this.documento_descripcion.setValue(this.cod_curso);
   }
 
   uploadImage() {
