@@ -13,12 +13,41 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 declare var $:any;
 import { environment } from 'src/environments/environment';
 
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
+const editorConfig = {
+  // ui: 'pt',
+  // language: 'pt',
+  toolbar: {
+    items: [
+      'undo',
+      'redo',
+      '|',
+      'heading',
+      '|',
+      'bold',
+      'italic',
+      'link',
+      '|',
+      'strikethrough',
+      'code',
+      '|', // Não tem ainda
+      'bulletedList',
+      'numberedList',
+    ],
+  },
+};
+
 @Component({
   selector: 'app-course-form',
   templateUrl: './course-form.component.html',
   styleUrls: ['./course-form.component.scss']
 })
 export class CourseFormComponent implements OnInit {
+  editorConfig = editorConfig;
+  public editorcodigo = ClassicEditor;
+  codigo : string ="";
+  
   courseDTO: CourseDTO;
   @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
   title: string = "";

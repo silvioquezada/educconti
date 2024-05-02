@@ -28,6 +28,8 @@ import { FilterPeriodPipe } from './pipes/filter-period.pipe';
 import { FilterCategoryPipe } from './pipes/filter-category.pipe';
 import { FilterCoursePipe } from './pipes/filter-course.pipe';
 
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+
 @NgModule({
   declarations: [
     RegistrationsComponent,
@@ -57,7 +59,8 @@ import { FilterCoursePipe } from './pipes/filter-course.pipe';
     ReactiveFormsModule,
     NgxPaginationModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    CKEditorModule
   ]
 })
 export class ManagerModule { }
