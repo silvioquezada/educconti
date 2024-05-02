@@ -6,31 +6,6 @@ import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { CourseFormComponent } from '../course-form/course-form.component';
 import { CourseSearchComponent } from '../course-search/course-search.component';
 
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-
-const editorConfig = {
-  // ui: 'pt',
-  // language: 'pt',
-  toolbar: {
-    items: [
-      'undo',
-      'redo',
-      '|',
-      'heading',
-      '|',
-      'bold',
-      'italic',
-      'link',
-      '|',
-      'strikethrough',
-      'code',
-      '|', // Não tem ainda
-      'bulletedList',
-      'numberedList',
-    ],
-  },
-};
-
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
@@ -39,10 +14,6 @@ const editorConfig = {
 export class CourseListComponent implements OnInit {
   @ViewChild(CourseFormComponent)  periodFormComponent: any;
   @ViewChild(CourseSearchComponent) periodSearchComponent: any;
-
-  editorConfig = editorConfig;
-  public editorcodigo = ClassicEditor;
-  codigo : string ="";
   
   loading: boolean = false;
   coursesDTO: CourseDTO[];

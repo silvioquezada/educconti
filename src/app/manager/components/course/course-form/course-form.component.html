@@ -2,19 +2,24 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <label class="text-weight">DESCCRIPCIÓN</label>
+        <label class="text-weight">Descripción Curso</label>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         
         <form class="form-modal">
           
-          <div class="panel panel-col-p50">
+          <div class="panel panel-col-p100">
             
-            <ckeditor [editor]="editorcodigo"  [config]="editorConfig" [(ngModel)]="codigo"></ckeditor>
+            <ckeditor [editor]="editorcodigo"  [config]="editorConfig" [(ngModel)]="codigo" class="ck-editor__editable_inline"></ckeditor>
             
           </div>
-
+          <div class="panel panel-col-p100">
+          </div>
+          <div class="panel panel-col-p100">
+          </div>
+          <div class="panel panel-col-p100">
+          </div>
         </form>
         
       </div>
