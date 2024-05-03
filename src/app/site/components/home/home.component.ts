@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { CourseDTO } from 'src/app/manager/models/course.dto';
+import { CourseService } from 'src/app/manager/services/course.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +12,64 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  loading: boolean = false;
+  coursesDTO: CourseDTO[];
+  filterpost = "";
+  baseUrl = environment.baseUrlFile + 'img/';
+  page = 1;
+  count = 0;
+  pagesize = 5;
 
-  constructor() { }
+  constructor(private courseService: CourseService) { }
 
   ngOnInit(): void {
+    this.listCouseManager();
+  }
+
+  getRouteImage(imagen_curso: string) {
+    return this.baseUrl + imagen_curso;
+  }
+
+  getDiffWeek(fechaInicio: Date, fechaFin: Date) {//
+    let fecha1 = moment(fechaInicio);
+    let fecha2 = moment(fechaFin);
+    let diasDeDiferencia = fecha2.diff(fecha1, 'week') + 1;
+    return diasDeDiferencia + ' Semanas';
+  }
+
+  getDateFormat(fecha: Date) {//
+    moment.locale('es');
+    return moment().format('DD') + " de " + moment(fecha).format('MMMM') + " del " + moment().format('YYYY');
+  }
+
+  verifyCloseCousre(fechaFin: Date) {
+    let fechaActual = moment();
+    let diasDeDiferencia = moment(fechaFin).diff(fechaActual, 'days') + 1;
+    if (diasDeDiferencia>0) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  listCouseManager(): void {
+    this.loading = true;
+
+    this.courseService.list()
+    .subscribe( (data) => {
+        this.loading = false;
+        this.coursesDTO = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
   }
 
 }

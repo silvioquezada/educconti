@@ -9,6 +9,8 @@ import { RequirementsComponent } from './components/requirements/requirements.co
 import { CategoryComponent } from './components/category/category.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
+import { SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
   ],
   imports: [
     CommonModule,
-    SiteRoutingModule
+    SiteRoutingModule,
+    SharedModule
   ]
 })
 export class SiteModule { }

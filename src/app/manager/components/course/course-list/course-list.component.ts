@@ -26,10 +26,10 @@ export class CourseListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listUserManager();
+    this.listCouseManager();
   }
 
-  listUserManager(): void {
+  listCouseManager(): void {
     this.loading = true;
 
     this.courseService.list()
@@ -50,7 +50,7 @@ export class CourseListComponent implements OnInit {
   }
 
   receiveManagerData(): void {
-    this.listUserManager();
+    this.listCouseManager();
   }
 
   keyFilter() {
@@ -108,7 +108,7 @@ export class CourseListComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          this.listUserManager();
+          this.listCouseManager();
         }
         else
         {
