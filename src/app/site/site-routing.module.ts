@@ -5,6 +5,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { RequirementsComponent } from './components/requirements/requirements.component';
 import { AboutComponent } from './components/about/about.component';
+import { DetailCourseComponent } from './components/detail-course/detail-course.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path: 'inicio',
     component: HomeComponent
+  },
+  {
+    path: 'detalle_curso/:cod_curso',
+    component: DetailCourseComponent
   },
   {
     path: 'categoria',

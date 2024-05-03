@@ -261,13 +261,7 @@ export class SignUpComponent implements OnInit {
         resolve(true);
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        this.isValidFormCedula = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error en la conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        this.isValidFormCedula = true;
         reject(false);
       });
     });
@@ -289,13 +283,7 @@ export class SignUpComponent implements OnInit {
         resolve(true);
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        this.isValidFormEmail = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error en la conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        this.isValidFormEmail = true;
         reject(false);
       });
     });
@@ -317,13 +305,7 @@ export class SignUpComponent implements OnInit {
         resolve(true);
       }, (error: HttpErrorResponse) => {
         this.loading = false;
-        this.isValidFormUser = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Error en la conexión intente mas tarde',
-          showConfirmButton: false,
-          timer: 1500
-        });
+        this.isValidFormUser = true;
         reject(false);
       });
     });

@@ -1,30 +1,48 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { CourseDTO } from 'src/app/manager/models/course.dto';
 import { CourseService } from 'src/app/manager/services/course.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-detail-course',
+  templateUrl: './detail-course.component.html',
+  styleUrls: ['./detail-course.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class DetailCourseComponent implements OnInit {
+  courseDTO: CourseDTO = new CourseDTO(0, null, '', null, '', '', '', '', null, null, null, null, '', null, '', '', 1);
+  cod_curso: number;
   loading: boolean = false;
-  coursesDTO: CourseDTO[];
-  filterpost = "";
   baseUrl = environment.baseUrlFile + 'img/';
-  page = 1;
-  count = 0;
-  pagesize = 5;
 
-  constructor(private router: Router, private courseService: CourseService) { }
+  constructor(private rutaActiva: ActivatedRoute, private courseService: CourseService) { }
 
   ngOnInit(): void {
-    this.listCouseManager();
+    this.cod_curso = Number(this.rutaActiva.snapshot.paramMap.get("cod_curso")!);
+    this.detailCourse();
+  }
+
+  detailCourse(): void {
+    this.loading = true;
+
+    this.courseService.detailCourse(this.cod_curso)
+    .subscribe( (data) => {
+        this.loading = false;
+        this.courseDTO = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
   }
 
   getRouteImage(imagen_curso: string) {
@@ -51,30 +69,6 @@ export class HomeComponent implements OnInit {
     } else {
       return false;
     }
-  }
-
-  listCouseManager(): void {
-    this.loading = true;
-
-    this.courseService.listCourse()
-    .subscribe( (data) => {
-        this.loading = false;
-        this.coursesDTO = data;
-      },
-      (error: HttpErrorResponse) => {
-        this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Se ha originado un error en el servidor',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    );
-  }
-
-  viewDetail(cod_curso: number): void {
-    this.router.navigateByUrl('detalle_curso/' + cod_curso);
   }
 
 }

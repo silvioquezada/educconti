@@ -10,6 +10,7 @@ import { CategoryComponent } from './components/category/category.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
 import { SharedModule } from '../shared/shared.module';
+import { DetailCourseComponent } from './components/detail-course/detail-course.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { SharedModule } from '../shared/shared.module';
     AboutComponent,
     RequirementsComponent,
     CategoryComponent,
-    MyCoursesComponent
+    MyCoursesComponent,
+    DetailCourseComponent
   ],
   imports: [
     CommonModule,

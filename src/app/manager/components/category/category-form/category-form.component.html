@@ -15,12 +15,12 @@
           <div class="panel panel-col-p100">
             <div class="input-group">
               <label class="form-label" for="categoria">Categoría:</label>
-              <input class="form-control" id="categoria" type="text" placeholder="Ingrese categoría" maxlength="100" [formControl]="categoria" [ngClass]="{ 'is-invalid': (categoria.errors && isValidForm != null && !isValidForm) || !isValidFormPeriod}">
-              <div *ngIf="categoria.errors || !isValidFormPeriod">
+              <input class="form-control" id="categoria" type="text" placeholder="Ingrese categoría" maxlength="100" [formControl]="categoria" [ngClass]="{ 'is-invalid': (categoria.errors && isValidForm != null && !isValidForm) || !isValidFormCategory}">
+              <div *ngIf="categoria.errors || !isValidFormCategory">
                 <div *ngIf="categoria.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="categoria?.hasError('required')">Categoría es requerido</small>
                 </div>
-                <div *ngIf="!isValidFormPeriod">
+                <div *ngIf="!isValidFormCategory">
                   <small class="text-color-red">Categoría ya está registrado</small>
                 </div>
               </div>

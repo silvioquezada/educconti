@@ -21,7 +21,7 @@ export class CategoryFormComponent implements OnInit {
   categoria: FormControl;
   registerForm: FormGroup;
   isValidForm!: boolean | null;
-  isValidFormPeriod: boolean;
+  isValidFormCategory: boolean;
   messaguePeriod: string = '';
   periodTemporal: string = '';
   loading: boolean = false;
@@ -52,7 +52,7 @@ export class CategoryFormComponent implements OnInit {
     this.cod_categoria = Number(moment().unix().toString());
 
     this.isValidForm = true;
-    this.isValidFormPeriod = true;
+    this.isValidFormCategory = true;
     this.ban = true;
     this.textButton = 'Guardar';
   }
@@ -67,7 +67,7 @@ export class CategoryFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isValidFormPeriod = true;
+    this.isValidFormCategory = true;
   }
 
   register() {
@@ -83,14 +83,14 @@ export class CategoryFormComponent implements OnInit {
     }
 
     this.isValidForm = true;
-    this.isValidFormPeriod = true;
+    this.isValidFormCategory = true;
     this.categoryDTO = this.registerForm.value;
     this.categoryDTO.cod_categoria = this.cod_categoria;
 
-    const promise1 = this.searchEmail().then();
+    const promise1 = this.searchCategory().then();
     Promise.all([promise1])
     .then(() => {
-      if(this.isValidFormPeriod) {
+      if(this.isValidFormCategory) {
         if(this.ban) {
           this.save();
         } else {
@@ -115,7 +115,7 @@ export class CategoryFormComponent implements OnInit {
     });
   }
 
-  searchEmail() {
+  searchCategory() {
     this.loading = true;
     return new Promise((resolve, reject) => {
 
@@ -128,20 +128,14 @@ export class CategoryFormComponent implements OnInit {
           this.loading = false;
           const dataResult = data;
           if (dataResult.estado) {
-            this.isValidFormPeriod = false;
+            this.isValidFormCategory = false;
           } else {
-            this.isValidFormPeriod = true;
+            this.isValidFormCategory = true;
           }
           resolve(true);
         }, (error: HttpErrorResponse) => {
           this.loading = false;
-          this.isValidFormPeriod = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error en la conexión intente mas tarde',
-            showConfirmButton: false,
-            timer: 1500
-          });
+          this.isValidFormCategory = true;
           reject(false);
         });
       }

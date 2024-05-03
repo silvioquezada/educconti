@@ -101,7 +101,7 @@ export class PeriodFormComponent implements OnInit {
     this.periodDTO = this.registerForm.value;
     this.periodDTO.cod_periodo = this.cod_periodo;
 
-    const promise1 = this.searchEmail().then();
+    const promise1 = this.searchCodePeriod().then();
     Promise.all([promise1])
     .then(() => {
       if(this.isValidFormPeriod) {
@@ -129,7 +129,7 @@ export class PeriodFormComponent implements OnInit {
     });
   }
 
-  searchEmail() {
+  searchCodePeriod() {
     this.loading = true;
     return new Promise((resolve, reject) => {
 
@@ -149,13 +149,7 @@ export class PeriodFormComponent implements OnInit {
           resolve(true);
         }, (error: HttpErrorResponse) => {
           this.loading = false;
-          this.isValidFormPeriod = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Error en la conexión intente mas tarde',
-            showConfirmButton: false,
-            timer: 1500
-          });
+          this.isValidFormPeriod = true;
           reject(false);
         });
       }

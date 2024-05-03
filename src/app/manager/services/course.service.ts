@@ -38,4 +38,12 @@ export class CourseService {
   uploadPdf(form: FormData):Observable<any>{
     return this.http.post(this.api + "pdf",form);
   }
+
+  listCourse(): Observable<CourseDTO[]> {
+    return this.http.get<CourseDTO[]>(this.api + 'list/');
+  }
+
+  detailCourse(cod_curso: number): Observable<CourseDTO> {
+    return this.http.get<CourseDTO>(this.api + 'detail/' + cod_curso);
+  }
 }
