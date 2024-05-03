@@ -63,6 +63,7 @@ export class CourseListComponent implements OnInit {
 
   newRow(): void {
     this. periodFormComponent.formNormal();
+    this.periodFormComponent.restoreFile();
   }
 
   editRow(courseDTO: CourseDTO) {

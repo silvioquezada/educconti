@@ -19,7 +19,7 @@ export class FilterCoursePipe implements PipeTransform {
       
       if (frases.length===1)
       {
-        this.data = item.cedula.toLowerCase().includes(texto) || item.apellido.toLowerCase().includes(texto) || item.nombre.toLowerCase().includes(texto);
+        this.data = item.codigo_curso.toLowerCase().includes(texto) || item.anio.toString().toLowerCase().includes(texto) || item.categoria.toLowerCase().includes(texto) || item.nombre_curso.toLowerCase().includes(texto);
         return this.data;
       }
       else
@@ -28,7 +28,7 @@ export class FilterCoursePipe implements PipeTransform {
         let coincidencia = 0;
         for(let c=0; c<frases.length; c++) {
 
-          this.data = item.cedula.toLowerCase().includes(frases[c]) || item.apellido.toLowerCase().includes(frases[c]) || item.nombre.toLowerCase().includes(frases[c]);
+          this.data = item.codigo_curso.toLowerCase().includes(frases[c]) || item.anio.toString().toLowerCase().includes(frases[c]) || item.categoria.toLowerCase().includes(frases[c]) || item.nombre_curso.toLowerCase().includes(frases[c]);
          
          if(this.data)
          {

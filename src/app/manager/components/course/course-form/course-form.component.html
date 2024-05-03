@@ -74,7 +74,7 @@
 
             <div class="input-group">
               <label class="form-label" for="imagen_curso">Imagen:</label>
-              <input class="form-control" id="imagen_curso" type="file" accept=".jpg,.png" name="image" (change)="selectImagen($event)" [ngClass]="{ 'is-invalid': (imagen_curso.errors && isValidForm != null && !isValidForm) || !isValidFormImage}">
+              <input class="form-control" id="imagen_curso" type="file" accept=".jpg,.png" name="image" (change)="selectImagen($event)" [ngClass]="{ 'is-invalid': (imagen_curso.errors && isValidForm != null && !isValidForm) || !isValidFormImage}" #fileImage>
               <div *ngIf="imagen_curso.errors">
                 <div *ngIf="imagen_curso.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="imagen_curso?.hasError('required')">Imagen es requerido</small>
@@ -130,7 +130,10 @@
 
             <div class="input-group">
               <label class="form-label" for="modalidad">Modalidad:</label>
-              <input class="form-control" id="modalidad" type="text" placeholder="Ingrese año" maxlength="15" [formControl]="modalidad" [ngClass]="{ 'is-invalid': modalidad.errors && isValidForm != null && !isValidForm}">
+              <select class="form-control form-control-select" id="modalidad" [formControl]="modalidad" [ngClass]="{ 'is-invalid': modalidad.errors && isValidForm != null && !isValidForm}">
+                <option value="Presencial">Presencial</option>
+                <option value="Virtual">Virtual</option>
+              </select>
               <div *ngIf="modalidad.errors">
                 <div *ngIf="modalidad.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="modalidad?.hasError('required')">Año es requerido</small>
@@ -150,7 +153,7 @@
 
             <div class="input-group">
               <label class="form-label" for="subir_programa">Subir programa pdf:</label>
-              <input class="form-control" id="subir_programa" type="file" accept=".pdf" name="pdf" (change)="selectPdf($event)">
+              <input class="form-control" id="subir_programa" type="file" accept=".pdf" name="pdf" (change)="selectPdf($event)" #filePdf>
             </div>
 
           </div>

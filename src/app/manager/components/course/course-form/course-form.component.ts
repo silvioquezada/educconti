@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CourseDTO } from 'src/app/manager/models/course.dto';
@@ -47,6 +47,9 @@ export class CourseFormComponent implements OnInit {
   editorConfig = editorConfig;
   public editorcodigo = ClassicEditor;
   codigo : string ="";
+
+  @ViewChild("fileImage") fileImage: ElementRef = null;
+  @ViewChild("filePdf") filePdf: ElementRef = null;
   
   courseDTO: CourseDTO;
   @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
@@ -92,9 +95,7 @@ export class CourseFormComponent implements OnInit {
   pagesize = 5;
 
   constructor(private formBuilder: FormBuilder, private periodService: PeriodService, private router: Router, private categoryService: CategoryService, private courseService: CourseService) {
-    this.listPeriod();
-    this.listCategories();
-    this.formNormal();
+    
   }
 
   formNormal() {  
@@ -178,6 +179,12 @@ export class CourseFormComponent implements OnInit {
     this.isValidFormCourse = true;
     this.ban = true;
     this.textButton = 'Guardar';
+    //this.restore();
+  }
+
+  restoreFile(): void {
+    this.fileImage.nativeElement.value = null;
+    this.filePdf.nativeElement.value = null;
   }
 
   assignValues(courseDTO: CourseDTO): void {
@@ -187,7 +194,6 @@ export class CourseFormComponent implements OnInit {
     this.periodo.setValue(courseDTO.cod_periodo);
     this.categoria.setValue(courseDTO.cod_categoria);
     this.nombre_curso.setValue(courseDTO.nombre_curso);
-    //this.imagen_curso.setValue(null);
     this.imagen_curso.setValue(courseDTO.imagen_curso);
     this.urlImage = environment.baseUrlFile + 'img/' + courseDTO.imagen_curso;
     this.fecha_inicio_inscripcion.setValue(courseDTO.fecha_inicio_inscripcion);
@@ -197,24 +203,24 @@ export class CourseFormComponent implements OnInit {
     this.modalidad.setValue(courseDTO.modalidad);
     this.cupo.setValue(courseDTO.cupo);
     this.descripcion.setValue(courseDTO.descripcion);
-    //this.documento_descripcion.setValue(null);
     this.documento_descripcion.setValue(courseDTO.documento_descripcion);
     this.codigoCursoTemporal = courseDTO.codigo_curso;
     this.ban = false;
-    //this.courseDTO.imagen_curso = courseDTO.imagen_curso;
-    //this.courseDTO.documento_descripcion = courseDTO.descripcion;
     this.textButton = 'Actualizar';
+    this.restoreFile();
   }
 
   ngOnInit(): void {
     this.isValidFormCourse = true;
+
+    this.listPeriod();
+    this.listCategories();
+    this.formNormal();
   }
 
   register(): void {
     this.isValidForm = false;
     if (this.registerForm.status == 'INVALID') {
-
-      //if (this.ban) {
         Swal.fire({
           icon: 'error',
           title: 'Algunos datos son inválidos, revise por favor',
@@ -222,19 +228,6 @@ export class CourseFormComponent implements OnInit {
           timer: 1500
         });
         return;
-      //}
-      /*
-      if (this.ban === false && this.imagen_curso.value !== null) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Algunos datos son inválidos, revise por favor',
-          showConfirmButton: false,
-          timer: 1500
-        });
-        return;
-      }
-      */
-      
     }
 
     this.isValidForm = true;
