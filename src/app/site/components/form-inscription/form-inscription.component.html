@@ -1,0 +1,27 @@
+<form class="modal fade" id="modalConfirmInscription" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" [formGroup]="registerForm" (ngSubmit)="register()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <label class="text-weight">Confirmar Inscripción</label>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-modal">
+          
+          <div class="panel panel-col-p100">
+            <div class="input-group">
+              <label class="form-label" for="subir_programa">Seleccionar archivo:</label>
+              <input class="form-control" id="subir_programa" type="file" accept=".pdf" name="pdf" (change)="selectPdf($event)" #filePdf>
+            </div>
+          </div>
+
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar</button>
+      </div>
+    </div>
+  </div>
+</form>

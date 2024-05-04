@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { SiteRoutingModule } from './site-routing.module';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
 import { RequirementsComponent } from './components/requirements/requirements.component';
@@ -11,6 +13,7 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
 
 import { SharedModule } from '../shared/shared.module';
 import { DetailCourseComponent } from './components/detail-course/detail-course.component';
+import { FormInscriptionComponent } from './components/form-inscription/form-inscription.component';
 
 
 @NgModule({
@@ -20,12 +23,14 @@ import { DetailCourseComponent } from './components/detail-course/detail-course.
     RequirementsComponent,
     CategoryComponent,
     MyCoursesComponent,
-    DetailCourseComponent
+    DetailCourseComponent,
+    FormInscriptionComponent
   ],
   imports: [
     CommonModule,
     SiteRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class SiteModule { }

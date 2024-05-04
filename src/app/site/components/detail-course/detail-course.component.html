@@ -1,5 +1,8 @@
 <main>
   <app-loader [loading] = "loading"></app-loader>
+
+  <app-form-inscription></app-form-inscription>
+
   <section class="container" aria-label="Detalle de Curso">
 
     <div class="content-title">
@@ -10,7 +13,7 @@
 
       <div class="card">
         <div class="card-head">
-          <img class="image-card" src={{getRouteImage(courseDTO.imagen_curso)}} alt="Imagen course">
+          <img class="image-card" src={{getRouteImage()}} alt="Imagen course">
         </div>
 
         <div class="description-card">
@@ -41,7 +44,7 @@
   
         <div class="foot-card">
           <div class="">
-            <button class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
+            <button class="btn btn-primary" (click)="searchEnrolledCourse()"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
           </div>
         </div>
 
@@ -53,7 +56,7 @@
 
         <p class="text-center">Haz clic en el siguiente botón para descargar el programa completo del curso</p>
           
-          <button class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> Descarga Programa</button>
+          <button class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> Descargar Programa</button>
     
       </div>
 
