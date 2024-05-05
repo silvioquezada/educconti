@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 import { EnrollService } from 'src/app/manager/services/enroll.service';
@@ -6,6 +6,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { environment } from 'src/environments/environment';
 import * as moment from 'moment';
+import { FormInscriptionComponent } from '../form-inscription/form-inscription.component';
+declare var $:any;
 
 @Component({
   selector: 'app-my-courses',
@@ -13,6 +15,8 @@ import * as moment from 'moment';
   styleUrls: ['./my-courses.component.scss']
 })
 export class MyCoursesComponent implements OnInit {
+  @ViewChild(FormInscriptionComponent) formInscriptionComponent: any;
+  cod_matricula: number;
   loading: boolean = false;
   coursesDTO: EnrollDTO[];
   filterpost = "";
@@ -75,6 +79,12 @@ export class MyCoursesComponent implements OnInit {
 
   viewDetail(cod_curso: number): void {
     this.router.navigateByUrl('detalle_curso/' + cod_curso);
+  }
+
+  editRow(enrollDTO: EnrollDTO) {
+    this.formInscriptionComponent.formNormal();
+    this.formInscriptionComponent.assignValues(enrollDTO);
+    $("#modalConfirmInscription").modal('show');
   }
 
 }

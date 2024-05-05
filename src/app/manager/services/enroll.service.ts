@@ -24,6 +24,10 @@ export class EnrollService {
     return this.http.post<EnrollDTO>(this.api, post);
   }
 
+  update(put: EnrollDTO): Observable<EnrollDTO> {
+    return this.http.put<EnrollDTO>(this.api, put);
+  }
+
   myCourses(): Observable<EnrollDTO[]> {
     return this.http.get<EnrollDTO[]>(this.api + 'mycourses/');
   }

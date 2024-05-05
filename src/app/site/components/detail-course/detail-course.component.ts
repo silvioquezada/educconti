@@ -66,7 +66,7 @@ export class DetailCourseComponent implements OnInit {
 
   getDateFormat(fecha: Date) {//
     moment.locale('es');
-    return moment(fecha).format('DD') + " de " + moment(fecha).format('MMMM') + " del " + moment().format('YYYY');
+    return moment(fecha).format('DD') + " de " + moment(fecha).format('MMMM');// + " del " + moment().format('YYYY');
   }
 
   verifyCloseCousre(fechaFin: Date) {
