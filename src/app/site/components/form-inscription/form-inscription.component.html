@@ -1,4 +1,5 @@
 <form class="modal fade" id="modalConfirmInscription" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" [formGroup]="registerForm" (ngSubmit)="register()">
+  <app-loader [loading] = "loading"></app-loader>
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">

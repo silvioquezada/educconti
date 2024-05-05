@@ -3,7 +3,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-//import { CourseDTO } from 'src/app/manager/models/course.dto';
 import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 import { EnrollService } from 'src/app/manager/services/enroll.service';
 declare var $:any;
@@ -14,8 +13,8 @@ declare var $:any;
   styleUrls: ['./form-inscription.component.scss']
 })
 export class FormInscriptionComponent implements OnInit {
-  //courseDTO: CourseDTO = new CourseDTO(0, null, '', null, '', '', '', '', null, null, null, null, '', null, '', '', 1);
-  enrollDTO: EnrollDTO = new EnrollDTO(0, null, 0, 0, '', '', '', '', '', '', 1);
+
+  enrollDTO: EnrollDTO = new EnrollDTO(0, null, 0, 0, '', '', '', '', '', '', 1, null);
   cod_matricula: number;
   cod_curso: number;
   loading: boolean = false;

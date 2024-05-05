@@ -1,3 +1,4 @@
+import { CourseDTO } from "./course.dto";
 export class EnrollDTO {
   cod_matricula: number;
   fecha_registro: Date;
@@ -10,8 +11,9 @@ export class EnrollDTO {
   observacion_revision: string;
   documento_descripcion: string;
   estado: number;
+  curso: CourseDTO;
 
-  constructor(cod_matricula: number, fecha_registro: Date, cod_curso: number, cod_usuario: number, estado_matricula: string, estado_respuesta: string, estado_aprobacion: string, archivo_certificado: string, observacion_revision: string, documento_descripcion: string, estado: number) {
+  constructor(cod_matricula: number, fecha_registro: Date, cod_curso: number, cod_usuario: number, estado_matricula: string, estado_respuesta: string, estado_aprobacion: string, archivo_certificado: string, observacion_revision: string, documento_descripcion: string, estado: number, curso: CourseDTO) {
     this.cod_matricula = cod_matricula;
     this.fecha_registro = fecha_registro;
     this.cod_curso = cod_curso;
@@ -23,5 +25,6 @@ export class EnrollDTO {
     this.observacion_revision = observacion_revision;
     this.documento_descripcion = documento_descripcion;
     this.estado = estado;
+    this.curso = curso;
   }
 }

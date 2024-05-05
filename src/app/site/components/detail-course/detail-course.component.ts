@@ -9,12 +9,14 @@ import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 declare var $:any;
 import { FormInscriptionComponent } from '../form-inscription/form-inscription.component';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 
 @Component({
   selector: 'app-detail-course',
   templateUrl: './detail-course.component.html',
   styleUrls: ['./detail-course.component.scss']
 })
+
 export class DetailCourseComponent implements OnInit {
   baseUrl = environment.baseUrlFile + 'img/';
   courseDTO: CourseDTO = new CourseDTO(0, null, '', null, '', '', '', '', null, null, null, null, '', null, '', '', 1);
@@ -23,7 +25,7 @@ export class DetailCourseComponent implements OnInit {
   imagen_curso: string = 'defecto.png';
   @ViewChild(FormInscriptionComponent) formInscriptionComponent: any;
 
-  constructor(private rutaActiva: ActivatedRoute, private courseService: CourseService, private enrollService: EnrollService) { }
+  constructor(private rutaActiva: ActivatedRoute, private courseService: CourseService, private enrollService: EnrollService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.cod_curso = Number(this.rutaActiva.snapshot.paramMap.get("cod_curso")!);
@@ -74,6 +76,19 @@ export class DetailCourseComponent implements OnInit {
       return true;
     } else {
       return false;
+    }
+  }
+
+  enrollCourse(): void {
+    if(this.localStorageService.getData("estado_sesion")==='true') {
+      this.searchEnrolledCourse();
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Para inscribirse al curso debe iniciar sesión',
+        showConfirmButton: false,
+        timer: 2000
+      });
     }
   }
 
