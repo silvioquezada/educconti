@@ -14,7 +14,7 @@ declare var $:any;
 })
 export class FormInscriptionComponent implements OnInit {
 
-  enrollDTO: EnrollDTO = new EnrollDTO(0, null, 0, 0, '', '', '', '', '', '', 1, null);
+  enrollDTO: EnrollDTO = new EnrollDTO(0, null, 0, 0, 0, 0, 0, '', '', '', 1, null);
   cod_matricula: number;
   cod_curso: number;
   loading: boolean = false;
