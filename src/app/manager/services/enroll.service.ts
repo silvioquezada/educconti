@@ -32,4 +32,8 @@ export class EnrollService {
     return this.http.get<EnrollDTO[]>(this.api + 'mycourses/');
   }
 
+  listInscriptions(cod_periodo: number, estado_matricula: number): Observable<EnrollDTO[]> {
+    return this.http.get<EnrollDTO[]>(this.api + 'listinscriptions/' + cod_periodo + '/' + estado_matricula);
+  }
+
 }

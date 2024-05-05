@@ -1,1 +1,96 @@
-<p>registrations works!</p>
+<app-loader [loading] = "loading"></app-loader>
+
+<app-course-form (dataSend)="receiveManagerData()"></app-course-form>
+
+<app-course-search></app-course-search>
+
+<main>
+  
+  <section class="container" aria-label="Listado de usuarios">
+
+      <div class="content-title content-inline">
+        <h1>Listado de Inscripciones</h1>
+        <div class="width-150px">
+          <select class="form-control form-control-select" id="periodos">
+            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+              {{item.codigo_periodo}}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <form class="form skin-form">
+
+        
+        <div class="panel panel-col-p100">
+
+          <div class="content-column-between">
+
+            <div class="width-150px">
+              <select class="form-control form-control-select" id="estado_inscripcion">
+                <option [value]="item.cod_estado_inscripcion" *ngFor="let item of dataStatusInscription" [selected]="cod_estado_inscripcion == item.cod_estado_inscripcion">
+                  {{item.estado_inscripcion}}
+                </option>
+              </select>
+            </div>
+            <input (keyup)="keyFilter();" class="form-filter" type="text" placeholder="Buscar" name="filterpost" [(ngModel)]="filterpost">
+          </div>
+
+          
+          <table class="content-table resp">
+            <thead>
+              <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Celular</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of (coursesDTO | filterCourse: filterpost) | paginate : {
+                itemsPerPage: pagesize,
+                currentPage: page,
+                totalItems: count
+              }">
+                <td>{{item.codigo_curso}}</td>
+                <td>{{item.anio}}</td>
+                <td>{{item.categoria}}</td>
+                <td>{{item.nombre_curso}}</td>
+                <td>
+                  <div class="flex-content-right">
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" toggle="tooltip" data-bs-placement="top" title="Editar registro" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" toggle="tooltip" data-bs-placement="top" title="Ver registro" (click)="viewRow(item)"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-danger btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex-content-right">
+            <pagination-controls class="custom-pagination"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)">
+            </pagination-controls>
+          </div>
+
+        </div>
+
+
+  
+
+
+        
+      </form>
+      
+
+
+
+
+
+  
+    
+  </section>
+</main>

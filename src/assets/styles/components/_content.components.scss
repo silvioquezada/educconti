@@ -34,6 +34,13 @@
   text-align: center;
 }
 
+.content-inline {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
 .description-detail {
   display: flex;
   flex-direction: column;
@@ -63,6 +70,13 @@
     width: 80%;
     height: 100%;
   }
+
+  .content-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+  }
 }
 
 @media screen and (min-width: $high-width) {
@@ -85,7 +99,18 @@
     padding-left: 20px;
   }
 
+  .content-inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+  }
+
   .width-100 {
     width: 100%;
   }
+}
+
+.width-150px {
+  width: 150px;
 }
