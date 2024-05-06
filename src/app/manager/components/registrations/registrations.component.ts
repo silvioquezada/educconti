@@ -9,7 +9,7 @@ import { PeriodService } from '../../services/period.service';
 import { PeriodDTO } from '../../models/period.dto';
 import { EnrollService } from '../../services/enroll.service';
 import { EnrollDTO } from '../../models/enroll.dto';
-
+import { InscriptionDTO } from '../../models/inscription.dto';
 
 @Component({
   selector: 'app-registrations',
@@ -27,6 +27,7 @@ export class RegistrationsComponent implements OnInit {
   enrollDTO: EnrollDTO[];
   coursesDTO: CourseDTO[];
   periodsDTO: PeriodDTO[];
+  inscriptionDTO: InscriptionDTO[];
   dataStatusInscription: any[] = [
     {
       "cod_estado_inscripcion" : 0,
@@ -89,8 +90,7 @@ export class RegistrationsComponent implements OnInit {
     this.enrollService.listInscriptions(this.cod_periodo, this.cod_estado_inscripcion)
     .subscribe( (data) => {
         this.loading = false;
-        console.log(data);
-        //this.enrollDTO = data;
+        this.inscriptionDTO = data;
       },
       (error: HttpErrorResponse) => {
         this.loading = false;

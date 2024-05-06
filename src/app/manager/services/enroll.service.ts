@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { EnrollDTO } from '../models/enroll.dto';
 import { Observable } from 'rxjs';
+import { InscriptionDTO } from '../models/inscription.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -32,8 +33,8 @@ export class EnrollService {
     return this.http.get<EnrollDTO[]>(this.api + 'mycourses/');
   }
 
-  listInscriptions(cod_periodo: number, estado_matricula: number): Observable<EnrollDTO[]> {
-    return this.http.get<EnrollDTO[]>(this.api + 'listinscriptions/' + cod_periodo + '/' + estado_matricula);
+  listInscriptions(cod_periodo: number, estado_matricula: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listinscriptions/' + cod_periodo + '/' + estado_matricula);
   }
 
 }
