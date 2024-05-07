@@ -43,6 +43,7 @@
                 <th scope="col">Correo</th>
                 <th scope="col">Celular</th>
                 <th scope="col"></th>
+                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
@@ -59,13 +60,15 @@
                   <div class="flex-content-right">
                     <div class="width-150px">
                       <select class="form-control form-control-select" id="estado_aprobacion" (change)="changeStatusApprovals($event, item)">
-                        <option [value]="item.cod_estado_aprobacion" *ngFor="let item of dataStatusApproval" [selected]="item.estado_aprobacion == item.cod_estado_aprobacion">
-                          {{item.estado_aprobacion}}
+                        <option [value]="itemStatus.cod_estado_aprobacion" *ngFor="let itemStatus of dataStatusApproval" [selected]="item.estado_aprobacion == itemStatus.cod_estado_aprobacion">
+                          {{itemStatus.estado_aprobacion}}
                         </option>
                       </select>
                     </div>
-                    <button *ngIf="item.estado_aprobacion == 2" class="btn btn-primary btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa-solid fa-cloud-arrow-up"></i></button>
                   </div>
+                </td>
+                <td>
+                    <button *ngIf="item.estado_aprobacion == 2" class="btn btn-primary btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa-solid fa-cloud-arrow-up"></i></button>
                 </td>
               </tr>
             </tbody>

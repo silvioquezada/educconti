@@ -146,7 +146,7 @@ export class ApprovalsComponent implements OnInit {
   approve(inscriptionDTO: InscriptionDTO, elemento: number): void {
     this.loading = true;
     inscriptionDTO.estado_aprobacion = Number(elemento);
-    this.enrollService.enroll(inscriptionDTO)
+    this.enrollService.approve(inscriptionDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
