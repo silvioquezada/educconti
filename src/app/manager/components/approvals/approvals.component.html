@@ -1,1 +1,99 @@
-<p>approvals works!</p>
+<app-loader [loading] = "loading"></app-loader>
+
+<app-verify-registry (dataSend)="receiveVerifyRegistryData()"></app-verify-registry>
+
+<main>
+  
+  <section class="container" aria-label="Listado de usuarios">
+
+      <div class="content-title content-inline">
+        <h1>Listado de Aprobaciones</h1>
+        <div class="width-150px">
+          <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
+            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+              {{item.codigo_periodo}}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <form class="form skin-form">
+
+        
+        <div class="panel panel-col-p100">
+
+          <div class="content-column-between">
+
+            <div class="width-150px">
+              <select class="form-control form-control-select" id="estado_inscripcion" (change)="changeStatus($event)">
+                <option [value]="item.cod_estado_inscripcion" *ngFor="let item of dataStatusInscription" [selected]="cod_estado_inscripcion == item.cod_estado_inscripcion">
+                  {{item.estado_inscripcion}}
+                </option>
+              </select>
+            </div>
+            <input (keyup)="keyFilter();" class="form-filter" type="text" placeholder="Buscar" name="filterpost" [(ngModel)]="filterpost">
+          </div>
+
+          
+          <table class="content-table resp">
+            <thead>
+              <tr>
+                <th scope="col">Usuario</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Celular</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of (inscriptionDTO | filterRegistration: filterpost) | paginate : {
+                itemsPerPage: pagesize,
+                currentPage: page,
+                totalItems: count
+              }">
+                <td>{{item.usuario}}</td>
+                <td>{{item.nombre_curso}}</td>
+                <td>{{item.correo}}</td>
+                <td>{{item.celular}}</td>
+                <td>
+                  <div class="flex-content-right">
+                    <div class="width-150px">
+                      <select class="form-control form-control-select" id="estado_aprobacion" (change)="changeStatusApprovals($event, item)">
+                        <option [value]="item.cod_estado_aprobacion" *ngFor="let item of dataStatusApproval" [selected]="item.estado_aprobacion == item.cod_estado_aprobacion">
+                          {{item.estado_aprobacion}}
+                        </option>
+                      </select>
+                    </div>
+                    <button *ngIf="item.estado_aprobacion == 2" class="btn btn-primary btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa-solid fa-cloud-arrow-up"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex-content-right">
+            <pagination-controls class="custom-pagination"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)">
+            </pagination-controls>
+          </div>
+
+        </div>
+
+
+  
+
+
+        
+      </form>
+      
+
+
+
+
+
+  
+    
+  </section>
+</main>

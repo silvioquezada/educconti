@@ -45,8 +45,21 @@ export class EnrollService {
     return this.http.put<EnrollDTO>(this.api + "sendobservation/", put);
   }
 
+  enroll(put: InscriptionDTO): Observable<InscriptionDTO> {
+    return this.http.put<InscriptionDTO>(this.api + "enroll/", put);
+  }
+
+  listAllEstudentsCourse(cod_periodo: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourse/' + cod_periodo);
+  }
+
+  listEstudentsCourse(cod_periodo: number, cod_curso: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listestudentscourse/' + cod_periodo + '/' + cod_curso);
+  }
+
   approve(put: InscriptionDTO): Observable<InscriptionDTO> {
     return this.http.put<InscriptionDTO>(this.api + "approve/", put);
   }
+
 
 }

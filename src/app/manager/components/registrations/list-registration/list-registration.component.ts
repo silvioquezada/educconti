@@ -128,7 +128,7 @@ export class ListRegistrationComponent implements OnInit {
     this.verifyRegistryComponent.assignValues(inscriptionDTO);
   }
 
-  approveRow(inscriptionDTO: InscriptionDTO): void {
+  enrollRow(inscriptionDTO: InscriptionDTO): void {
     Swal.fire({
       title: inscriptionDTO.usuario + ' - ' +  inscriptionDTO.nombre_curso,
       text: '¿Estás seguro de matricular usuario?',
@@ -138,16 +138,16 @@ export class ListRegistrationComponent implements OnInit {
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
-        this.approve(inscriptionDTO);
+        this.enroll(inscriptionDTO);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         
       }
     });
   }
 
-  approve(inscriptionDTO: InscriptionDTO): void {
+  enroll(inscriptionDTO: InscriptionDTO): void {
     this.loading = true;
-    this.enrollService.approve(inscriptionDTO)
+    this.enrollService.enroll(inscriptionDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
