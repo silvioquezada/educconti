@@ -1,31 +1,26 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CourseDTO } from 'src/app/manager/models/course.dto';
-import { CourseService } from 'src/app/manager/services/course.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { CourseFormComponent } from '../course/course-form/course-form.component';
-import { CourseSearchComponent } from '../course/course-search/course-search.component';
-import { PeriodService } from '../../services/period.service';
-import { PeriodDTO } from '../../models/period.dto';
-import { EnrollService } from '../../services/enroll.service';
-import { EnrollDTO } from '../../models/enroll.dto';
-import { InscriptionDTO } from '../../models/inscription.dto';
+import { VerifyRegistryComponent } from '../verify-registry/verify-registry.component';
+import { PeriodService } from 'src/app/manager/services/period.service';
+import { PeriodDTO } from 'src/app/manager/models/period.dto';
+import { EnrollService } from 'src/app/manager/services/enroll.service';
+import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
+import { InscriptionDTO } from 'src/app/manager/models/inscription.dto';
 
 @Component({
-  selector: 'app-registrations',
-  templateUrl: './registrations.component.html',
-  styleUrls: ['./registrations.component.scss']
+  selector: 'app-list-registration',
+  templateUrl: './list-registration.component.html',
+  styleUrls: ['./list-registration.component.scss']
 })
-export class RegistrationsComponent implements OnInit {
+export class ListRegistrationComponent implements OnInit {
   cod_periodo: number = 0;
   cod_estado_inscripcion: number = 0;
 
-  @ViewChild(CourseFormComponent)  periodFormComponent: any;
-  @ViewChild(CourseSearchComponent) periodSearchComponent: any;
+  @ViewChild(VerifyRegistryComponent) verifyRegistryComponent: any;
   
   loading: boolean = false;
   enrollDTO: EnrollDTO[];
-  coursesDTO: CourseDTO[];
   periodsDTO: PeriodDTO[];
   inscriptionDTO: InscriptionDTO[];
   dataStatusInscription: any[] = [
@@ -52,7 +47,7 @@ export class RegistrationsComponent implements OnInit {
   count = 0;
   pagesize = 5;
 
-  constructor(private courseService: CourseService, private periodService: PeriodService, private enrollService: EnrollService) {
+  constructor(private periodService: PeriodService, private enrollService: EnrollService) {
   }
 
   ngOnInit(): void {
@@ -69,7 +64,7 @@ export class RegistrationsComponent implements OnInit {
         this.periodsDTO = data;
         if(this.periodsDTO.length>0) {
           this.cod_periodo = this.periodsDTO[0].cod_periodo;
-          this.listCouseManager();
+          this.listRegistration();
         }
       },
       (error: HttpErrorResponse) => {
@@ -84,7 +79,7 @@ export class RegistrationsComponent implements OnInit {
     );
   }
 
-  listCouseManager(): void {
+  listRegistration(): void {
     this.loading = true;
 
     this.enrollService.listInscriptions(this.cod_periodo, this.cod_estado_inscripcion)
@@ -104,8 +99,8 @@ export class RegistrationsComponent implements OnInit {
     );
   }
 
-  receiveManagerData(): void {
-    this.listCouseManager();
+  receiveVerifyRegistryData(): void {
+    this.listRegistration();
   }
 
   keyFilter() {
@@ -116,24 +111,14 @@ export class RegistrationsComponent implements OnInit {
     this.page = event;
   }
 
-  newRow(): void {
-    this. periodFormComponent.formNormal();
-    this.periodFormComponent.restoreFile();
+  verifyRegistry(inscriptionDTO: InscriptionDTO) {
+    this.verifyRegistryComponent.formNormal();
+    this.verifyRegistryComponent.assignValues(inscriptionDTO);
   }
 
-  editRow(courseDTO: CourseDTO) {
-    this.periodFormComponent.formNormal();
-    this.periodFormComponent.assignValues(courseDTO);
-  }
-
-  viewRow(courseDTO: CourseDTO): void {
-    this.periodSearchComponent.formNormal();
-    this.periodSearchComponent.assignValues(courseDTO);
-  }
-
-  deleteRow(courseDTO: CourseDTO): void {
+  deleteRow(inscriptionDTO: InscriptionDTO): void {
     Swal.fire({
-      title: courseDTO.nombre_curso,
+      title: inscriptionDTO.usuario + ' ' +  inscriptionDTO.nombre_curso,
       text: '¿Estás seguro de eliminar registro?',
       icon: 'warning',
       showCancelButton: true,
@@ -141,16 +126,16 @@ export class RegistrationsComponent implements OnInit {
       cancelButtonText: 'No, Cerrar'
     }).then((result) => {
       if (result.value) {
-        this.delete(courseDTO);
+        this.delete(inscriptionDTO);
       } else if (result.dismiss === Swal.DismissReason.cancel) {
         
       }
     });
   }
 
-  delete(courseDTO: CourseDTO) : void {
+  delete(inscriptionDTO: InscriptionDTO) : void {
     this.loading = true;
-    this.courseService.delete(courseDTO)
+    this.enrollService.delete(inscriptionDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -159,11 +144,11 @@ export class RegistrationsComponent implements OnInit {
         {
           await Swal.fire({
             icon: 'success',
-            title: 'Se ha eliminado correctamente',
+            title: 'Se ha eliminado la inscripción correctamente',
             showConfirmButton: false,
             timer: 1500
           });
-          this.listCouseManager();
+          this.listRegistration();
         }
         else
         {

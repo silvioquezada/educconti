@@ -110,6 +110,7 @@ export class DetailCourseComponent implements OnInit {
             this.formInscriptionComponent.cod_curso = this.cod_curso;
             this.formInscriptionComponent.formNormal();
             this.formInscriptionComponent.restoreFile();
+            this.formInscriptionComponent.typeForm = 'nuevo';
             $("#modalConfirmInscription").modal('show');
           }
       },

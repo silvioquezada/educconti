@@ -1,8 +1,6 @@
 <app-loader [loading] = "loading"></app-loader>
 
-<app-course-form (dataSend)="receiveManagerData()"></app-course-form>
-
-<app-course-search></app-course-search>
+<app-verify-registry (dataSend)="receiveVerifyRegistryData()"></app-verify-registry>
 
 <main>
   
@@ -59,8 +57,8 @@
                 <td>{{item.celular}}</td>
                 <td>
                   <div class="flex-content-right">
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalForm" toggle="tooltip" data-bs-placement="top" title="Editar registro" (click)="editRow(item)"><i class="fas fa-edit"></i></button>
-                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" toggle="tooltip" data-bs-placement="top" title="Ver registro" (click)="viewRow(item)"><i class="fas fa-search"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalVerifyInscription" toggle="tooltip" data-bs-placement="top" title="Revisar Inscripción" (click)="verifyRegistry(item)"><i class="fa-solid fa-address-card"></i></button>
+                    <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="modal" data-bs-target="#modalSearch" toggle="tooltip" data-bs-placement="top" title="Matricular"><i class="fa-solid fa-check"></i></button>
                     <button class="btn btn-danger btn-sm" toggle="tooltip" data-bs-placement="top" title="Eliminar registro" (click)="deleteRow(item)"><i class="fa fa-trash"></i></button>
                   </div>
                 </td>

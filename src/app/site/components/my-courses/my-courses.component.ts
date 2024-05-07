@@ -28,7 +28,7 @@ export class MyCoursesComponent implements OnInit {
   constructor(private router: Router, private enrollService: EnrollService) { }
 
   ngOnInit(): void {
-    this.listCouseManager();
+    this.listMyCourse();
   }
 
   getRouteImage(imagen_curso: string) {
@@ -57,7 +57,7 @@ export class MyCoursesComponent implements OnInit {
     }
   }
 
-  listCouseManager(): void {
+  listMyCourse(): void {
     this.loading = true;
 
     this.enrollService.myCourses()
@@ -77,14 +77,29 @@ export class MyCoursesComponent implements OnInit {
     );
   }
 
+  viewInscription(enrollDTO: EnrollDTO) {
+    this.formInscriptionComponent.formNormal();
+    this.formInscriptionComponent.assignValues(enrollDTO);
+    this.formInscriptionComponent.title = enrollDTO.curso.nombre_curso;
+    this.formInscriptionComponent.typeForm = 'pendiente';
+    $("#modalConfirmInscription").modal('show');
+  }
+
+  viewObservation(enrollDTO: EnrollDTO) {
+    this.formInscriptionComponent.formNormal();
+    this.formInscriptionComponent.assignValues(enrollDTO);
+    this.formInscriptionComponent.title = enrollDTO.curso.nombre_curso;
+    this.formInscriptionComponent.observacion_revision = enrollDTO.observacion_revision;
+    this.formInscriptionComponent.typeForm = 'no_cumple';
+    $("#modalConfirmInscription").modal('show');
+  }
+
   viewDetail(cod_curso: number): void {
     this.router.navigateByUrl('detalle_curso/' + cod_curso);
   }
 
-  editRow(enrollDTO: EnrollDTO) {
-    this.formInscriptionComponent.formNormal();
-    this.formInscriptionComponent.assignValues(enrollDTO);
-    $("#modalConfirmInscription").modal('show');
+  receiveInscriptionData(): void {
+    this.listMyCourse();
   }
 
 }

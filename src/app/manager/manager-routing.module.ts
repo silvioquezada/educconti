@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -8,6 +7,7 @@ import { UserManagerListComponent } from './components/user-manager/user-manager
 import { PeriodListComponent } from './components/period/period-list/period-list.component';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { CourseListComponent } from './components/course/course-list/course-list.component';
+import { ListRegistrationComponent } from './components/registrations/list-registration/list-registration.component';
 
 const routes: Routes = [
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: 'inscripciones',
-    component: RegistrationsComponent
+    component: ListRegistrationComponent
   },
   {
     path: 'aprobaciones',

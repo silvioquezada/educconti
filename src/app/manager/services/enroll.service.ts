@@ -37,4 +37,12 @@ export class EnrollService {
     return this.http.get<InscriptionDTO[]>(this.api + 'listinscriptions/' + cod_periodo + '/' + estado_matricula);
   }
 
+  delete(destroy: InscriptionDTO): Observable<InscriptionDTO> {
+    return this.http.put<InscriptionDTO>(this.api + 'delete', destroy);
+  }
+
+  sendObservation(put: EnrollDTO): Observable<EnrollDTO> {
+    return this.http.put<EnrollDTO>(this.api + "sendobservation/", put);
+  }
+
 }

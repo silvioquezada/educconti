@@ -1,0 +1,39 @@
+<form class="modal fade" id="modalVerifyInscription" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true" [formGroup]="registerForm" (ngSubmit)="register()">
+  <app-loader [loading] = "loading"></app-loader>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <label class="text-weight">{{ title }}</label>
+        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        <form class="form-modal">
+          
+          <div class="panel panel-col-p100">
+
+            <div class="input-group">
+              <label class="form-label" for="observaciones">Observaciones:</label>
+              <textarea class="form-control" id="observaciones" [formControl]="observacion_revision" [ngClass]="{ 'is-invalid': observacion_revision.errors && isValidForm != null && !isValidForm}"></textarea>
+              <div *ngIf="observacion_revision.errors">
+                <div *ngIf="observacion_revision.errors && isValidForm != null && !isValidForm">
+                  <small class="text-color-red" *ngIf="observacion_revision?.hasError('required')">Observación es requerido</small>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="documento_descripcion !== null" class="input-group">
+              <button class="btn btn-primary btn-sm width-100" type="button" (click) = "view()"><i class="fa-solid fa-search"></i> Visualizar</button>
+            </div>
+
+          </div>
+
+        </form>
+        
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary btn-sm" type="submit"><i class="fa-solid fa-paper-plane"></i> Enviar Observación</button>
+      </div>
+    </div>
+  </div>
+</form>

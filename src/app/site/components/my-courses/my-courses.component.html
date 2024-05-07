@@ -2,7 +2,7 @@
 
   <app-loader [loading] = "loading"></app-loader>
 
-  <app-form-inscription></app-form-inscription>
+  <app-form-inscription (dataSend)="receiveInscriptionData()"></app-form-inscription>
 
   <section class="container" aria-label="Cursos ofertados">
   
@@ -49,8 +49,8 @@
             </div>
       
               <div class="foot-card">
-                <button *ngIf="item.estado_matricula == 0" class="btn btn-primary" type="button" (click)="editRow(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
-                <button *ngIf="item.estado_matricula == 1" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver observaciones</button>
+                <button *ngIf="item.estado_matricula == 0" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
+                <button *ngIf="item.estado_matricula == 1" class="btn btn-primary" type="button" (click)="viewObservation(item)"><i class="fas fa-search"></i> Ver observaciones</button>
                 <button *ngIf="item.estado_matricula == 2" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
                 <button *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 1" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Descargar certificado</button>
                 <button *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 0"  class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver observaciones</button>

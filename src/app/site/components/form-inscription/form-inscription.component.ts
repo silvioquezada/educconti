@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./form-inscription.component.scss']
 })
 export class FormInscriptionComponent implements OnInit {
+  @Output() dataSend: EventEmitter<any> = new EventEmitter<any>();
   baseUrlFile = environment.baseUrlFile + 'requirementpdf/';
   enrollDTO: EnrollDTO = new EnrollDTO(0, null, 0, 0, 0, 0, 0, '', '', '', 1, null);
   cod_matricula: number;
@@ -27,6 +28,7 @@ export class FormInscriptionComponent implements OnInit {
   textButton: string = '';
   title: string = '';
   typeForm: string = '';
+  observacion_revision: string = '';
 
   constructor(private formBuilder: FormBuilder, private enrollService: EnrollService) { }
 
@@ -44,11 +46,9 @@ export class FormInscriptionComponent implements OnInit {
     this.title = 'Confirmar Inscripción';
     this.ban = true;
     this.textButton = 'Enviar';
-    this.typeForm = 'nuevo';
   }
 
   assignValues(enrollDTO: EnrollDTO): void {
-    this.title = "Editar Registro";
     this.cod_matricula = Number(enrollDTO.cod_matricula);
     this.documento_descripcion.setValue(enrollDTO.documento_descripcion);
     this.ban = false;
@@ -62,7 +62,9 @@ export class FormInscriptionComponent implements OnInit {
   }
 
   restoreFile(): void {
-    this.filePdf.nativeElement.value = null;
+    if(this.typeForm !== 'matriculado' && this.typeForm !== 'pendiente') {
+      this.filePdf.nativeElement.value = null;
+    }
   }
 
   selectPdf(event): void {
@@ -173,12 +175,12 @@ export class FormInscriptionComponent implements OnInit {
         {
           await Swal.fire({
             icon: 'success',
-            title: 'Se ha inscrito satisfactoriamente',
+            title: 'Se actualizado la inscripción satisfactoriamente',
             showConfirmButton: false,
             timer: 1500
           });
           $("#modalConfirmInscription").modal("hide");
-          //this.dataSend.emit();
+          this.dataSend.emit();
         }
         else
         {

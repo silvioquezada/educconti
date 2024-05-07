@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ManagerRoutingModule } from './manager-routing.module';
-import { RegistrationsComponent } from './components/registrations/registrations.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -29,10 +28,11 @@ import { FilterCategoryPipe } from './pipes/filter-category.pipe';
 import { FilterCoursePipe } from './pipes/filter-course.pipe';
 
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ListRegistrationComponent } from './components/registrations/list-registration/list-registration.component';
+import { VerifyRegistryComponent } from './components/registrations/verify-registry/verify-registry.component';
 
 @NgModule({
   declarations: [
-    RegistrationsComponent,
     ApprovalsComponent,
     ReportsComponent,
     DashboardComponent,
@@ -51,7 +51,9 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     CourseSearchComponent,
     FilterPeriodPipe,
     FilterCategoryPipe,
-    FilterCoursePipe
+    FilterCoursePipe,
+    ListRegistrationComponent,
+    VerifyRegistryComponent
   ],
   imports: [
     CommonModule,
