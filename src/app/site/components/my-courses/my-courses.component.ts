@@ -95,7 +95,7 @@ export class MyCoursesComponent implements OnInit {
   }
 
   viewDetail(cod_curso: number): void {
-    this.router.navigateByUrl('detalle_curso/' + cod_curso);
+    //this.router.navigateByUrl('detalle_curso/' + cod_curso);
   }
 
   receiveInscriptionData(): void {

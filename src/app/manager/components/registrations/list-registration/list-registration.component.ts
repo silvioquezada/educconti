@@ -34,12 +34,12 @@ export class ListRegistrationComponent implements OnInit {
     },
     {
       "cod_estado_inscripcion" : 2,
-      "estado_inscripcion" : "Matriculados"
+      "estado_inscripcion" : "Por respuesta"
     },
     {
       "cod_estado_inscripcion" : 3,
-      "estado_inscripcion" : "Por respuesta"
-    },
+      "estado_inscripcion" : "Matriculados"
+    }
   ];
 
   filterpost = "";
@@ -53,6 +53,18 @@ export class ListRegistrationComponent implements OnInit {
   ngOnInit(): void {
     this.cod_estado_inscripcion = 0;
     this.listPeriod();
+  }
+
+  changePeriod(event: any): void {
+    const elemento = event.target.value;
+    this.cod_periodo = elemento;
+    this.listRegistration();
+  }
+
+  changeStatus(event: any): void {
+    const elemento = event.target.value;
+    this.cod_estado_inscripcion = elemento;
+    this.listRegistration();
   }
 
   listPeriod(): void {
@@ -114,6 +126,62 @@ export class ListRegistrationComponent implements OnInit {
   verifyRegistry(inscriptionDTO: InscriptionDTO) {
     this.verifyRegistryComponent.formNormal();
     this.verifyRegistryComponent.assignValues(inscriptionDTO);
+  }
+
+  approveRow(inscriptionDTO: InscriptionDTO): void {
+    Swal.fire({
+      title: inscriptionDTO.usuario + ' - ' +  inscriptionDTO.nombre_curso,
+      text: '¿Estás seguro de matricular usuario?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, Matricular',
+      cancelButtonText: 'No, Cerrar'
+    }).then((result) => {
+      if (result.value) {
+        this.approve(inscriptionDTO);
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        
+      }
+    });
+  }
+
+  approve(inscriptionDTO: InscriptionDTO): void {
+    this.loading = true;
+    this.enrollService.approve(inscriptionDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se ha matriculado el usuario satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.receiveVerifyRegistryData();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'No se pudo matricular el usuario, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
   }
 
   deleteRow(inscriptionDTO: InscriptionDTO): void {

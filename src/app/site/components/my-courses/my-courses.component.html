@@ -29,11 +29,11 @@
                     <span>Inicio: </span>
                     {{getDateFormat(item.curso.fecha_inicio)}}
                   </p>
-                  <span *ngIf="item.estado_matricula == 0" class="badge badge-yellow">Pendiente</span>
-                  <span *ngIf="item.estado_matricula == 1" class="badge badge-red">No cumple</span>
-                  <span *ngIf="item.estado_matricula == 2" class="badge badge-info">Matriculado</span>
-                  <span *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 1" class="badge badge-green">Aprobado</span>
-                  <span *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 0" class="badge badge-red">No aprobado</span>
+                  <span *ngIf="item.estado_matricula == 0 || item.estado_matricula == 2" class="badge badge-yellow">Pendiente</span>
+                  <span *ngIf="item.estado_matricula == 1 && item.estado_aprobacion == 0" class="badge badge-red">No cumple</span>
+                  <span *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 0" class="badge badge-info">Matriculado</span>
+                  <span *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 2" class="badge badge-green">Aprobado</span>
+                  <span *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 1" class="badge badge-red">No aprobado</span>
                 </div>
                 <p>
                   <span class="icon-items"><i class="fa-regular fa-clock"></i></span>
@@ -49,11 +49,11 @@
             </div>
       
               <div class="foot-card">
-                <button *ngIf="item.estado_matricula == 0" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
-                <button *ngIf="item.estado_matricula == 1" class="btn btn-primary" type="button" (click)="viewObservation(item)"><i class="fas fa-search"></i> Ver observaciones</button>
-                <button *ngIf="item.estado_matricula == 2" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
-                <button *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 1" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Descargar certificado</button>
-                <button *ngIf="item.estado_matricula == 2 && item.estado_aprobacion == 0"  class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver observaciones</button>
+                <button *ngIf="item.estado_matricula == 0 || item.estado_matricula == 2" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
+                <button *ngIf="item.estado_matricula == 1 && item.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewObservation(item)"><i class="fas fa-search"></i> Ver observaciones</button>
+                <button *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver detalles</button>
+                <button *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 2" class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Descargar certificado</button>
+                <button *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 1"  class="btn btn-primary" type="button" (click)="viewDetail(item.curso.cod_curso)"><i class="fas fa-search"></i> Ver observaciones</button>
               </div>
           </div>
       

@@ -45,4 +45,8 @@ export class EnrollService {
     return this.http.put<EnrollDTO>(this.api + "sendobservation/", put);
   }
 
+  approve(put: InscriptionDTO): Observable<InscriptionDTO> {
+    return this.http.put<InscriptionDTO>(this.api + "approve/", put);
+  }
+
 }
