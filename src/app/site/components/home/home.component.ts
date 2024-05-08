@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
-    this.listCouseManager();
+    this.listCourse();
   }
 
   getRouteImage(imagen_curso: string) {
@@ -53,7 +53,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  listCouseManager(): void {
+  listCourse(): void {
     this.loading = true;
 
     this.courseService.listCourse()

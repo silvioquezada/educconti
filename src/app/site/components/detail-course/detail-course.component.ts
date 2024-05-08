@@ -19,6 +19,7 @@ import { LocalStorageService } from 'src/app/shared/services/local-storage.servi
 
 export class DetailCourseComponent implements OnInit {
   baseUrl = environment.baseUrlFile + 'img/';
+  baseUrlProgram = environment.baseUrlFile + 'pdf/';
   courseDTO: CourseDTO = new CourseDTO(0, null, '', null, '', '', '', '', null, null, null, null, '', null, '', '', 1);
   cod_curso: number;
   loading: boolean = false;
@@ -124,6 +125,12 @@ export class DetailCourseComponent implements OnInit {
         });
       }
     );
+  }
+
+  viewProgram(documento_descripcion: string) {
+    console.log(documento_descripcion);
+    let miWindow = window.open(this.baseUrlProgram + documento_descripcion, "", 'width=600,height=400,left=300,top=100');
+    miWindow.focus();
   }
   
 }

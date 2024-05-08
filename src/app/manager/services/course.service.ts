@@ -46,4 +46,8 @@ export class CourseService {
   detailCourse(cod_curso: number): Observable<CourseDTO> {
     return this.http.get<CourseDTO>(this.api + 'detail/' + cod_curso);
   }
+
+  listCoursePeriod(cod_periodo: number): Observable<CourseDTO[]> {
+    return this.http.get<CourseDTO[]>(this.api + 'listcourseperiod/' + cod_periodo);
+  }
 }

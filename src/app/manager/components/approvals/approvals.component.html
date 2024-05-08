@@ -25,9 +25,9 @@
           <div class="content-column-between">
 
             <div class="width-150px">
-              <select class="form-control form-control-select" id="estado_inscripcion" (change)="changeStatus($event)">
-                <option [value]="item.cod_estado_inscripcion" *ngFor="let item of dataStatusInscription" [selected]="cod_estado_inscripcion == item.cod_estado_inscripcion">
-                  {{item.estado_inscripcion}}
+              <select class="form-control form-control-select" id="cursos" (change)="changeCourse($event)">
+                <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso == item.cod_curso">
+                  {{item.nombre_curso}}
                 </option>
               </select>
             </div>
