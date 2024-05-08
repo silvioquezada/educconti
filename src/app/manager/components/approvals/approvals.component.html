@@ -69,10 +69,10 @@
                 </td>
                 <td class="inline-block">
                     <div *ngIf="item.estado_aprobacion == 2" class="upload-container">
-                      <label for="file-input">
+                      <label for="file-input" (click)="selectItem(item.cod_matricula)">
                         <div class="btn btn-primary btn-sm" toggle="tooltip" data-bs-placement="top" title="Cargar Certificado"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                       </label>
-                      <input class="file-input" type="file" accept=".pdf" id="file-input" (change)="selectPdf($event, item.cod_matricula)">
+                      <input class="file-input" type="file" accept=".pdf" id="file-input" (change)="selectPdf($event)">
                     </div>
 
                     <button *ngIf="item.estado_aprobacion == 2 && item.archivo_certificado != ''" class="btn btn-primary btn-sm" type="button" toggle="tooltip" data-bs-placement="top" title="Visualizar Certificado" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-search"></i></button>

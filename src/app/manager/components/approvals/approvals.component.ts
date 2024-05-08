@@ -189,11 +189,13 @@ export class ApprovalsComponent implements OnInit {
     );
   }
 
-  selectPdf(event, cod_matricula: number) {
+  selectPdf(event: any) {
     this.selectedPdf = <File>event.target.files[0];
+    this.uploadFile();
+  }
+
+  selectItem(cod_matricula: number) {
     this.cod_matricula = cod_matricula;
-    console.log(cod_matricula);
-    //this.uploadFile();
   }
 
   uploadFile() {
