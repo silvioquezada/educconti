@@ -28,7 +28,7 @@ export class AuthInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.token = this.localStorageService.getData('token');
-    if (this.token && req.url!=this.apiCurso + 'image' && req.url!=this.apiCurso + 'pdf' && req.url!=this.apiMatricula + 'pdf') {
+    if (this.token && req.url!=this.apiCurso + 'image' && req.url!=this.apiCurso + 'pdf' && req.url!=this.apiMatricula + 'pdf' && req.url!=this.apiMatricula + 'pdfcertificate') {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',

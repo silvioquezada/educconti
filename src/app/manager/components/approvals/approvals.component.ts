@@ -7,6 +7,7 @@ import { PeriodDTO } from 'src/app/manager/models/period.dto';
 import { EnrollService } from 'src/app/manager/services/enroll.service';
 import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 import { InscriptionDTO } from 'src/app/manager/models/inscription.dto';
+declare var $:any;
 
 @Component({
   selector: 'app-approvals',
@@ -16,12 +17,15 @@ import { InscriptionDTO } from 'src/app/manager/models/inscription.dto';
 export class ApprovalsComponent implements OnInit {
   cod_periodo: number = 0;
   cod_estado_inscripcion: number = 0;
-  //cod_estado_aprobacion: number = 0;
+  cod_matricula: number;
+
+  selectedPdf: File = null;
   
   loading: boolean = false;
   enrollDTO: EnrollDTO[];
   periodsDTO: PeriodDTO[];
-  inscriptionDTO: InscriptionDTO[];
+  inscriptionsDTO: InscriptionDTO[];
+  inscriptionDTO: InscriptionDTO = new InscriptionDTO(0, '', '', '', '', '', '', '', 0, 1);
   dataStatusInscription: any[] = [
     {
       "cod_estado_inscripcion" : 0,
@@ -81,10 +85,10 @@ export class ApprovalsComponent implements OnInit {
     this.listAllEstudentsCourse();
   }
 
-  changeStatusApprovals(event: any, inscriptionDTO: InscriptionDTO): void {
+  changeStatusApprovals(event: any, inscriptionsDTO: InscriptionDTO): void {
     const elemento = event.target.value;
     //this.cod_estado_inscripcion = elemento;
-    this.approve(inscriptionDTO, elemento);
+    this.approve(inscriptionsDTO, elemento);
   }
 
   listPeriod(): void {
@@ -117,7 +121,7 @@ export class ApprovalsComponent implements OnInit {
     this.enrollService.listAllEstudentsCourse(this.cod_periodo)
     .subscribe( (data) => {
         this.loading = false;
-        this.inscriptionDTO = data;
+        this.inscriptionsDTO = data;
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -143,10 +147,10 @@ export class ApprovalsComponent implements OnInit {
     this.page = event;
   }
 
-  approve(inscriptionDTO: InscriptionDTO, elemento: number): void {
+  approve(inscriptionsDTO: InscriptionDTO, elemento: number): void {
     this.loading = true;
-    inscriptionDTO.estado_aprobacion = Number(elemento);
-    this.enrollService.approve(inscriptionDTO)
+    inscriptionsDTO.estado_aprobacion = Number(elemento);
+    this.enrollService.approve(inscriptionsDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -168,7 +172,7 @@ export class ApprovalsComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          inscriptionDTO.estado_aprobacion = 0;
+          inscriptionsDTO.estado_aprobacion = 0;
         }
       },
       (error: HttpErrorResponse) => {
@@ -183,26 +187,9 @@ export class ApprovalsComponent implements OnInit {
     );
   }
 
-  deleteRow(inscriptionDTO: InscriptionDTO): void {
-    Swal.fire({
-      title: inscriptionDTO.usuario + ' ' +  inscriptionDTO.nombre_curso,
-      text: '¿Estás seguro de eliminar registro?',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: 'Si, Eliminar',
-      cancelButtonText: 'No, Cerrar'
-    }).then((result) => {
-      if (result.value) {
-        this.delete(inscriptionDTO);
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
-        
-      }
-    });
-  }
-
-  delete(inscriptionDTO: InscriptionDTO) : void {
+  delete(inscriptionsDTO: InscriptionDTO) : void {
     this.loading = true;
-    this.enrollService.delete(inscriptionDTO)
+    this.enrollService.delete(inscriptionsDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -222,6 +209,90 @@ export class ApprovalsComponent implements OnInit {
           Swal.fire({
             icon: 'error',
             title: 'Registro no se pudo eliminar, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
+  }
+
+  selectPdf(event, cod_matricula: number) {
+    this.selectedPdf = <File>event.target.files[0];
+    this.cod_matricula = cod_matricula;
+    this.uploadFile();
+  }
+
+  uploadFile() {
+    const promise1 = this.uploadPdf().then();
+    Promise.all([promise1])
+    .then(() => {
+        this.update();
+    })
+    .catch(() => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error en la conexión intente mas tarde',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    });
+  }
+
+  uploadPdf() {
+    return new Promise((resolve, reject) => {
+        this.loading = true;
+        let formPdf = new FormData();
+        formPdf.append("pdf", this.selectedPdf);
+        formPdf.append("name_pdf", String(this.cod_matricula));
+        this.enrollService.uploadPdfCertificate(formPdf).subscribe( (data : any) => {
+          this.loading = false;
+          if(data.estado) {
+            this.inscriptionDTO.cod_matricula = this.cod_matricula;
+            this.inscriptionDTO.archivo_certificado = data.file;
+            resolve(true);
+          } else {
+            reject(false);
+          }
+        }, () => {
+          this.loading = false;
+          reject(false);
+        });
+    });
+  }
+
+  update(): void {
+    this.loading = true;
+    this.enrollService.updatePdfCertificate(this.inscriptionDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se ha subido el certificado PDF satisfactoriamente',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          $("#modalForm").modal("hide");
+          //this.dataSend.emit();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'No se pudo subir el certificado PDF, vuelva a intertarlo por favor',
             showConfirmButton: false,
             timer: 1500
           });

@@ -306,6 +306,14 @@
   cursor: pointer;
  }
 
- .ck-editor__editable_inline {
+.ck-editor__editable_inline {
   height: 200px;
+}
+
+.upload-container {
+  padding-right: 5px;
+}
+
+.upload-container>.file-input {
+  display: none;
 }

@@ -61,5 +61,12 @@ export class EnrollService {
     return this.http.put<InscriptionDTO>(this.api + "approve/", put);
   }
 
+  uploadPdfCertificate(form: FormData):Observable<any>{
+    return this.http.post(this.api + "pdfcertificate", form);
+  }
+
+  updatePdfCertificate(put: InscriptionDTO): Observable<InscriptionDTO> {
+    return this.http.put<InscriptionDTO>(this.api + 'updatepdfcertificate/', put);
+  }
 
 }
