@@ -8,6 +8,7 @@ import { EnrollService } from 'src/app/manager/services/enroll.service';
 import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 import { InscriptionDTO } from 'src/app/manager/models/inscription.dto';
 declare var $:any;
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-approvals',
@@ -20,6 +21,7 @@ export class ApprovalsComponent implements OnInit {
   cod_matricula: number;
 
   selectedPdf: File = null;
+  baseUrlCertificate = environment.baseUrlFile + 'certificatepdf/';
   
   loading: boolean = false;
   enrollDTO: EnrollDTO[];
@@ -85,10 +87,10 @@ export class ApprovalsComponent implements OnInit {
     this.listAllEstudentsCourse();
   }
 
-  changeStatusApprovals(event: any, inscriptionsDTO: InscriptionDTO): void {
+  changeStatusApprovals(event: any, inscriptionDTO: InscriptionDTO): void {
     const elemento = event.target.value;
-    //this.cod_estado_inscripcion = elemento;
-    this.approve(inscriptionsDTO, elemento);
+    this.inscriptionDTO = new InscriptionDTO(0, '', '', '', '', '', '', '', 0, 1);
+    this.approve(inscriptionDTO, elemento);
   }
 
   listPeriod(): void {
@@ -147,10 +149,10 @@ export class ApprovalsComponent implements OnInit {
     this.page = event;
   }
 
-  approve(inscriptionsDTO: InscriptionDTO, elemento: number): void {
+  approve(inscriptionDTO: InscriptionDTO, elemento: number): void {
     this.loading = true;
-    inscriptionsDTO.estado_aprobacion = Number(elemento);
-    this.enrollService.approve(inscriptionsDTO)
+    inscriptionDTO.estado_aprobacion = Number(elemento);
+    this.enrollService.approve(inscriptionDTO)
     .subscribe( async (data) => {
         this.loading = false;
         const dataResult = data;
@@ -172,46 +174,7 @@ export class ApprovalsComponent implements OnInit {
             showConfirmButton: false,
             timer: 1500
           });
-          inscriptionsDTO.estado_aprobacion = 0;
-        }
-      },
-      (error: HttpErrorResponse) => {
-        this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Se ha originado un error en el servidor',
-          showConfirmButton: false,
-          timer: 1500
-        });
-      }
-    );
-  }
-
-  delete(inscriptionsDTO: InscriptionDTO) : void {
-    this.loading = true;
-    this.enrollService.delete(inscriptionsDTO)
-    .subscribe( async (data) => {
-        this.loading = false;
-        const dataResult = data;
-        
-        if (dataResult.estado === 1)
-        {
-          await Swal.fire({
-            icon: 'success',
-            title: 'Se ha eliminado la inscripción correctamente',
-            showConfirmButton: false,
-            timer: 1500
-          });
-          this.listAllEstudentsCourse();
-        }
-        else
-        {
-          Swal.fire({
-            icon: 'error',
-            title: 'Registro no se pudo eliminar, vuelva a intertarlo por favor',
-            showConfirmButton: false,
-            timer: 1500
-          });
+          inscriptionDTO.estado_aprobacion = 0;
         }
       },
       (error: HttpErrorResponse) => {
@@ -229,7 +192,8 @@ export class ApprovalsComponent implements OnInit {
   selectPdf(event, cod_matricula: number) {
     this.selectedPdf = <File>event.target.files[0];
     this.cod_matricula = cod_matricula;
-    this.uploadFile();
+    console.log(cod_matricula);
+    //this.uploadFile();
   }
 
   uploadFile() {
@@ -286,7 +250,15 @@ export class ApprovalsComponent implements OnInit {
             timer: 1500
           });
           $("#modalForm").modal("hide");
-          //this.dataSend.emit();
+         
+          this.inscriptionsDTO.map((item) => {
+            if (item.cod_matricula === this.cod_matricula) {
+              item.archivo_certificado = this.inscriptionDTO.archivo_certificado;
+              return item;
+            } else {
+              return item;
+            }
+          })
         }
         else
         {
@@ -308,6 +280,11 @@ export class ApprovalsComponent implements OnInit {
         });
       }
     );
+  }
+
+  viewCertificate(archivo_certificado: string) {
+    let miWindow = window.open(this.baseUrlCertificate + archivo_certificado, "", 'width=600,height=400,left=300,top=100');
+    miWindow.focus();
   }
 
 }

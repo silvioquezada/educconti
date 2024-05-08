@@ -21,7 +21,7 @@ export class MyCoursesComponent implements OnInit {
   coursesDTO: EnrollDTO[];
   filterpost = "";
   baseUrl = environment.baseUrlFile + 'img/';
-  baseUrlCertificate = environment.baseUrlFile + 'certificate/';
+  baseUrlCertificate = environment.baseUrlFile + 'certificatepdf/';
   page = 1;
   count = 0;
   pagesize = 5;
@@ -95,7 +95,7 @@ export class MyCoursesComponent implements OnInit {
     $("#modalConfirmInscription").modal('show');
   }
 
-  downloadCertificate(archivo_certificado: string) {
+  viewCertificate(archivo_certificado: string) {
     let miWindow = window.open(this.baseUrlCertificate + archivo_certificado, "", 'width=600,height=400,left=300,top=100');
     miWindow.focus();
   }
