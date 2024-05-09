@@ -69,4 +69,38 @@ export class EnrollService {
     return this.http.put<InscriptionDTO>(this.api + 'updatepdfcertificate/', put);
   }
 
+
+  listAllEstudentsCourseApprove(cod_periodo: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseapprove/' + cod_periodo);
+  }
+
+  listAllEstudentsCourseApproveStatus(cod_periodo: number, cod_estado: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseapprovestatus/' + cod_periodo + '/' + cod_estado);
+  }
+
+  listEstudentsCourseApprove(cod_curso: number, cod_estado: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listestudentscourseapprove/' + cod_curso + '/' + cod_estado);
+  }
+
+  listAllEstudentsCourseApproveAllStatus(cod_curso: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseapproveallstatus/' + cod_curso);
+  }
+
+
+
+  listAllEstudentsCourseInscribed(cod_periodo: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseinscribed/' + cod_periodo);
+  }
+
+  listAllEstudentsCourseInscribedStatus(cod_periodo: number, cod_estado: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseinscribedstatus/' + cod_periodo + '/' + cod_estado);
+  }
+
+  listEstudentsCourseInscribed(cod_curso: number, cod_estado: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listestudentscourseinscribed/' + cod_curso + '/' + cod_estado);
+  }
+
+  listAllEstudentsCourseInscribedAllStatus(cod_curso: number): Observable<InscriptionDTO[]> {
+    return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseinscribedallstatus/' + cod_curso);
+  }
 }

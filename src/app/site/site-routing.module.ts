@@ -23,7 +23,7 @@ const routes: Routes = [
     component: DetailCourseComponent
   },
   {
-    path: 'categoria',
+    path: 'categoria/:cod_categoria',
     component: CategoryComponent
   },
   {

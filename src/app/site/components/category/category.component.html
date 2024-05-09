@@ -1,1 +1,52 @@
-<p>category works!</p>
+<main>
+  <app-loader [loading] = "loading"></app-loader>
+  
+  <section class="container" aria-label="Cursos ofertados">
+  
+    <div class="content-title">
+      <h1>Educación Continua</h1>
+      <p>Capacítate en nuestros cursos 100% online, primero debes registrarte.</p>
+    </div>
+  
+      <div class="card-container">
+  
+        <div class="card" *ngFor="let item of coursesDTO">
+    
+          <div class="card-head">
+            <img class="image-card" src={{getRouteImage(item.imagen_curso)}} alt="Imagen course">
+          </div>
+          
+          <div class="description-card">
+            <p class="text-weight">{{item.nombre_curso}}</p>
+
+            <div class="detail-course">
+              <div class="inline-block">
+                <p>
+                  <span class="icon-items"><i class="fa-solid fa-calendar-days"></i></span>
+                  <span>Inicio: </span>
+                  {{getDateFormat(item.fecha_inicio)}}
+                </p>
+                <span *ngIf="verifyCloseCousre(item.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
+                <span *ngIf="!verifyCloseCousre(item.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
+              </div>
+              <p>
+                <span class="icon-items"><i class="fa-regular fa-clock"></i></span>
+                <span>Duración: </span>
+                {{getDiffWeek(item.fecha_inicio, item.fecha_fin)}}
+              </p>
+              <p>
+                <span class="icon-items"><i class="fa-solid fa-location-dot"></i></span>
+                <span>Modalidad: </span>
+                {{item.modalidad}}
+              </p>
+            </div>
+          </div>
+    
+            <div class="foot-card">
+              <button class="btn btn-primary" type="button" (click)="viewDetail(item.cod_curso)"><i class="fas fa-search"></i> Ver detalle</button>
+            </div>
+        </div>
+  
+      </div>
+    </section>
+  </main>

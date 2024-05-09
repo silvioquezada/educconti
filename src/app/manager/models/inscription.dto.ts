@@ -1,6 +1,9 @@
 export class InscriptionDTO {
   cod_matricula: number;
   usuario: string;
+  cedula: string;
+  apellido: string;
+  nombre: string;
   nombre_curso: string;
   correo: string;
   celular: string;
@@ -8,6 +11,7 @@ export class InscriptionDTO {
   documento_descripcion: string;
   archivo_certificado: string;
   estado_aprobacion: number;
+  estado_matricula: number;
   estado: number;
 
   constructor(cod_matricula: number, usuario: string, nombre_curso: string, correo: string, celular: string, observacion_revision: string, documento_descripcion: string, archivo_certificado: string,  estado_aprobacion: number, estado: number) {

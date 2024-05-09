@@ -14,17 +14,8 @@
             <li class="nav-item dropdown">
               <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categoría</a>
               <ul class="dropdown-menu shadow">
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="category()">Informática</a>
-                </li>
-                <li>
-                    <a class="dropdown-item text-color-black" (click)="category()">Mecánica</a>
-                </li>
-                <li>
-                    <a class="dropdown-item text-color-black" (click)="category()">Electricidad</a>
-                </li>
-                <li>
-                    <a class="dropdown-item text-color-black" (click)="category()">Administración</a>
+                <li *ngFor="let item of categoriesDTO">
+                  <a class="dropdown-item text-color-black" (click)="category(item.cod_categoria)">{{item.categoria}}</a>
                 </li>
               </ul>
             </li>

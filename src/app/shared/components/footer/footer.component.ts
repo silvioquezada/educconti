@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 import { HeaderMenus } from '../../models/header-menus.dto';
 import { AccessService } from '../../services/access.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { CategoryDTO } from 'src/app/manager/models/category.dto';
+import { CategoryService } from 'src/app/manager/services/category.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-footer',
@@ -13,8 +16,10 @@ export class FooterComponent implements OnInit {
   showAuthNormal: boolean = false;
   showAuthManager: boolean = false;
   statusSesion : string = "";
+  loading: boolean = false;
+  categoriesDTO: CategoryDTO[];
   
-  constructor(private router: Router, private accessservice: AccessService, private localStorageService: LocalStorageService) { }
+  constructor(private router: Router, private accessservice: AccessService, private localStorageService: LocalStorageService, private categoryService: CategoryService) { }
 
   ngOnInit(): void {
     this.accessservice.headerManagement.subscribe(
@@ -44,14 +49,29 @@ export class FooterComponent implements OnInit {
         }
       }
     );
+    this.listCategories();
+  }
+
+  listCategories(): void {
+    this.loading = true;
+
+    this.categoryService.list()
+    .subscribe( (data) => {
+        this.loading = false;
+        this.categoriesDTO = data;
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+      }
+    );
   }
 
   home(): void {
     this.router.navigateByUrl('inicio');
   }
 
-  category(): void {
-    this.router.navigateByUrl('categoria');
+  category(cod_categoria: number): void {
+    this.router.navigateByUrl('categoria/' + cod_categoria);
   }
 
   mycourses(): void {

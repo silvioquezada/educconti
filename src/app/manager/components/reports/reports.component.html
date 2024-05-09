@@ -1,1 +1,112 @@
-<p>reports works!</p>
+<app-loader [loading] = "loading"></app-loader>
+
+<main>
+  
+  <section class="container" aria-label="Listado de usuarios">
+
+      <div class="content-title content-inline">
+        <h1>Reportes de nóminas</h1>
+        <div class="width-150px">
+          <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
+            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+              {{item.codigo_periodo}}
+            </option>
+          </select>
+        </div>
+      </div>
+  
+      <form class="form skin-form">
+
+        
+        <div class="panel panel-col-p100">
+
+          <div class="content-column-between">
+
+            <div class="width-250px">
+              <div class="input-group">
+                <label class="form-label" for="categoria">Curso:</label>
+                <select class="form-control form-control-select" id="cursos" (change)="changeCourse($event)">
+                  <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso == item.cod_curso">
+                    {{item.nombre_curso}}
+                  </option>
+                </select>
+              </div>
+              
+            </div>
+
+            <div class="width-250px">
+              <div class="input-group">
+                <label class="form-label" for="categoria">Estado:</label>
+                <select class="form-control form-control-select" id="estado" (change)="changeStatus($event)">
+                  <option [value]="item.cod_estado" *ngFor="let item of dataStatusInscription" [selected]="cod_estado == item.cod_estado">
+                    {{item.estado}}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+           
+          </div>
+
+          <div class="content-column-between">
+
+            <div>
+              <button class="btn btn-success btn-flat btn-sm float-right" type="button" (click)="exportExcel();"><i class="fa fa-file-excel"></i> Excel</button>
+              <button class="btn btn-danger btn-flat btn-sm float-right" type="button" (click)="exportPdf();"><i class="fa fa-file-pdf"></i> PDF</button>
+            </div>
+            <input (keyup)="keyFilter();" class="form-filter" type="text" placeholder="Buscar" name="filterpost" [(ngModel)]="filterpost">
+          </div>
+
+          
+
+          <table class="content-table resp">
+            <thead>
+              <tr>
+                <th scope="col">Cédula</th>
+                <th scope="col">Apellidos</th>
+                <th scope="col">Nombres</th>
+                <th scope="col">Correo</th>
+                <th scope="col">Celular</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Estado</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of (inscriptionsDTO | filterRegistration: filterpost) | paginate : {
+                itemsPerPage: pagesize,
+                currentPage: page,
+                totalItems: count
+              }">
+                <td>{{item.cedula}}</td>
+                <td>{{item.apellido}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.correo}}</td>
+                <td>{{item.celular}}</td>
+                <td>{{item.nombre_curso}}</td>
+                <td *ngIf="cod_estado == 0 || cod_estado == 2 || cod_estado == 3">
+                  <span *ngIf="item.estado_aprobacion === 1">No Aprobado</span>
+                  <span *ngIf="item.estado_aprobacion === 2">Aprobado</span>
+                </td>
+                <td *ngIf="cod_estado == 1 || cod_estado == 4 || cod_estado == 5">
+                  <span *ngIf="item.estado_matricula === 0 || item.estado_matricula === 1 || item.estado_matricula === 2">Pendientes</span>
+                  <span *ngIf="item.estado_matricula === 3">Matriculados</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="flex-content-right">
+            <pagination-controls class="custom-pagination"
+            previousLabel="Anterior"
+            nextLabel="Siguiente"
+            [responsive]="true"
+            (pageChange)="handlePageChange($event)">
+            </pagination-controls>
+          </div>
+
+        </div>
+
+      </form>
+
+  </section>
+</main>

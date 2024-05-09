@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import { VerifyRegistryComponent } from '../registrations/verify-registry/verify-registry.component';
 import { CourseService } from '../../services/course.service';
 import { PeriodService } from 'src/app/manager/services/period.service';
 import { PeriodDTO } from 'src/app/manager/models/period.dto';
