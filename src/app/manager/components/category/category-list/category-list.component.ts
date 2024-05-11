@@ -61,12 +61,12 @@ export class CategoryListComponent implements OnInit {
   }
 
   newRow(): void {
-    this. categoryFormComponent.formNormal();
+    this.categoryFormComponent.formNormal();
   }
 
   editRow(categoryDTO: CategoryDTO): void {
-    this. categoryFormComponent.formNormal();
-    this. categoryFormComponent.assignValues(categoryDTO);
+    this.categoryFormComponent.formNormal();
+    this.categoryFormComponent.assignValues(categoryDTO);
   }
 
   viewRow(categoryDTO: CategoryDTO): void {

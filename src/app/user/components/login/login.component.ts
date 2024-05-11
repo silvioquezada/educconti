@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -7,9 +7,8 @@ import { UsuarioService } from '../../services/usuario.service';
 import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
 import { HeaderMenus } from 'src/app/shared/models/header-menus.dto';
 import { AccessService } from 'src/app/shared/services/access.service';
-
+import { RecoverPasswordComponent } from '../recover-password/recover-password.component';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -18,6 +17,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  @ViewChild(RecoverPasswordComponent) recoverPasswordComponent: any;
   usuarioDTO: UsuarioDTO
   usuario: FormControl;
   password: FormControl;
@@ -118,6 +118,10 @@ export class LoginComponent implements OnInit {
         });
       }
     );
+  }
+
+  recoverPassword(): void {
+    this.recoverPasswordComponent.formNormal();
   }
 
 }

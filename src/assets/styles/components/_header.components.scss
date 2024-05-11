@@ -65,7 +65,7 @@ nav {
   text-align: center;
 }
 
-@media screen and (min-width: $medium-width) {
+@media screen and (min-width: 768px) {
 
   .header {
     display: flex;
@@ -82,7 +82,7 @@ nav {
     width: 13vh;
     padding: 1%;
   }
-    
+  
   #enlace_menu:not(.visible){
     display: none;
   }
@@ -96,13 +96,13 @@ nav {
     padding-left: 12px;
     padding-right: 12px;
   }
-
+  
   .nav-flex-end {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
   }
-    
+
 }
 
 .dropdown-menu.show {

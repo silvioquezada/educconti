@@ -48,29 +48,13 @@ export class ProfileComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService, private router: Router, private localStorageService: LocalStorageService) {
 
-    this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
-
-    this.cedula = new FormControl(this.usuarioDTO.cedula, [
-      this.cedulaValidator
-    ]);
+    this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', ''); 
 
     this.apellido = new FormControl(this.usuarioDTO.apellido, [
       Validators.required
     ]);
 
     this.nombre = new FormControl(this.usuarioDTO.nombre, [
-      Validators.required
-    ]);
-
-    this.genero = new FormControl(this.usuarioDTO.genero, [
-      Validators.required
-    ]);
-
-    this.etnia = new FormControl(this.usuarioDTO.etnia, [
-      Validators.required
-    ]);
-
-    this.direccion = new FormControl(this.usuarioDTO.direccion, [
       Validators.required
     ]);
 
@@ -81,10 +65,6 @@ export class ProfileComponent implements OnInit {
     this.correo = new FormControl(this.usuarioDTO.correo, [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
-    ]);
-
-    this.nivelInstruccion = new FormControl(this.usuarioDTO.nivel_instruccion, [
-      Validators.required
     ]);
 
     this.usuario = new FormControl(this.usuarioDTO.usuario, [
@@ -100,20 +80,54 @@ export class ProfileComponent implements OnInit {
       this.passwordValidator
     ]);
 
-    this.profileForm = this.formBuilder.group({
-      cedula: this.cedula,
-      apellido: this.apellido,
-      nombre: this.nombre,
-      genero: this.genero,
-      etnia: this.etnia,
-      direccion: this.direccion,
-      celular: this.celular,
-      correo: this.correo,
-      nivel_instruccion: this.nivelInstruccion,
-      usuario: this.usuario,
-      password: this.password,
-      password2: this.password2
-    });
+    if(this.tipo_usuario == 'NORMAL') {
+      this.cedula = new FormControl(this.usuarioDTO.cedula, [
+        this.cedulaValidator
+      ]);
+
+      this.genero = new FormControl(this.usuarioDTO.genero, [
+        Validators.required
+      ]);
+  
+      this.etnia = new FormControl(this.usuarioDTO.etnia, [
+        Validators.required
+      ]);
+  
+      this.direccion = new FormControl(this.usuarioDTO.direccion, [
+        Validators.required
+      ]);
+
+      this.nivelInstruccion = new FormControl(this.usuarioDTO.nivel_instruccion, [
+        Validators.required
+      ]);
+      
+      this.profileForm = this.formBuilder.group({
+        cedula: this.cedula,
+        apellido: this.apellido,
+        nombre: this.nombre,
+        genero: this.genero,
+        etnia: this.etnia,
+        direccion: this.direccion,
+        celular: this.celular,
+        correo: this.correo,
+        nivel_instruccion: this.nivelInstruccion,
+        usuario: this.usuario,
+        password: this.password,
+        password2: this.password2
+      });
+    } else {
+      this.profileForm = this.formBuilder.group({
+        apellido: this.apellido,
+        nombre: this.nombre,
+        celular: this.celular,
+        correo: this.correo,
+        usuario: this.usuario,
+        password: this.password,
+        password2: this.password2
+      });
+    }
+
+    
   }
 
   cedulaValidator: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
@@ -223,22 +237,27 @@ export class ProfileComponent implements OnInit {
         }
         else
         {
+          if(this.tipo_usuario == 'NORMAL') {
+            this.cedula.setValue(dataResult.cedula);
+            this.genero.setValue(dataResult.genero);
+            this.etnia.setValue(dataResult.etnia);
+            this.direccion.setValue(dataResult.direccion);
+            this.nivelInstruccion.setValue(dataResult.nivel_instruccion);
+            this.usuarioDTO.tipo_usuario = 'NORMAL';
+          }
+
           this.cod_usuario = Number(dataResult.cod_usuario);
-          this.cedula.setValue(dataResult.cedula);
           this.apellido.setValue(dataResult.apellido);
           this.nombre.setValue(dataResult.nombre);
-          this.genero.setValue(dataResult.genero);
-          this.etnia.setValue(dataResult.etnia);
-          this.direccion.setValue(dataResult.direccion);
           this.celular.setValue(dataResult.celular);
           this.correo.setValue(dataResult.correo);
-          this.nivelInstruccion.setValue(dataResult.nivel_instruccion);
           this.usuario.setValue(dataResult.usuario);
           this.password.setValue("");
           this.password2.setValue("");
           this.cedulaTemporal = dataResult.cedula;
           this.correoTemporal = dataResult.correo;
           this.usuarioTemporal = dataResult.usuario;
+          this.usuarioDTO.tipo_usuario = 'GESTOR';
         }
       },
       (error: HttpErrorResponse) => {
@@ -270,8 +289,17 @@ export class ProfileComponent implements OnInit {
     this.isValidFormEmail = true;
     this.isValidFormUser = true;
     this.usuarioDTO = this.profileForm.value;
-    this.usuarioDTO.tipo_usuario = 'NORMAL';
     this.usuarioDTO.cod_usuario = this.cod_usuario;
+    if(this.tipo_usuario == 'NORMAL') {
+      this.usuarioDTO.tipo_usuario = 'NORMAL';
+    } else {
+      this.usuarioDTO.tipo_usuario = 'GESTOR';
+      this.usuarioDTO.cedula = '0';
+      this.usuarioDTO.genero = '0';
+      this.usuarioDTO.etnia = '0';
+      this.usuarioDTO.direccion = '0';
+      this.usuarioDTO.nivel_instruccion = '0';
+    }
 
     const promise1 = this.searchCedula().then();
     const promise2 = this.searchEmail().then();
@@ -302,27 +330,30 @@ export class ProfileComponent implements OnInit {
   searchCedula() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-
-      if(this.cedulaTemporal === this.usuarioDTO.cedula) {
-        resolve(true);
-      } else {
-        this.usuarioService.searchCedula(this.cedula.value)
-        .subscribe( (data : any) =>
-        {
-          this.loading = false;
-          const dataResult = data;
-          if (dataResult.estado) {
-            this.isValidFormCedula = false;
-            this.messagueCedula = 'Cédula ya está registrada';
-          } else {
-            this.isValidFormCedula = true;
-          }
+      if(this.tipo_usuario == 'GESTOR') {
+        if(this.cedulaTemporal === this.usuarioDTO.cedula) {
           resolve(true);
-        }, (error: HttpErrorResponse) => {
-          this.loading = false;
-          this.isValidFormCedula = true;
-          reject(false);
-        });
+        } else {
+          this.usuarioService.searchCedula(this.cedula.value)
+          .subscribe( (data : any) =>
+          {
+            this.loading = false;
+            const dataResult = data;
+            if (dataResult.estado) {
+              this.isValidFormCedula = false;
+              this.messagueCedula = 'Cédula ya está registrada';
+            } else {
+              this.isValidFormCedula = true;
+            }
+            resolve(true);
+          }, (error: HttpErrorResponse) => {
+            this.loading = false;
+            this.isValidFormCedula = true;
+            reject(false);
+          });
+        }
+      } else {
+        resolve(true);
       }
     });
   }
@@ -382,7 +413,6 @@ export class ProfileComponent implements OnInit {
   update(): void {
 
     this.loading = true;
-
     this.usuarioService.update(this.usuarioDTO)
     .subscribe( async (data) => {
         this.loading = false;

@@ -31,7 +31,7 @@
               <select class="form-control form-control-select" id="periodos" [formControl]="periodo" [ngClass]="{'is-invalid': periodo.errors && isValidForm != null && !isValidForm}">
                 <option></option>
                 <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO">
-                  {{item.descripcion}}
+                  {{item.codigo_periodo + ' (' + item.anio + ' - ' + item.descripcion + ')'}}
                 </option>
               </select>
               <div *ngIf="periodo.errors">

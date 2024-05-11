@@ -16,13 +16,13 @@ export class RequirementsComponent implements OnInit {
   constructor(private requirementsService: RequirementsService) { }
 
   ngOnInit(): void {
-    this.search();
+    this.viewRequirement();
   }
 
-  search(): void {
+  viewRequirement(): void {
     this.loading = true;
 
-    this.requirementsService.search()
+    this.requirementsService.viewRequirement()
     .subscribe( (data) => {
         this.loading = false;
         this.requirementDTO.requisitos = data.requisitos;

@@ -11,8 +11,12 @@ export class RequirementsService {
   api = environment.baseUrl + 'requisitos/';
   constructor(private http:HttpClient) { }
 
-  search(): Observable<RequirementsDTO> {
+  viewRequirement(): Observable<RequirementsDTO> {
     return this.http.get<RequirementsDTO>(this.api);
+  }
+
+  search(): Observable<RequirementsDTO> {
+    return this.http.get<RequirementsDTO>(this.api + 'search/');
   }
 
   update(put: RequirementsDTO): Observable<RequirementsDTO> {

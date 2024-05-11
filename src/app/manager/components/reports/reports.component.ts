@@ -20,12 +20,15 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnInit {
+  urlImage: string = '../assets/images/logo.svg';
   cod_periodo: number = 0;
   cod_curso: number = 0;
   cod_estado: number = 0;
   cod_matricula: number;
   estado_matricula: number = 0;
   estado_aprobacion: number = 0;
+  nombre_curso: string = '';
+  nombre_estado: string = '';
 
   selectedPdf: File = null;
   baseUrlCertificate = environment.baseUrlFile + 'certificatepdf/';
@@ -71,7 +74,7 @@ export class ReportsComponent implements OnInit {
   constructor(private periodService: PeriodService, private courseService: CourseService, private enrollService: EnrollService) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.cod_estado = 0;
     this.listPeriod();
   }
@@ -126,11 +129,16 @@ export class ReportsComponent implements OnInit {
     }
     else
     {
-      //this.toastr.info("Debe generar primero el reporte para exportar", "INFORMACIÓN DEL SISTEMA");
+      Swal.fire({
+        icon: 'info',
+        title: 'Debe generar primero el reporte para exportar',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 
-  exportPdf()
+  async exportPdf()
   {
     if(this.inscriptionsDTO.length>0)
     {
@@ -186,10 +194,23 @@ export class ReportsComponent implements OnInit {
         
         content: [
           {
-            text: 'Reporte de Clientes',
+            image: await this.getBase64ImageFromURL('../assets/images/logo.svg'),
+            width: 50,
+            alignment: 'center'
+          },
+          {
+            text: 'Reporte de Nóminas',
             fontSize: 16,  
             alignment: 'center',  
             color: '#047886'  
+          },
+          {
+            text: 'Curso: ' + this.nombre_curso,
+            margin: [0, 5, 0, 5]
+          },
+          {
+            text: 'Estado: ' + this.nombre_estado,
+            margin: [0, 5, 0, 5]
           },
           {
             table: {
@@ -205,7 +226,12 @@ export class ReportsComponent implements OnInit {
     }
     else
     {
-      //this.toastr.info("Debe generar primero el reporte para exportar", "INFORMACIÓN DEL SISTEMA");
+      Swal.fire({
+        icon: 'info',
+        title: 'Debe generar primero el reporte para exportar',
+        showConfirmButton: false,
+        timer: 1500
+      });
     }
   }
 
@@ -221,12 +247,15 @@ export class ReportsComponent implements OnInit {
   changeCourse(event: any): void {
     const elemento = event.target.value;
     this.cod_curso = elemento;
+    this.nombre_curso = this.coursesDTO.find( (item) => item.cod_curso == this.cod_curso ).nombre_curso;
+
     this.searchSelect();
   }
 
   changeStatus(event: any): void {
     const elemento = event.target.value;
     this.cod_estado = elemento;
+    this.nombre_estado = this.dataStatusInscription.find( (item) => item.cod_estado == this.cod_estado ).estado;
     this.searchSelect();
   }
 
@@ -297,6 +326,8 @@ export class ReportsComponent implements OnInit {
         this.periodsDTO = data;
         if(this.periodsDTO.length>0) {
           this.cod_periodo = this.periodsDTO[0].cod_periodo;
+          this.nombre_curso = 'Todos';
+          this.nombre_estado = 'Todas las Aprobaciones';
           this.listCourse();
           this.listAllEstudentsCourseApprove();
         }
@@ -497,6 +528,31 @@ export class ReportsComponent implements OnInit {
       }
     );
   }
+
+  getBase64ImageFromURL(url: string) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+    
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+    
+        var ctx = canvas.getContext("2d");
+        ctx!.drawImage(img, 0, 0);
+    
+        var dataURL = canvas.toDataURL("image/png");
+    
+        resolve(dataURL);
+      };
+    
+      img.onerror = error => {
+        reject(error);
+      };
+    
+      img.src = url;
+    });}
 
   keyFilter() {
     this.page = 1;

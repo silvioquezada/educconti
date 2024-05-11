@@ -74,7 +74,7 @@ export class HeaderComponent implements OnInit {
       status_normal: false
     };
     this.accessservice.headerManagement.next(headerInfo);
-    this.router.navigateByUrl('inicio');
+    this.router.navigateByUrl('user/login');
   }
 
   home(): void {

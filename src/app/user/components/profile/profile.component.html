@@ -10,7 +10,7 @@
     <form class="form skin-form" [formGroup]="profileForm" (ngSubmit)="profile()">
 
       <div class="panel panel-col-p50">
-        <div class="input-group">
+        <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
           <label class="form-label" for="cedula">Cédula:</label>
           <input class="form-control" id="cedula" type="text" placeholder="Ingrese cedula" maxlength="10" [formControl]="cedula" [ngClass]="{ 'is-invalid': (cedula.errors && isValidForm != null && !isValidForm) || !isValidFormCedula}">
           <div *ngIf="cedula.errors">
@@ -40,7 +40,7 @@
             </div>
           </div>
         </div>
-        <div class="input-group">
+        <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
           <label class="form-label" for="genero">Género:</label>
           <select class="form-control form-control-select" id="genero" [formControl]="genero" [ngClass]="{ 'is-invalid': genero.errors && isValidForm != null && !isValidForm}">
             <option value="MASCULINO">MASCULINO</option>
@@ -52,7 +52,7 @@
             </div>
           </div>
         </div>
-        <div class="input-group">
+        <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
           <label class="form-label" for="etnia">Etnia</label>
           <select class="form-control form-control-select" id="etnia" [formControl]="etnia" [ngClass]="{ 'is-invalid': etnia.errors && isValidForm != null && !isValidForm}">
             <option value="MESTIZO">MESTIZO</option>
@@ -67,7 +67,7 @@
             </div>
           </div>
         </div>
-        <div class="input-group">
+        <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
           <label class="form-label" for="direccion">Dirección:</label>
           <input class="form-control" id="direccion" type="text" placeholder="Ingrese direccion" maxlength="200" [formControl]="direccion" [ngClass]="{ 'is-invalid': direccion.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="direccion.errors">
@@ -76,32 +76,59 @@
             </div>
           </div>
         </div>
+        <div *ngIf="tipo_usuario!='NORMAL'">
+          <div class="input-group">
+            <label class="form-label" for="celular">Celular:</label>
+            <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
+            <div *ngIf="celular.errors">
+              <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
+                <small class="text-color-red" *ngIf="celular?.hasError('required')">Celular es requerido</small>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="form-label" for="correo">Correo:</label>
+            <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" maxlength="100" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
+            <div *ngIf="correo.errors || !isValidFormEmail">
+              <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
+                <small class="text-color-red" *ngIf="correo?.hasError('required')">Correo es requerido</small>
+                <small class="text-color-red" *ngIf="correo?.hasError('pattern')">Correo no es válido</small>
+              </div>
+              <div *ngIf="!isValidFormEmail">
+                <small class="text-color-red">Correo ya está registrado</small>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="panel panel-col-p50">
-        <div class="input-group">
-          <label class="form-label" for="celular">Celular:</label>
-          <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
-          <div *ngIf="celular.errors">
-            <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
-              <small class="text-color-red" *ngIf="celular?.hasError('required')">Celular es requerido</small>
+        <div *ngIf="tipo_usuario=='NORMAL'">
+          <div class="input-group">
+            <label class="form-label" for="celular">Celular:</label>
+            <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
+            <div *ngIf="celular.errors">
+              <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
+                <small class="text-color-red" *ngIf="celular?.hasError('required')">Celular es requerido</small>
+              </div>
+            </div>
+          </div>
+          <div class="input-group">
+            <label class="form-label" for="correo">Correo:</label>
+            <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" maxlength="100" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
+            <div *ngIf="correo.errors || !isValidFormEmail">
+              <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
+                <small class="text-color-red" *ngIf="correo?.hasError('required')">Correo es requerido</small>
+                <small class="text-color-red" *ngIf="correo?.hasError('pattern')">Correo no es válido</small>
+              </div>
+              <div *ngIf="!isValidFormEmail">
+                <small class="text-color-red">Correo ya está registrado</small>
+              </div>
             </div>
           </div>
         </div>
-        <div class="input-group">
-          <label class="form-label" for="correo">Correo:</label>
-          <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" maxlength="100" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
-          <div *ngIf="correo.errors || !isValidFormEmail">
-            <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
-              <small class="text-color-red" *ngIf="correo?.hasError('required')">Correo es requerido</small>
-              <small class="text-color-red" *ngIf="correo?.hasError('pattern')">Correo no es válido</small>
-            </div>
-            <div *ngIf="!isValidFormEmail">
-              <small class="text-color-red">Correo ya está registrado</small>
-            </div>
-          </div>
-        </div>
-        <div class="input-group">
+        
+        <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
           <label class="form-label" for="instruccion">Nivel de Instrucción:</label>
           <select class="form-control form-control-select" id="instruccion" [formControl]="nivelInstruccion" [ngClass]="{ 'is-invalid': nivelInstruccion.errors && isValidForm != null && !isValidForm}">
             <option>NINGUNA</option>
