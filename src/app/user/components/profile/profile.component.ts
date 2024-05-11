@@ -10,6 +10,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import * as moment from 'moment';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -42,9 +44,9 @@ export class ProfileComponent implements OnInit {
   cedulaTemporal: string = '';
   correoTemporal: string = '';
   usuarioTemporal: string = '';
-  constructor(private formBuilder: FormBuilder,
-    private usuarioService: UsuarioService,
-    private router: Router) {
+  tipo_usuario: string = this.localStorageService.getData('tipo_usuario');
+
+  constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService, private router: Router, private localStorageService: LocalStorageService) {
 
     this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
 

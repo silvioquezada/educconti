@@ -38,4 +38,8 @@ export class UsuarioService {
   searchRowUser(post: UsuarioDTO): Observable<UsuarioDTO> {
     return this.http.post<UsuarioDTO>(this.api + 'searchrowuser/', post);
   }
+
+  recoverPassword(put: UsuarioDTO): Observable<UsuarioDTO> {
+    return this.http.put<UsuarioDTO>(this.api + 'recoverpassword/', put);
+  }
 }
