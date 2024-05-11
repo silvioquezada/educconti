@@ -1,1 +1,19 @@
-<p>requirements works!</p>
+<app-loader [loading] = "loading"></app-loader>
+<main>
+
+  <section class="container" aria-label="Requisitos de los cursos">
+
+    <div class="content-title">
+      <h1>Requisitos</h1>
+    </div> 
+  
+    <div class="form">
+
+      <div class="panel panel-col-p100">
+        <div class="width-100" [innerHTML]="requirementDTO.requisitos"></div>
+      </div>
+
+    </div>
+
+  </section>
+</main>

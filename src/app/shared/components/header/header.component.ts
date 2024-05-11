@@ -109,6 +109,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('manager/dashboard');
   }
 
+  requirementsmanager(): void {
+    this.router.navigateByUrl('manager/requisitos');
+  }
+
   user(): void {
     this.router.navigateByUrl('manager/usuario');
   }

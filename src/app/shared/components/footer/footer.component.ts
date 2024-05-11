@@ -94,7 +94,10 @@ export class FooterComponent implements OnInit {
     this.router.navigateByUrl('user/perfil');
   }
 
-
+  requirementsmanager(): void {
+    this.router.navigateByUrl('manager/requisitos');
+  }
+  
   user(): void {
     this.router.navigateByUrl('manager/usuario');
   }

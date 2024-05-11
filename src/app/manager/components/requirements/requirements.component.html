@@ -1,0 +1,42 @@
+<app-loader [loading] = "loading"></app-loader>
+
+<main>
+  
+  <section class="container" aria-label="Listado de usuarios">
+
+      <div class="content-title">
+        <h1>Requisitos de cursos</h1>
+      </div>
+  
+      <form class="form skin-form" [formGroup]="registerForm" (ngSubmit)="register()">
+
+        
+        
+   
+
+        <div class="panel panel-col-p100">
+          <div class="content-column-between">
+            <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-save"></i> ACTUALIZAR</button>
+          </div>
+
+          <div [ngClass]="{ 'input-error': requisitos.errors && isValidForm != null && !isValidForm}">
+            <ckeditor class="ck-editor__editable_inline" [editor]="editorcodigo" [config]="editorConfig" [formControl]="requisitos"></ckeditor>
+          </div>
+          <div *ngIf="requisitos.errors && isValidForm != null && !isValidForm">
+            <small class="text-color-red" *ngIf="requisitos?.hasError('required')">Requisitos es requerido</small>
+          </div>
+
+        </div>
+
+        
+      </form>
+      
+
+
+
+
+
+  
+    
+  </section>
+</main>

@@ -1,59 +1,65 @@
 <main>
-  
-  
+  <app-loader [loading] = "loading"></app-loader>
 
-    <section class="container" aria-label="Detalle de Curso">
-  
-      <div class="content-title">
-        <h1>Dashboard</h1>
+  <section class="container" aria-label="Detalle de Curso">
+
+    <div class="content-title content-inline">
+      <h1>Dashboard</h1>
+      <div class="width-150px">
+        <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
+          <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+            {{item.codigo_periodo}}
+          </option>
+        </select>
       </div>
-        
-      <div class="content">
+    </div>
       
-        <div class="card-sm text-color-primary">
-          <div class="card-head-sm">
-            <i class="fa-solid fa-building-columns text-big"></i>
-          </div>
-          <div class="card-body-sm">
-            <p class="text-weight">Cursos</p>
-            <p>25</p>
-          </div>
+    <div class="content">
+    
+      <div class="card-sm text-color-primary">
+        <div class="card-head-sm">
+          <i class="fa-solid fa-building-columns text-big"></i>
         </div>
-  
-        <div class="card-sm text-color-primary">
-          <div class="card-head-sm">
-            <i class="fa-solid fa-user-clock text-big"></i>
-          </div>
-          <div class="card-body-sm">
-            <p class="text-weight">Pendientes</p>
-            <p>8</p>
-          </div>
+        <div class="card-body-sm">
+          <p class="text-weight">Cursos</p>
+          <p>{{countCourses}}</p>
         </div>
-  
-        <div class="card-sm text-color-primary">
-          <div class="card-head-sm">
-            <i class="fa-solid fa-user-check text-big"></i>
-          </div>
-          <div class="card-body-sm">
-            <p class="text-weight">Matriculados</p>
-            <p>8</p>
-          </div>
-        </div>
-  
-  
-        <div class="card-sm text-color-primary">
-          <div class="card-head-sm">
-            <i class="fa-solid fa-user-graduate text-big"></i>
-          </div>
-          <div class="card-body-sm">
-            <p class="text-weight">Aprobados</p>
-            <p>10</p>
-          </div>
-        </div>
-  
-  
-  
       </div>
+
+      <div class="card-sm text-color-primary">
+        <div class="card-head-sm">
+          <i class="fa-solid fa-user-clock text-big"></i>
+        </div>
+        <div class="card-body-sm">
+          <p class="text-weight">Pendientes</p>
+          <p>{{countEarrings}}</p>
+        </div>
+      </div>
+
+      <div class="card-sm text-color-primary">
+        <div class="card-head-sm">
+          <i class="fa-solid fa-user-check text-big"></i>
+        </div>
+        <div class="card-body-sm">
+          <p class="text-weight">Matriculados</p>
+          <p>{{countEnrolled}}</p>
+        </div>
+      </div>
+
+
+      <div class="card-sm text-color-primary">
+        <div class="card-head-sm">
+          <i class="fa-solid fa-user-graduate text-big"></i>
+        </div>
+        <div class="card-body-sm">
+          <p class="text-weight">Aprobados</p>
+          <p>{{countApproved}}</p>
+        </div>
+      </div>
+
+
+
+    </div>
   
   
   
@@ -61,5 +67,5 @@
   
     
       
-    </section>
-  </main>
+  </section>
+</main>

@@ -8,11 +8,16 @@ import { PeriodListComponent } from './components/period/period-list/period-list
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { CourseListComponent } from './components/course/course-list/course-list.component';
 import { ListRegistrationComponent } from './components/registrations/list-registration/list-registration.component';
+import { RequirementsComponent } from './components/requirements/requirements.component';
 
 const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardComponent
+  },
+  {
+    path: 'requisitos',
+    component: RequirementsComponent
   },
   {
     path: 'usuario',

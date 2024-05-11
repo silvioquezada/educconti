@@ -5,7 +5,6 @@ import { CourseService } from '../../services/course.service';
 import { PeriodService } from 'src/app/manager/services/period.service';
 import { PeriodDTO } from 'src/app/manager/models/period.dto';
 import { EnrollService } from 'src/app/manager/services/enroll.service';
-import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 import { InscriptionDTO } from 'src/app/manager/models/inscription.dto';
 declare var $:any;
 import { environment } from 'src/environments/environment';

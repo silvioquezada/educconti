@@ -31,6 +31,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ListRegistrationComponent } from './components/registrations/list-registration/list-registration.component';
 import { VerifyRegistryComponent } from './components/registrations/verify-registry/verify-registry.component';
 import { FilterRegistrationPipe } from './pipes/filter-registration.pipe';
+import { RequirementsComponent } from './components/requirements/requirements.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { FilterRegistrationPipe } from './pipes/filter-registration.pipe';
     FilterCoursePipe,
     ListRegistrationComponent,
     VerifyRegistryComponent,
-    FilterRegistrationPipe
+    FilterRegistrationPipe,
+    RequirementsComponent
   ],
   imports: [
     CommonModule,
