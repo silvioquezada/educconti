@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../shared/guards/auth.guard';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ApprovalsComponent } from './components/approvals/approvals.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -13,39 +14,48 @@ import { RequirementsComponent } from './components/requirements/requirements.co
 const routes: Routes = [
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'requisitos',
-    component: RequirementsComponent
+    component: RequirementsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'usuario',
-    component: UserManagerListComponent
+    component: UserManagerListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'periodo',
-    component: PeriodListComponent
+    component: PeriodListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'categoria',
-    component: CategoryListComponent
+    component: CategoryListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'cursos',
-    component: CourseListComponent
+    component: CourseListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'inscripciones',
-    component: ListRegistrationComponent
+    component: ListRegistrationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'aprobaciones',
-    component: ApprovalsComponent
+    component: ApprovalsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'reportes',
-    component: ReportsComponent
+    component: ReportsComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

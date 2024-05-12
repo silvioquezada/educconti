@@ -6,6 +6,7 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
 import { RequirementsComponent } from './components/requirements/requirements.component';
 import { AboutComponent } from './components/about/about.component';
 import { DetailCourseComponent } from './components/detail-course/detail-course.component';
+import { AuthLoginGuard } from '../shared/guards/auth-login.guard';
 
 
 const routes: Routes = [
@@ -28,7 +29,8 @@ const routes: Routes = [
   },
   {
     path: 'mis_cursos',
-    component: MyCoursesComponent
+    component: MyCoursesComponent,
+    canActivate: [AuthLoginGuard]
   },
   {
     path: 'requisitos',
@@ -37,7 +39,6 @@ const routes: Routes = [
   {
     path: 'acerca_de',
     component: AboutComponent
-    //canActivate: [AuthGuard]
   }
 ];
 

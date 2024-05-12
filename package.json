@@ -30,7 +30,6 @@
     "jquery-slim": "^3.0.0",
     "moment": "^2.29.4",
     "ngx-pagination": "^6.0.3",
-    "ngx-toastr": "^15.0.0",
     "pdfmake": "^0.2.7",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.10.8",
