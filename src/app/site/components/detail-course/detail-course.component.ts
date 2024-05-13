@@ -128,7 +128,6 @@ export class DetailCourseComponent implements OnInit {
   }
 
   viewProgram(documento_descripcion: string) {
-    console.log(documento_descripcion);
     let miWindow = window.open(this.baseUrlProgram + documento_descripcion, "", 'width=600,height=400,left=300,top=100');
     miWindow.focus();
   }

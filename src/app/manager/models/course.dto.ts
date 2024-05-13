@@ -2,6 +2,7 @@ export class CourseDTO {
   cod_curso: number;
   cod_periodo: number;
   anio: string;
+  codigo_periodo: string;
   cod_categoria: number;
   categoria: string;
   codigo_curso: string;

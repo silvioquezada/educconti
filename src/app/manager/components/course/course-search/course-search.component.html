@@ -1,32 +1,90 @@
 <div class="modal fade" id="modalSearch" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <label class="text-weight">Registro del Periodo</label>
+        <label class="text-weight">Registro del Curso</label>
         <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         
         <form class="form-modal">
           
-          <!-- <div class="panel panel-col-p100">
-            <div class="input-group">
-              <label class="form-label" for="codigo_periodo">Código:</label>
-              <label class="label-control">{{courseDTO.codigo_curso}}</label>
-            </div>
-            <div class="input-group">
-              <label class="form-label" for="apellidos">Año:</label>
-              <label class="label-control">{{courseDTO.anio}}</label>
-            </div>
-            <div class="input-group">
-              <label class="form-label" for="nombres">Descripción:</label>
-              <label class="label-control">{{courseDTO.descripcion}}</label>
-            </div>
-          </div> -->
-  
           <div class="panel panel-col-p50">
+            <div class="input-group">
+              <label class="form-label" for="codigo_curso">Código:</label>
+              <label class="form-control">{{courseDTO.codigo_curso}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="periodos">Periodo:</label>
+              <label class="form-control">{{courseDTO.codigo_periodo}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="categorias">Categoria:</label>
+              <label class="form-control">{{courseDTO.categoria}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="curso">Nombre curso:</label>
+              <label class="form-control">{{courseDTO.nombre_curso}}</label>
+            </div>
+
+            <div class="input-group">
+              <div>
+                <img width="170" height="120" src={{urlImage}}>
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="imagen_curso">Imagen:</label>
+              <label class="form-control">{{courseDTO.codigo_curso}}</label>
+            </div>
+          </div>
+
+          <div class="panel panel-col-p50">
+
+            <div class="input-group">
+              <label class="form-label" for="fecha_inicio_inscripcion">Fecha inicio inscripción:</label>
+              <label class="form-control">{{courseDTO.fecha_inicio_inscripcion}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="fecha_fin_inscripcion">Fecha fin inscripción:</label>
+              <label class="form-control">{{courseDTO.fecha_fin_inscripcion}}</label>
+            </div>
             
-            
+            <div class="input-group">
+              <label class="form-label" for="fecha_inicio">Fecha inicio curso:</label>
+              <label class="form-control">{{courseDTO.fecha_inicio}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="fecha_fin">Fecha fin curso:</label>
+              <label class="form-control">{{courseDTO.fecha_fin}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="modalidad">Modalidad:</label>
+              <label class="form-control">{{courseDTO.modalidad}}</label>
+            </div>
+
+            <div class="input-group">
+              <label class="form-label" for="cupo">Cupo:</label>
+              <label class="form-control">{{courseDTO.cupo}}</label>
+            </div>
+
+            <div class="input-group" *ngIf="courseDTO.documento_descripcion != null">
+              <button class="btn btn-primary" (click)="viewProgram(courseDTO.documento_descripcion)"><i class="fa-solid fa-file-pdf"></i> Ver Programa</button>
+            </div>
+
+          </div>
+
+          <div class="panel panel-col-p100">
+            <div class="input-group">
+              <label class="form-label" for="descripcion">Descripción:</label>
+            </div>
+            <div class="width-100" [innerHTML]="courseDTO.descripcion"></div>
           </div>
 
         </form>

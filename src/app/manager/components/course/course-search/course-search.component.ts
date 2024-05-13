@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CourseDTO } from 'src/app/manager/models/course.dto';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-course-search',
@@ -8,6 +9,8 @@ import { CourseDTO } from 'src/app/manager/models/course.dto';
 })
 export class CourseSearchComponent implements OnInit {
   courseDTO: CourseDTO;
+  urlImage: string = '';
+
   constructor() {
     this.formNormal();
   }
@@ -21,6 +24,12 @@ export class CourseSearchComponent implements OnInit {
 
   assignValues(managerDTO: CourseDTO): void {
     this.courseDTO = managerDTO;
+    this.urlImage = environment.baseUrlFile + 'img/' + this.courseDTO.imagen_curso;
+  }
+
+  viewProgram(documento_descripcion: string) {
+    let miWindow = window.open(environment.baseUrlFile + 'pdf/' + documento_descripcion, "", 'width=600,height=400,left=300,top=100');
+    miWindow.focus();
   }
 
 }
