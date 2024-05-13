@@ -24,13 +24,35 @@ export class DetailCourseComponent implements OnInit {
   cod_curso: number;
   loading: boolean = false;
   imagen_curso: string = 'defecto.png';
+  total_quotas: number;
   @ViewChild(FormInscriptionComponent) formInscriptionComponent: any;
 
   constructor(private rutaActiva: ActivatedRoute, private courseService: CourseService, private enrollService: EnrollService, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
     this.cod_curso = Number(this.rutaActiva.snapshot.paramMap.get("cod_curso")!);
-    this.detailCourse();
+    this.verifyQuotas();
+  }
+
+  verifyQuotas(): void {
+    this.loading = true;
+
+    this.enrollService.verifyQuotas(this.cod_curso)
+    .subscribe( (data) => {
+        this.loading = false;
+        this.total_quotas = data.total_quotas;
+        this.detailCourse();
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
   }
 
   detailCourse(): void {
@@ -73,7 +95,7 @@ export class DetailCourseComponent implements OnInit {
   verifyCloseCousre(fechaFin: Date) {
     let fechaActual = moment();
     let diasDeDiferencia = moment(fechaFin).diff(fechaActual, 'days') + 1;
-    if (diasDeDiferencia>0) {
+    if (diasDeDiferencia>0 && this.total_quotas < this.courseDTO.cupo) {
       return true;
     } else {
       return false;

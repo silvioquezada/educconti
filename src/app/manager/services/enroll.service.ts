@@ -103,4 +103,8 @@ export class EnrollService {
   listAllEstudentsCourseInscribedAllStatus(cod_curso: number): Observable<InscriptionDTO[]> {
     return this.http.get<InscriptionDTO[]>(this.api + 'listallestudentscourseinscribedallstatus/' + cod_curso);
   }
+
+  verifyQuotas(cod_curso: number): Observable<any> {
+    return this.http.get<any>(this.api + 'verifyquotas/' + cod_curso);
+  }
 }

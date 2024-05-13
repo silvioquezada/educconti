@@ -235,7 +235,43 @@ export class CourseFormComponent implements OnInit {
     this.courseDTO = this.registerForm.value;
     this.courseDTO.cod_curso = this.cod_curso;
     
-    this.searchCodigoCurso();
+    const fechaInicioInscripcion = moment(this.fecha_inicio_inscripcion.value)
+    const fechaFinInscripcion   = moment(this.fecha_fin_inscripcion.value)
+    let result = fechaInicioInscripcion.isAfter(fechaFinInscripcion);
+    if(result) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fecha de inicio de inscripción no puede iniciar después de fecha fin de inscripción, revise por favor',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    } else {
+      const fechaInicio = moment(this.fecha_inicio.value)
+      const fechaFinInscripcion   = moment(this.fecha_fin_inscripcion.value)
+      let result = fechaFinInscripcion.isAfter(fechaInicio);
+      if(result) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Fecha de inicio de curso no puede iniciar antes de las fechas de inscripción, revise por favor',
+          showConfirmButton: false,
+          timer: 2000
+        });
+      } else {
+        const fechaInicio = moment(this.fecha_inicio.value)
+        const fechaFin   = moment(this.fecha_fin.value)
+        let result = fechaInicio.isAfter(fechaFin);
+        if(result) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Fecha de inicio de curso no puede iniciar después de fecha fin de curso, revise por favor',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        } else {
+          this.searchCodigoCurso();
+        }
+      }
+    }
   }
 
   searchCodigoCurso() {
