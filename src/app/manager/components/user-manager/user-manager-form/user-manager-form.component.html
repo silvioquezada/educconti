@@ -34,7 +34,7 @@
             </div>
             <div class="input-group">
               <label class="form-label" for="celular">Celular:</label>
-              <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" onKeyPress="return soloNumerosEnteros(event)" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
               <div *ngIf="celular.errors">
                 <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="celular?.hasError('required')">Celular es requerido</small>

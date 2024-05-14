@@ -143,7 +143,7 @@
 
             <div class="input-group">
               <label class="form-label" for="cupo">Cupo:</label>
-              <input class="form-control" id="cupo" type="text" placeholder="Ingrese cantidad cupo" maxlength="3" [formControl]="cupo" [ngClass]="{ 'is-invalid': cupo.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="cupo" type="text" placeholder="Ingrese cantidad cupo" maxlength="3" onKeyPress="return soloNumerosEnteros(event)" [formControl]="cupo" [ngClass]="{ 'is-invalid': cupo.errors && isValidForm != null && !isValidForm}">
               <div *ngIf="cupo.errors">
                 <div *ngIf="cupo.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="cupo?.hasError('required')">Cupo es requerido</small>
