@@ -90,41 +90,53 @@
 
             <div class="input-group">
               <label class="form-label" for="fecha_inicio_inscripcion">Fecha inicio inscripción:</label>
-              <input class="form-control" id="fecha_inicio_inscripcion" type="date" maxlength="10" [formControl]="fecha_inicio_inscripcion" [ngClass]="{ 'is-invalid': fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="fecha_inicio_inscripcion" type="date" maxlength="10" [formControl]="fecha_inicio_inscripcion" [ngClass]="{ 'is-invalid': (fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
               <div *ngIf="fecha_inicio_inscripcion.errors">
                 <div *ngIf="fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_inicio_inscripcion?.hasError('required')">Fecha inicio de inscripción es requerido</small>
                 </div>
               </div>
+              <div *ngIf="!isValidFormDateInscription">
+                <small class="text-color-red">Revise la fecha de inicio y fin de inscripción del curso</small>
+              </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="fecha_fin_inscripcion">Fecha fin inscripción:</label>
-              <input class="form-control" id="fecha_fin_inscripcion" type="date" maxlength="10" [formControl]="fecha_fin_inscripcion" [ngClass]="{ 'is-invalid': fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="fecha_fin_inscripcion" type="date" maxlength="10" [formControl]="fecha_fin_inscripcion" [ngClass]="{ 'is-invalid': (fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
               <div *ngIf="fecha_fin_inscripcion.errors">
                 <div *ngIf="fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_fin_inscripcion?.hasError('required')">Fecha fin de inscripción es requerido</small>
                 </div>
               </div>
+              <div *ngIf="!isValidFormDateInscription">
+                <small class="text-color-red">Revise la fecha de inicio y fin de inscripción del curso</small>
+              </div>
             </div>
             
             <div class="input-group">
               <label class="form-label" for="fecha_inicio">Fecha inicio curso:</label>
-              <input class="form-control" id="fecha_inicio" type="date" maxlength="10" [formControl]="fecha_inicio" [ngClass]="{ 'is-invalid': fecha_inicio.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="fecha_inicio" type="date" maxlength="10" [formControl]="fecha_inicio" [ngClass]="{'is-invalid': (fecha_inicio.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
               <div *ngIf="fecha_inicio.errors">
                 <div *ngIf="fecha_inicio.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_inicio?.hasError('required')">Fecha inicio de curso es requerido</small>
                 </div>
               </div>
+              <div *ngIf="!isValidFormDateEnroll">
+                <small class="text-color-red">Revise la fecha de inicio y fin del curso</small>
+              </div>
             </div>
 
             <div class="input-group">
               <label class="form-label" for="fecha_fin">Fecha fin curso:</label>
-              <input class="form-control" id="fecha_fin" type="date" maxlength="10" [formControl]="fecha_fin" [ngClass]="{ 'is-invalid': fecha_fin.errors && isValidForm != null && !isValidForm}">
+              <input class="form-control" id="fecha_fin" type="date" maxlength="10" [formControl]="fecha_fin" [ngClass]="{ 'is-invalid': (fecha_fin.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
               <div *ngIf="fecha_fin.errors">
                 <div *ngIf="fecha_fin.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_fin?.hasError('required')">Fecha fin de curso es requerido</small>
                 </div>
+              </div>
+              <div *ngIf="!isValidFormDateEnroll">
+                <small class="text-color-red">Revise la fecha de inicio y fin del curso</small>
               </div>
             </div>
 

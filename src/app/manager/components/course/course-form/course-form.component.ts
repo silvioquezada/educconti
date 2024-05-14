@@ -89,6 +89,9 @@ export class CourseFormComponent implements OnInit {
   textButton: string = '';
   urlImage: string = '';
 
+  isValidFormDateInscription: boolean;
+  isValidFormDateEnroll: boolean;
+
   filterpost = "";
   page = 1;
   count = 0;
@@ -177,9 +180,10 @@ export class CourseFormComponent implements OnInit {
     this.isValidFormImage = true;
     this.isValidForm = true;
     this.isValidFormCourse = true;
+    this.isValidFormDateInscription = true;
+    this.isValidFormDateEnroll = true;
     this.ban = true;
     this.textButton = 'Guardar';
-    //this.restore();
   }
 
   restoreFile(): void {
@@ -234,9 +238,12 @@ export class CourseFormComponent implements OnInit {
     this.isValidFormCourse = true;
     this.courseDTO = this.registerForm.value;
     this.courseDTO.cod_curso = this.cod_curso;
+    this.isValidFormDateInscription = true;
+    this.isValidFormDateEnroll = true;
     
-    const fechaInicioInscripcion = moment(this.fecha_inicio_inscripcion.value)
-    const fechaFinInscripcion   = moment(this.fecha_fin_inscripcion.value)
+    let valueError = true;
+    let fechaInicioInscripcion = moment(this.fecha_inicio_inscripcion.value)
+    let fechaFinInscripcion   = moment(this.fecha_fin_inscripcion.value)
     let result = fechaInicioInscripcion.isAfter(fechaFinInscripcion);
     if(result) {
       Swal.fire({
@@ -245,33 +252,43 @@ export class CourseFormComponent implements OnInit {
         showConfirmButton: false,
         timer: 2000
       });
-    } else {
-      const fechaInicio = moment(this.fecha_inicio.value)
-      const fechaFinInscripcion   = moment(this.fecha_fin_inscripcion.value)
-      let result = fechaFinInscripcion.isAfter(fechaInicio);
-      if(result) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Fecha de inicio de curso no puede iniciar antes de las fechas de inscripción, revise por favor',
-          showConfirmButton: false,
-          timer: 2000
-        });
-      } else {
-        const fechaInicio = moment(this.fecha_inicio.value)
-        const fechaFin   = moment(this.fecha_fin.value)
-        let result = fechaInicio.isAfter(fechaFin);
-        if(result) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Fecha de inicio de curso no puede iniciar después de fecha fin de curso, revise por favor',
-            showConfirmButton: false,
-            timer: 2000
-          });
-        } else {
-          this.searchCodigoCurso();
-        }
-      }
+      this.isValidFormDateInscription = false;
+      valueError = false;
     }
+    
+    let fechaInicio = moment(this.fecha_inicio.value)
+    result = fechaFinInscripcion.isAfter(fechaInicio);
+    if(result) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fecha de inicio de curso no puede iniciar antes de las fechas de inscripción, revise por favor',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      this.isValidFormDateInscription = false;
+      this.isValidFormDateEnroll = false;
+      valueError = false;
+    }
+
+    let fechaFin   = moment(this.fecha_fin.value)
+    result = fechaInicio.isAfter(fechaFin);
+    if(result) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Fecha de inicio de curso no puede iniciar después de fecha fin de curso, revise por favor',
+        showConfirmButton: false,
+        timer: 2000
+      });
+      this.isValidFormDateEnroll = false;
+      valueError = false;
+    }
+
+    if(valueError) {
+      this.searchCodigoCurso();
+    }
+        
+      
+    
   }
 
   searchCodigoCurso() {
