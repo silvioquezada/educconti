@@ -19,7 +19,7 @@
               <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Categoría</a>
               <ul class="dropdown-menu shadow">
                 <li *ngFor="let item of categoriesDTO">
-                  <a class="dropdown-item text-color-black" (click)="category(item.cod_categoria)">{{item.categoria}}</a>
+                  <a class="dropdown-item text-color-black" (click)="category(item)">{{item.categoria}}</a>
                 </li>
               </ul>
             </li>

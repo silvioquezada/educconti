@@ -24,7 +24,7 @@ const routes: Routes = [
     component: DetailCourseComponent
   },
   {
-    path: 'categoria/:cod_categoria',
+    path: 'categoria/:categoria/:cod_categoria',
     component: CategoryComponent
   },
   {

@@ -81,8 +81,8 @@ export class HeaderComponent implements OnInit {
     this.router.navigateByUrl('inicio');
   }
 
-  category(cod_categoria: number): void {
-    this.router.navigateByUrl('categoria/' + cod_categoria);
+  category(item: CategoryDTO): void {
+    this.router.navigateByUrl('categoria/' + item.categoria + '/' + item.cod_categoria);
   }
 
   mycourses(): void {

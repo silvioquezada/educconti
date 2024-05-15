@@ -13,7 +13,8 @@ import * as moment from 'moment';
   styleUrls: ['./category.component.scss']
 })
 export class CategoryComponent implements OnInit {
-  cod_categoria: number;
+  cod_categoria: number = 0;
+  categoria: string = '';
   loading: boolean = false;
   coursesDTO: CourseDTO[];
   filterpost = "";
@@ -27,6 +28,7 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.rutaActiva.paramMap.subscribe( (params: ParamMap) => {
       this.cod_categoria = Number(params.get('cod_categoria'));
+      this.categoria = 'Cursos de ' + params.get('categoria');
       this.listCourse();
     });
   }
