@@ -12,10 +12,14 @@
   }
   
   td:nth-of-type(3):before {
-    content: "Descripción";
+    content: "Categoría";
   }
 
   td:nth-of-type(4):before {
+    content: "Nombre curso";
+  }
+
+  td:nth-of-type(5):before {
     content: "";
   }
 }
