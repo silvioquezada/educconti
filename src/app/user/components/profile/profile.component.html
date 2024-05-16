@@ -11,7 +11,7 @@
 
       <div class="panel panel-col-p50">
         <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
-          <label class="form-label" for="cedula">Cédula:</label>
+          <label class="form-label" for="cedula">Cédula: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="cedula" type="text" placeholder="Ingrese cedula" maxlength="10" onKeyPress="return soloNumerosEnteros(event)" [formControl]="cedula" [ngClass]="{ 'is-invalid': (cedula.errors && isValidForm != null && !isValidForm) || !isValidFormCedula}">
           <div *ngIf="cedula.errors">
             <div *ngIf="(cedula.errors && isValidForm != null && !isValidForm)">
@@ -23,7 +23,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label class="form-label" for="apellidos">Apellidos:</label>
+          <label class="form-label" for="apellidos">Apellidos: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="apellidos" type="text" placeholder="Ingrese apellidos" maxlength="50" [formControl]="apellido" [ngClass]="{ 'is-invalid': apellido.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="apellido.errors">
             <div *ngIf="apellido.errors && isValidForm != null && !isValidForm">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label class="form-label" for="nombres">Nombres:</label>
+          <label class="form-label" for="nombres">Nombres: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="nombres" type="text" placeholder="Ingrese nombres" maxlength="50" [formControl]="nombre" [ngClass]="{ 'is-invalid': nombre.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="nombre.errors">
             <div *ngIf="nombre.errors && isValidForm != null && !isValidForm">
@@ -41,7 +41,7 @@
           </div>
         </div>
         <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
-          <label class="form-label" for="genero">Género:</label>
+          <label class="form-label" for="genero">Género: <span class="required" aria-label="required">*</span></label>
           <select class="form-control form-control-select" id="genero" [formControl]="genero" [ngClass]="{ 'is-invalid': genero.errors && isValidForm != null && !isValidForm}">
             <option value="MASCULINO">MASCULINO</option>
             <option value="FEMENINO">FEMENINO</option>
@@ -68,7 +68,7 @@
           </div>
         </div>
         <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
-          <label class="form-label" for="direccion">Dirección:</label>
+          <label class="form-label" for="direccion">Dirección: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="direccion" type="text" placeholder="Ingrese direccion" maxlength="200" [formControl]="direccion" [ngClass]="{ 'is-invalid': direccion.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="direccion.errors">
             <div *ngIf="direccion.errors && isValidForm != null && !isValidForm">
@@ -78,7 +78,7 @@
         </div>
         <div *ngIf="tipo_usuario!='NORMAL'">
           <div class="input-group">
-            <label class="form-label" for="celular">Celular:</label>
+            <label class="form-label" for="celular">Celular: <span class="required" aria-label="required">*</span></label>
             <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" onKeyPress="return soloNumerosEnteros(event)" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
             <div *ngIf="celular.errors">
               <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
@@ -87,7 +87,7 @@
             </div>
           </div>
           <div class="input-group">
-            <label class="form-label" for="correo">Correo:</label>
+            <label class="form-label" for="correo">Correo: <span class="required" aria-label="required">*</span></label>
             <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" maxlength="100" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
             <div *ngIf="correo.errors || !isValidFormEmail">
               <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
@@ -105,7 +105,7 @@
       <div class="panel panel-col-p50">
         <div *ngIf="tipo_usuario=='NORMAL'">
           <div class="input-group">
-            <label class="form-label" for="celular">Celular:</label>
+            <label class="form-label" for="celular">Celular: <span class="required" aria-label="required">*</span></label>
             <input class="form-control" id="celular" type="text" placeholder="Ingrese celular" maxlength="15" onKeyPress="return soloNumerosEnteros(event)" [formControl]="celular" [ngClass]="{ 'is-invalid': celular.errors && isValidForm != null && !isValidForm}">
             <div *ngIf="celular.errors">
               <div *ngIf="celular.errors && isValidForm != null && !isValidForm">
@@ -114,7 +114,7 @@
             </div>
           </div>
           <div class="input-group">
-            <label class="form-label" for="correo">Correo:</label>
+            <label class="form-label" for="correo">Correo: <span class="required" aria-label="required">*</span></label>
             <input class="form-control" id="correo" type="text" placeholder="Ingrese correo" maxlength="100" [formControl]="correo" [ngClass]="{ 'is-invalid': (correo.errors && isValidForm != null && !isValidForm) || !isValidFormEmail}">
             <div *ngIf="correo.errors || !isValidFormEmail">
               <div *ngIf="correo.errors && isValidForm != null && !isValidForm">
@@ -129,7 +129,7 @@
         </div>
         
         <div *ngIf="tipo_usuario=='NORMAL'" class="input-group">
-          <label class="form-label" for="instruccion">Nivel de Instrucción:</label>
+          <label class="form-label" for="instruccion">Nivel de Instrucción: <span class="required" aria-label="required">*</span></label>
           <select class="form-control form-control-select" id="instruccion" [formControl]="nivelInstruccion" [ngClass]="{ 'is-invalid': nivelInstruccion.errors && isValidForm != null && !isValidForm}">
             <option>NINGUNA</option>
             <option>PRIMARIA</option>
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label class="form-label" for="usuario">Usuario:</label>
+          <label class="form-label" for="usuario">Usuario: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="usuario" type="text" placeholder="Ingrese usuario" maxlength="50" [formControl]="usuario" [ngClass]="{ 'is-invalid': (usuario.errors && isValidForm != null && !isValidForm) || !isValidFormUser}">
           <div *ngIf="usuario.errors || !isValidFormUser">
             <div *ngIf="usuario.errors && isValidForm != null && !isValidForm">
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="input-group">
-          <label class="form-label" for="password">Contraseña:</label>
+          <label class="form-label" for="password">Contraseña: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" maxlength="50" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="password.errors">
             <div *ngIf="password.errors && isValidForm != null && !isValidForm">
@@ -167,7 +167,7 @@
         </div>
 
         <div class="input-group">
-          <label class="form-label" for="password">Confirme contraseña:</label>
+          <label class="form-label" for="password">Confirme contraseña: <span class="required" aria-label="required">*</span></label>
           <input class="form-control" id="password" type="password" placeholder="Confirme contraseña" maxlength="50" [formControl]="password2" [ngClass]="{ 'is-invalid': password2.errors && isValidForm != null && !isValidForm}">
           <div *ngIf="password2.errors">
             <div *ngIf="password2.errors && isValidForm != null && !isValidForm">

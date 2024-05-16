@@ -14,7 +14,7 @@
 
           <div class="panel panel-col-p100">
             <div class="input-group">
-              <label class="form-label" for="codigo_periodo">Código:</label>
+              <label class="form-label" for="codigo_periodo">Código: <span class="required" aria-label="required">*</span></label>
               <input class="form-control" id="codigo_periodo" type="text" placeholder="Ingrese codigo" maxlength="100" [formControl]="codigo_periodo" [ngClass]="{ 'is-invalid': (codigo_periodo.errors && isValidForm != null && !isValidForm) || !isValidFormPeriod}">
               <div *ngIf="codigo_periodo.errors || !isValidFormPeriod">
                 <div *ngIf="codigo_periodo.errors && isValidForm != null && !isValidForm">
@@ -27,7 +27,7 @@
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Año:</label>
+              <label class="form-label" for="apellidos">Año: <span class="required" aria-label="required">*</span></label>
               <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="50" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && isValidForm != null && !isValidForm}">
               <div *ngIf="anio.errors">
                 <div *ngIf="anio.errors && isValidForm != null && !isValidForm">
@@ -36,7 +36,7 @@
               </div>
             </div>
             <div class="input-group">
-              <label class="form-label" for="nombres">Descripción:</label>
+              <label class="form-label" for="nombres">Descripción: <span class="required" aria-label="required">*</span></label>
               <input class="form-control" id="nombres" type="text" placeholder="Ingrese descripción" maxlength="50" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && isValidForm != null && !isValidForm}">
               <div *ngIf="descripcion.errors">
                 <div *ngIf="descripcion.errors && isValidForm != null && !isValidForm">

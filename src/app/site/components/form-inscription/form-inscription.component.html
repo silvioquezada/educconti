@@ -18,7 +18,7 @@
             </div>
 
             <div *ngIf="typeForm !== 'matriculado' && typeForm !== 'pendiente'" class="input-group">
-              <label class="form-label" for="subir_programa">Seleccionar archivo:</label>
+              <label class="form-label" for="subir_programa">Seleccionar archivo: <span class="required" aria-label="required">Si es necesario acorde a los requisitos de inscripción debes subir el archivo</span></label>
               <input class="form-control" id="subir_programa" type="file" accept=".pdf" name="pdf" (change)="selectPdf($event)" #filePdf>
             </div>
 

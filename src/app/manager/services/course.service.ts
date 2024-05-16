@@ -43,6 +43,10 @@ export class CourseService {
     return this.http.get<CourseDTO[]>(this.api + 'list/');
   }
 
+  listCourseOffert(): Observable<CourseDTO[]> {
+    return this.http.get<CourseDTO[]>(this.api + 'listcourseoffer/');
+  }
+
   detailCourse(cod_curso: number): Observable<CourseDTO> {
     return this.http.get<CourseDTO>(this.api + 'detail/' + cod_curso);
   }
@@ -53,5 +57,13 @@ export class CourseService {
 
   listCourseCategory(cod_categoria: number): Observable<CourseDTO[]> {
     return this.http.get<CourseDTO[]>(this.api + 'listcoursecategory/' + cod_categoria);
+  }
+
+  hideOffer(put: CourseDTO): Observable<CourseDTO> {
+    return this.http.put<CourseDTO>(this.api + 'hideoffer', put);
+  }
+
+  viewOffer(put: CourseDTO): Observable<CourseDTO> {
+    return this.http.put<CourseDTO>(this.api + 'viewoffer', put);
   }
 }

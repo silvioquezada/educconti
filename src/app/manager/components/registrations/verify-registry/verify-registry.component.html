@@ -13,7 +13,7 @@
           <div class="panel panel-col-p100">
 
             <div class="input-group">
-              <label class="form-label" for="observaciones">Observaciones:</label>
+              <label class="form-label" for="observaciones">Observaciones: <span class="required" aria-label="required">*</span></label>
               <textarea class="form-control" id="observaciones" [formControl]="observacion_revision" [ngClass]="{ 'is-invalid': observacion_revision.errors && isValidForm != null && !isValidForm}"></textarea>
               <div *ngIf="observacion_revision.errors">
                 <div *ngIf="observacion_revision.errors && isValidForm != null && !isValidForm">

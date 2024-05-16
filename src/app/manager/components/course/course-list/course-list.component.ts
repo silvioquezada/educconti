@@ -132,4 +132,82 @@ export class CourseListComponent implements OnInit {
     );
   }
 
+  hideOffer(courseDTO: CourseDTO) : void {
+    this.loading = true;
+    this.courseService.hideOffer(courseDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se ocultó el curso ofertado',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.listCouseManager();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro no se pudo ocultar el curso, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
+  }
+
+  viewOffer(courseDTO: CourseDTO) : void {
+    this.loading = true;
+    this.courseService.viewOffer(courseDTO)
+    .subscribe( async (data) => {
+        this.loading = false;
+        const dataResult = data;
+        
+        if (dataResult.estado === 1)
+        {
+          await Swal.fire({
+            icon: 'success',
+            title: 'Se visualizó el curso ofertado',
+            showConfirmButton: false,
+            timer: 1500
+          });
+          this.listCouseManager();
+        }
+        else
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'Registro no se pudo visualizar, vuelva a intertarlo por favor',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      },
+      (error: HttpErrorResponse) => {
+        this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Se ha originado un error en el servidor',
+          showConfirmButton: false,
+          timer: 1500
+        });
+      }
+    );
+  }
+
 }

@@ -24,14 +24,14 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
-    this.listCourse();
+    this.listCourseOffert();
   }
 
   getRouteImage(imagen_curso: string) {
     return this.baseUrl + imagen_curso;
   }
 
-  getDiffWeek(fechaInicio: Date, fechaFin: Date) {//
+  getDiffWeek(fechaInicio: Date, fechaFin: Date) {
     let fecha1 = moment(fechaInicio);
     let fecha2 = moment(fechaFin);
     let diasDeDiferencia = fecha2.diff(fecha1, 'week') + 1;
@@ -53,10 +53,10 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  listCourse(): void {
+  listCourseOffert(): void {
     this.loading = true;
 
-    this.courseService.listCourse()
+    this.courseService.listCourseOffert()
     .subscribe( (data) => {
         this.loading = false;
         this.coursesDTO = data;
