@@ -72,3 +72,9 @@
 
   background-color: $color-green;
 }
+
+.hover-white {
+  &:hover {
+    color: $color-white;
+  }
+}
