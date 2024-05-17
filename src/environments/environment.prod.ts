@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl : "http://127.0.0.1:8000/api/",
-  baseUrlFile : "http://127.0.0.1:8000/"
+  baseUrl : "https://educconti.es/apieducconti/public/api/",
+  baseUrlFile : "https://educconti.es/apieducconti/public/"
 };
