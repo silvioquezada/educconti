@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PeriodService {
-  api = environment.baseUrl + 'periodo/';
+  api = environment.baseUrl + 'periodos';
   constructor(private http:HttpClient) { }
 
   list(): Observable<PeriodDTO[]> {
@@ -16,7 +16,7 @@ export class PeriodService {
   }
 
   searchCodePeriod(codigo_periodo: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcodeperiod/' + codigo_periodo);
+    return this.http.get<any>(this.api + '/searchcodeperiod/' + codigo_periodo);
   }
 
   save(post: PeriodDTO): Observable<PeriodDTO> {
@@ -28,6 +28,6 @@ export class PeriodService {
   }
 
   delete(destroy: PeriodDTO): Observable<PeriodDTO> {
-    return this.http.put<PeriodDTO>(this.api + 'delete', destroy);
+    return this.http.put<PeriodDTO>(this.api + '/delete', destroy);
   }
 }

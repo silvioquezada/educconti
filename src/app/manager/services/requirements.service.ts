@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class RequirementsService {
-  api = environment.baseUrl + 'requisitos/';
+  api = environment.baseUrl + 'requisitos';
   constructor(private http:HttpClient) { }
 
   viewRequirement(): Observable<RequirementsDTO> {
@@ -16,7 +16,7 @@ export class RequirementsService {
   }
 
   search(): Observable<RequirementsDTO> {
-    return this.http.get<RequirementsDTO>(this.api + 'search/');
+    return this.http.get<RequirementsDTO>(this.api + '/search');
   }
 
   update(put: RequirementsDTO): Observable<RequirementsDTO> {

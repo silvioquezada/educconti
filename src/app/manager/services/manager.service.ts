@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ManagerService {
-  api = environment.baseUrl + 'usuariosmanager/';
+  api = environment.baseUrl + 'usuarios/manager';
   constructor(private http:HttpClient) { }
 
   listUserManager(): Observable<ManagerDTO[]> {
@@ -24,6 +24,6 @@ export class ManagerService {
   }
 
   deleteManager(destroy: ManagerDTO): Observable<ManagerDTO> {
-    return this.http.put<ManagerDTO>(this.api + 'delete', destroy);
+    return this.http.put<ManagerDTO>(this.api + '/delete', destroy);
   }
 }

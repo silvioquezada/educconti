@@ -14,8 +14,8 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AuthInterceptorService {
-  apiCurso = environment.baseUrl + 'curso/'
-  apiMatricula = environment.baseUrl + 'matricula/'
+  apiCurso = environment.baseUrl + 'cursos'
+  apiMatricula = environment.baseUrl + 'matriculas'
 
   token: string | null;
 
@@ -28,7 +28,7 @@ export class AuthInterceptorService {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     this.token = this.localStorageService.getData('token');
-    if (this.token && req.url!=this.apiCurso + 'image' && req.url!=this.apiCurso + 'pdf' && req.url!=this.apiMatricula + 'pdf' && req.url!=this.apiMatricula + 'pdfcertificate') {
+    if (this.token && req.url!=this.apiCurso + '/image' && req.url!=this.apiCurso + '/pdf' && req.url!=this.apiMatricula + '/pdf' && req.url!=this.apiMatricula + '/pdfcertificate') {
       req = req.clone({
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
@@ -39,8 +39,6 @@ export class AuthInterceptorService {
     } else {
       req = req.clone({
         setHeaders: {
-          'Content-Type': 'application/json; charset=utf-8',
-          Accept: 'application/json',
           Authorization: `Bearer ${this.token}`
         },
       });

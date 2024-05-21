@@ -8,11 +8,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  api = environment.baseUrl + 'usuarios/';
+  api = environment.baseUrl + 'usuarios';
   constructor(private http:HttpClient) { }
 
   login(post: UsuarioDTO): Observable<UsuarioDTO> {
-    return this.http.post<UsuarioDTO>(this.api + 'login/', post);
+    return this.http.post<UsuarioDTO>(this.api + '/login', post);
   }
 
   save(post: UsuarioDTO): Observable<UsuarioDTO> {
@@ -24,22 +24,22 @@ export class UsuarioService {
   }
 
   searchCedula(cedula: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcedula/' + cedula);
+    return this.http.get<any>(this.api + '/searchcedula/' + cedula);
   }
 
   searchEmail(correo: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchemail/' + correo);
+    return this.http.get<any>(this.api + '/searchemail/' + correo);
   }
 
   searchUser(usuario: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchuser/' + usuario);
+    return this.http.get<any>(this.api + '/searchuser/' + usuario);
   }
 
   searchRowUser(post: UsuarioDTO): Observable<UsuarioDTO> {
-    return this.http.post<UsuarioDTO>(this.api + 'searchrowuser/', post);
+    return this.http.post<UsuarioDTO>(this.api + '/searchrowuser', post);
   }
 
   recoverPassword(put: UsuarioDTO): Observable<UsuarioDTO> {
-    return this.http.put<UsuarioDTO>(this.api + 'recoverpassword/', put);
+    return this.http.put<UsuarioDTO>(this.api + '/recoverpassword', put);
   }
 }

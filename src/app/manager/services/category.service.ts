@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class CategoryService {
-  api = environment.baseUrl + 'categoria/';
+  api = environment.baseUrl + 'categorias';
   constructor(private http:HttpClient) { }
 
   list(): Observable<CategoryDTO[]> {
@@ -16,7 +16,7 @@ export class CategoryService {
   }
 
   searchCategory(categoria: string): Observable<any> {
-    return this.http.get<any>(this.api + 'searchcategory/' + categoria);
+    return this.http.get<any>(this.api + '/searchcategory/' + categoria);
   }
 
   save(post: CategoryDTO): Observable<CategoryDTO> {
@@ -28,6 +28,6 @@ export class CategoryService {
   }
 
   delete(destroy: CategoryDTO): Observable<CategoryDTO> {
-    return this.http.put<CategoryDTO>(this.api + 'delete', destroy);
+    return this.http.put<CategoryDTO>(this.api + '/delete', destroy);
   }
 }
