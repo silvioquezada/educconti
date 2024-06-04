@@ -14,6 +14,7 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
 import { SharedModule } from '../shared/shared.module';
 import { DetailCourseComponent } from './components/detail-course/detail-course.component';
 import { FormInscriptionComponent } from './components/form-inscription/form-inscription.component';
+import { ItemCourseComponent } from './components/item-course/item-course.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { FormInscriptionComponent } from './components/form-inscription/form-ins
     CategoryComponent,
     MyCoursesComponent,
     DetailCourseComponent,
-    FormInscriptionComponent
+    FormInscriptionComponent,
+    ItemCourseComponent
   ],
   imports: [
     CommonModule,

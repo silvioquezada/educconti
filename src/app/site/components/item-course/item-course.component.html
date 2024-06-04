@@ -1,0 +1,36 @@
+
+    
+  <div class="card-head">
+    <img class="image-card" src={{getRouteImage(coursesDTO.imagen_curso)}} alt="Imagen course">
+  </div>
+  
+  <div class="description-card">
+    <p class="text-weight">{{coursesDTO.nombre_curso}}</p>
+
+    <div class="detail-course">
+      <div class="inline-block">
+        <p>
+          <span class="icon-coursesDTOs"><i class="fa-solid fa-calendar-days"></i></span>
+          <span>Inicio: </span>
+          {{getDateFormat(coursesDTO.fecha_inicio)}}
+        </p>
+        <span *ngIf="verifyCloseCousre(coursesDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
+        <span *ngIf="!verifyCloseCousre(coursesDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
+      </div>
+      <p>
+        <span class="icon-coursesDTOs"><i class="fa-regular fa-clock"></i></span>
+        <span>Duración: </span>
+        {{getDiffWeek(coursesDTO.fecha_inicio, coursesDTO.fecha_fin)}}
+      </p>
+      <p>
+        <span class="icon-coursesDTOs"><i class="fa-solid fa-location-dot"></i></span>
+        <span>Modalidad: </span>
+        {{coursesDTO.modalidad}}
+      </p>
+    </div>
+  </div>
+
+    <div class="foot-card">
+      <button class="btn btn-primary" type="button" (click)="viewDetail(coursesDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalle</button>
+    </div>
+
