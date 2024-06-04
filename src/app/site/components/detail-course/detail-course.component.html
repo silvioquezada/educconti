@@ -11,45 +11,7 @@
 
     <div *ngIf="courseDTO.cod_curso!=0" class="card-content">
 
-      <div class="card">
-        <div class="card-head">
-          <img class="image-card" src={{getRouteImage()}} alt="Imagen course">
-        </div>
-
-        <div class="description-card">
-          <p class="text-weight">{{courseDTO.nombre_curso}}</p>
-
-          <div class="detail-course">
-            <div class="inline-block">
-              <p>
-                <span class="icon-items"><i class="fa-solid fa-calendar-days"></i></span>
-                <span>Inicio: </span>
-                {{getDateFormat(courseDTO.fecha_inicio)}}
-              </p>
-              <span *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
-              <span *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
-            </div>
-            <p>
-              <span class="icon-items"><i class="fa-regular fa-clock"></i></span>
-              <span>Duración: </span>
-              {{getDiffWeek(courseDTO.fecha_inicio, courseDTO.fecha_fin)}}
-            </p>
-            <p>
-              <span class="icon-items"><i class="fa-solid fa-location-dot"></i></span>
-              <span>Modalidad: </span>
-              {{courseDTO.modalidad}}
-            </p>
-          </div>
-        </div>
-  
-        <div class="foot-card">
-          <div class="">
-            <button *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-primary" (click)="enrollCourse()"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
-            <button *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Inscripción cerrada</button>
-          </div>
-        </div>
-
-      </div>
+      <app-item-course class="card" [courseDTO] = "courseDTO"></app-item-course>
       
       <div class="description-detail">
 

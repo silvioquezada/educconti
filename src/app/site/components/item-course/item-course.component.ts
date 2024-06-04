@@ -3,6 +3,9 @@ import { environment } from 'src/environments/environment';
 import { CourseDTO } from 'src/app/manager/models/course.dto';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { LocalStorageService } from 'src/app/shared/services/local-storage.service';
+import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 
 @Component({
   selector: 'app-item-course',
@@ -10,12 +13,34 @@ import { Router } from '@angular/router';
   styleUrls: ['./item-course.component.scss']
 })
 export class ItemCourseComponent implements OnInit {
-  @Input() coursesDTO: CourseDTO;
+  @Input() courseDTO: CourseDTO;
+  @Input() enrollDTO: EnrollDTO;
   loading: boolean = false;
   baseUrl = environment.baseUrlFile + 'img/';
-  constructor(private router: Router) { }
+  banInicio: boolean = false;
+  banMisCursos: boolean = false;
+  banDetalleCurso: boolean = false;
+  constructor(private router: Router, private localStorageService: LocalStorageService) { }
 
   ngOnInit(): void {
+    
+    let url = this.router.url.split("/");
+    if(url[1] === 'inicio') {
+      this.banInicio = true;
+    }
+
+    if(url[1] === 'categoria') {
+      this.banInicio = true;
+    }
+
+    if(url[1] === 'mis_cursos') {
+      this.banMisCursos = true;
+    }
+
+    if(url[1] === 'detalle_curso') {
+      this.banDetalleCurso = true;
+    }
+    
   }
 
   getRouteImage(imagen_curso: string) {
@@ -44,6 +69,20 @@ export class ItemCourseComponent implements OnInit {
     return diasDeDiferencia + ' Semanas';
   }
 
+  enrollCourse(): void {
+    
+    if(this.localStorageService.getData("estado_sesion")==='true') {
+      //this.searchEnrolledCourse();
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Para inscribirse al curso debe iniciar sesión',
+        showConfirmButton: false,
+        timer: 2000
+      });
+    }
+    
+  }
   viewDetail(cod_curso: number): void {
     this.router.navigateByUrl('detalle_curso/' + cod_curso);
   }

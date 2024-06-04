@@ -13,7 +13,9 @@
   
     <div class="card-container">
   
-        <div class="card" *ngFor="let item of coursesDTO">
+      <app-item-course class="card" [courseDTO] = "item.curso" [enrollDTO] = "item" *ngFor="let item of coursesDTO"></app-item-course>
+
+        <!-- <div class="card" *ngFor="let item of coursesDTO">
     
             <div class="card-head">
               <img class="image-card" src={{getRouteImage(item.curso.imagen_curso)}} alt="Imagen course">
@@ -56,7 +58,7 @@
                 <button *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 2 && item.archivo_certificado == ''" class="btn btn-warning" type="button"><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
                 <button *ngIf="item.estado_matricula == 3 && item.estado_aprobacion == 1" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
               </div>
-          </div>
+          </div> -->
       
     </div>
   </section>

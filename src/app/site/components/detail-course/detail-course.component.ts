@@ -92,6 +92,7 @@ export class DetailCourseComponent implements OnInit {
     return moment(fecha).format('DD') + " de " + moment(fecha).format('MMMM');// + " del " + moment().format('YYYY');
   }
 
+  /*
   verifyCloseCousre(fechaFin: Date) {
     let fechaActual = moment();
     let diasDeDiferencia = moment(fechaFin).diff(fechaActual, 'days') + 1;
@@ -101,7 +102,9 @@ export class DetailCourseComponent implements OnInit {
       return false;
     }
   }
+  */
 
+  /*
   enrollCourse(): void {
     if(this.localStorageService.getData("estado_sesion")==='true') {
       this.searchEnrolledCourse();
@@ -114,6 +117,7 @@ export class DetailCourseComponent implements OnInit {
       });
     }
   }
+  */
 
   searchEnrolledCourse(): void {
     this.loading = true;

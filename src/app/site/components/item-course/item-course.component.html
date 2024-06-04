@@ -1,36 +1,72 @@
 
     
   <div class="card-head">
-    <img class="image-card" src={{getRouteImage(coursesDTO.imagen_curso)}} alt="Imagen course">
+    <img class="image-card" src={{getRouteImage(courseDTO.imagen_curso)}} alt="Imagen course">
   </div>
   
   <div class="description-card">
-    <p class="text-weight">{{coursesDTO.nombre_curso}}</p>
+    <p class="text-weight">{{courseDTO.nombre_curso}}</p>
 
     <div class="detail-course">
       <div class="inline-block">
         <p>
-          <span class="icon-coursesDTOs"><i class="fa-solid fa-calendar-days"></i></span>
+          <span class="icon-courseDTOs"><i class="fa-solid fa-calendar-days"></i></span>
           <span>Inicio: </span>
-          {{getDateFormat(coursesDTO.fecha_inicio)}}
+          {{getDateFormat(courseDTO.fecha_inicio)}}
         </p>
-        <span *ngIf="verifyCloseCousre(coursesDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
-        <span *ngIf="!verifyCloseCousre(coursesDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
+
+        <div *ngIf="banInicio || banDetalleCurso">
+          <span *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
+          <span *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
+        </div>
+
+        
+
+        <!-- Mis Cursos -->
+        <div *ngIf="banMisCursos">
+          <span *ngIf="enrollDTO.estado_matricula == 0 || enrollDTO.estado_matricula == 2" class="badge badge-yellow">Pendiente</span>
+          <span *ngIf="enrollDTO.estado_matricula == 1 && enrollDTO.estado_aprobacion == 0" class="badge badge-red">No cumple</span>
+          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 0" class="badge badge-info">Matriculado</span>
+          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2" class="badge badge-green">Aprobado</span>
+          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 1" class="badge badge-red">No aprobado</span>
+        </div>
+        
+
+
       </div>
       <p>
-        <span class="icon-coursesDTOs"><i class="fa-regular fa-clock"></i></span>
+        <span class="icon-courseDTOs"><i class="fa-regular fa-clock"></i></span>
         <span>Duración: </span>
-        {{getDiffWeek(coursesDTO.fecha_inicio, coursesDTO.fecha_fin)}}
+        {{getDiffWeek(courseDTO.fecha_inicio, courseDTO.fecha_fin)}}
       </p>
       <p>
-        <span class="icon-coursesDTOs"><i class="fa-solid fa-location-dot"></i></span>
+        <span class="icon-courseDTOs"><i class="fa-solid fa-location-dot"></i></span>
         <span>Modalidad: </span>
-        {{coursesDTO.modalidad}}
+        {{courseDTO.modalidad}}
       </p>
     </div>
   </div>
 
     <div class="foot-card">
-      <button class="btn btn-primary" type="button" (click)="viewDetail(coursesDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalle</button>
+      <div *ngIf="banInicio">
+        <button class="btn btn-primary" type="button" (click)="viewDetail(courseDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalle</button>
+      </div>
+      
+      <!-- Detalle de Curso -->
+      <div *ngIf="banDetalleCurso">
+        <button *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-primary" (click)="enrollCourse()"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
+        <button *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Inscripción cerrada</button>
+      </div>
+
+      <!-- Mis Cursos -->
+      <div *ngIf="banMisCursos">
+        <!-- <button *ngIf="enrollDTO.estado_matricula == 0 || enrollDTO.estado_matricula == 2" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
+        <button *ngIf="enrollDTO.estado_matricula == 1 && enrollDTO.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewObservation(item)"><i class="fas fa-search"></i> Ver observaciones</button>
+        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewDetail(enrollDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
+        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2 && enrollDTO.archivo_certificado != ''" class="btn btn-primary" type="button" (click)="viewCertificate(enrollDTO.archivo_certificado)"><i class="fa-solid fa-file-pdf"></i> Descargar certificado</button> -->
+        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2 && enrollDTO.archivo_certificado == ''" class="btn btn-warning" type="button"><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
+        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 1" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
+      </div>
+
     </div>
 
