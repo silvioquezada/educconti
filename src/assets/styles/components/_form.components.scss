@@ -190,7 +190,7 @@
 
 
 .input-error {
-  border: 2px solid $color-red;
+  border: 1px solid $color-red;
 }
 
 
@@ -320,4 +320,11 @@
 
 .required {
   color: $color-red;
+}
+
+
+
+.form-date-input[type='date'] {
+  font-family: $font;
+  font-size: 16px;
 }

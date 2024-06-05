@@ -90,7 +90,7 @@
 
             <div class="input-group">
               <label class="form-label" for="fecha_inicio_inscripcion">Fecha inicio inscripción: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="fecha_inicio_inscripcion" type="date" maxlength="10" [formControl]="fecha_inicio_inscripcion" [ngClass]="{ 'is-invalid': (fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
+              <input class="form-control form-date-input" id="fecha_inicio_inscripcion" type="date" maxlength="10" [formControl]="fecha_inicio_inscripcion" [ngClass]="{ 'input-error': (fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
               <div *ngIf="fecha_inicio_inscripcion.errors">
                 <div *ngIf="fecha_inicio_inscripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_inicio_inscripcion?.hasError('required')">Fecha inicio de inscripción es requerido</small>
@@ -103,7 +103,7 @@
 
             <div class="input-group">
               <label class="form-label" for="fecha_fin_inscripcion">Fecha fin inscripción: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="fecha_fin_inscripcion" type="date" maxlength="10" [formControl]="fecha_fin_inscripcion" [ngClass]="{ 'is-invalid': (fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
+              <input class="form-control form-date-input" id="fecha_fin_inscripcion" type="date" maxlength="10" [formControl]="fecha_fin_inscripcion" [ngClass]="{ 'input-error': (fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm) || !isValidFormDateInscription}">
               <div *ngIf="fecha_fin_inscripcion.errors">
                 <div *ngIf="fecha_fin_inscripcion.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_fin_inscripcion?.hasError('required')">Fecha fin de inscripción es requerido</small>
@@ -116,7 +116,7 @@
             
             <div class="input-group">
               <label class="form-label" for="fecha_inicio">Fecha inicio curso: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="fecha_inicio" type="date" maxlength="10" [formControl]="fecha_inicio" [ngClass]="{'is-invalid': (fecha_inicio.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
+              <input class="form-control form-date-input" id="fecha_inicio" type="date" maxlength="10" [formControl]="fecha_inicio" [ngClass]="{'input-error': (fecha_inicio.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
               <div *ngIf="fecha_inicio.errors">
                 <div *ngIf="fecha_inicio.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_inicio?.hasError('required')">Fecha inicio de curso es requerido</small>
@@ -129,7 +129,7 @@
 
             <div class="input-group">
               <label class="form-label" for="fecha_fin">Fecha fin curso: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="fecha_fin" type="date" maxlength="10" [formControl]="fecha_fin" [ngClass]="{ 'is-invalid': (fecha_fin.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
+              <input class="form-control form-date-input" id="fecha_fin" type="date" maxlength="10" [formControl]="fecha_fin" [ngClass]="{ 'input-error': (fecha_fin.errors && isValidForm != null && !isValidForm) || !isValidFormDateEnroll}">
               <div *ngIf="fecha_fin.errors">
                 <div *ngIf="fecha_fin.errors && isValidForm != null && !isValidForm">
                   <small class="text-color-red" *ngIf="fecha_fin?.hasError('required')">Fecha fin de curso es requerido</small>
