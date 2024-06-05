@@ -13,69 +13,84 @@
         <div class="collapse navbar-collapse nav-flex-end" id="navbar-content">
           <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active text-color-black" (click)="home()">Inicio</a>
+                <a class="nav-link active text-color-black" (click)="home()">Inicio</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Categoría</a>
-              <ul class="dropdown-menu shadow">
-                <li *ngFor="let item of categoriesDTO">
-                  <a class="dropdown-item text-color-black" (click)="category(item)">{{item.categoria}}</a>
-                </li>
-              </ul>
+              <div class="spacin105px">
+                <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Categoría</a>
+                <ul class="dropdown-menu shadow">
+                  <li *ngFor="let item of categoriesDTO">
+                    <a class="dropdown-item text-color-black" (click)="category(item)">{{item.categoria}}</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">
-              <a class="nav-link text-color-black" (click)="mycourses()">Mis Cursos</a>
+              <div class="spacin105px">
+                <a class="nav-link text-color-black" (click)="mycourses()">Mis Cursos</a>
+              </div> 
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" (click)="requirements()">Requisitos</a>
+              <div class="spacin95px">
+                <a class="nav-link text-color-black" (click)="requirements()">Requisitos</a>
+              </div>
             </li>
             <li *ngIf="showAuthManager" class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Gestión</a>
-              <ul class="dropdown-menu shadow">
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="dashboard()">Dashboard</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="requirementsmanager()">Requisitos</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="user()">Usuarios</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="period()">Periodos</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="categories()">Categorías</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="course()">Cursos</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="registrations()">Inscripciones</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="approvals()">Aprobaciones</a>
-                </li>
-                <li>
-                  <a class="dropdown-item text-color-black" (click)="reports()">Reportes</a>
-                </li>
-              </ul>
+              <div class="spacin90px">
+                <a class="nav-link dropdown-toggle text-color-black" href="#" data-bs-toggle="dropdown">Gestión</a>
+                <ul class="dropdown-menu shadow">
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="dashboard()">Dashboard</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="requirementsmanager()">Requisitos</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="user()">Usuarios</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="period()">Periodos</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="categories()">Categorías</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="course()">Cursos</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="registrations()">Inscripciones</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="approvals()">Aprobaciones</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item text-color-black" (click)="reports()">Reportes</a>
+                  </li>
+                </ul>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-color-black" (click)="about()">Acerca de</a>
+              <div class="spacin95px">
+                <a class="nav-link text-color-black" (click)="about()">Acerca de</a>
+              </div>
             </li>
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">
-              <a class="nav-link text-color-black" (click)="profile()">Perfil</a>
+              <div class="spacin60px">
+                <a class="nav-link text-color-black" (click)="profile()">Perfil</a>
+              </div>
             </li>
             <li *ngIf="!showAuthNormal" class="nav-item">
-              <a class="nav-link text-color-black" (click)="login()">Acceder</a>
+              <div class="spacin95px">
+                <a class="nav-link text-color-black" (click)="login()">Acceder</a>
+              </div>
             </li>
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">
-              <div class="nav-link text-color-black" (click)="profile()"><i class="fa-solid fa-circle-user"></i> {{ userName }}
-                </div>
+              <div class="nav-link text-color-black line-test pointer" (click)="profile()"><i class="fa-solid fa-circle-user"></i> {{ userName }}</div>
             </li>
             <li *ngIf="showAuthNormal || showAuthManager" class="nav-item">
-              <a class="nav-link text-color-black text-small Sign_off" (click)="closeSesion()">(Cerrar Sesión)</a>
+              <div class="spacin115px">
+                <a class="nav-link text-color-black text-small Sign_off" (click)="closeSesion()">(Cerrar Sesión)</a>
+              </div>
             </li>
   
           </ul>
