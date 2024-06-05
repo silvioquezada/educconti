@@ -11,7 +11,7 @@
 
     <div *ngIf="courseDTO.cod_curso!=0" class="card-content">
 
-      <app-item-course class="card" [courseDTO] = "courseDTO"></app-item-course>
+      <app-item-course class="card" [courseDTO] = "courseDTO" (sendSearchEnrolledCourse)="searchEnrolledCourse()"></app-item-course>
       
       <div class="description-detail">
 

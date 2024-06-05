@@ -13,7 +13,7 @@
   
     <div class="card-container">
   
-      <app-item-course class="card" [courseDTO] = "item.curso" [enrollDTO] = "item" *ngFor="let item of coursesDTO"></app-item-course>
+      <app-item-course class="card" (sendViewInscription)="viewInscription($event)" (sendViewObservation)="viewObservation($event)" [courseDTO] = "item.curso" [enrollDTO] = "item" *ngFor="let item of coursesDTO"></app-item-course>
 
         <!-- <div class="card" *ngFor="let item of coursesDTO">
     

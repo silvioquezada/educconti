@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CourseDTO } from 'src/app/manager/models/course.dto';
 import * as moment from 'moment';
@@ -15,8 +15,13 @@ import { EnrollDTO } from 'src/app/manager/models/enroll.dto';
 export class ItemCourseComponent implements OnInit {
   @Input() courseDTO: CourseDTO;
   @Input() enrollDTO: EnrollDTO;
+  @Output() sendSearchEnrolledCourse: EventEmitter<any> = new EventEmitter<any>();
+  @Output() sendViewInscription: EventEmitter<any> = new EventEmitter<any>();
+  @Output() sendViewObservation: EventEmitter<any> = new EventEmitter<any>();
+  
   loading: boolean = false;
   baseUrl = environment.baseUrlFile + 'img/';
+  baseUrlCertificate = environment.baseUrlFile + 'certificatepdf/';
   banInicio: boolean = false;
   banMisCursos: boolean = false;
   banDetalleCurso: boolean = false;
@@ -72,7 +77,7 @@ export class ItemCourseComponent implements OnInit {
   enrollCourse(): void {
     
     if(this.localStorageService.getData("estado_sesion")==='true') {
-      //this.searchEnrolledCourse();
+      this.sendSearchEnrolledCourse.emit();
     } else {
       Swal.fire({
         icon: 'info',
@@ -83,8 +88,22 @@ export class ItemCourseComponent implements OnInit {
     }
     
   }
+
+  viewInscription(enrollDTO: EnrollDTO) {
+    this.sendViewInscription.emit(enrollDTO);
+  }
+
+  viewObservation(enrollDTO: EnrollDTO) {
+    this.sendViewObservation.emit(enrollDTO);
+  }
+
   viewDetail(cod_curso: number): void {
     this.router.navigateByUrl('detalle_curso/' + cod_curso);
+  }
+
+  viewCertificate(archivo_certificado: string) {
+    let miWindow = window.open(this.baseUrlCertificate + archivo_certificado, "", 'width=600,height=400,left=300,top=100');
+    miWindow.focus();
   }
 
 }

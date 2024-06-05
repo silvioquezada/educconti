@@ -5,7 +5,6 @@ import { CourseService } from 'src/app/manager/services/course.service';
 import { EnrollService } from 'src/app/manager/services/enroll.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
-import * as moment from 'moment';
 import { environment } from 'src/environments/environment';
 declare var $:any;
 import { FormInscriptionComponent } from '../form-inscription/form-inscription.component';
@@ -75,49 +74,6 @@ export class DetailCourseComponent implements OnInit {
       }
     );
   }
-
-  getRouteImage() {
-    return this.baseUrl + this.imagen_curso;
-  }
-
-  getDiffWeek(fechaInicio: Date, fechaFin: Date) {//
-    let fecha1 = moment(fechaInicio);
-    let fecha2 = moment(fechaFin);
-    let diasDeDiferencia = fecha2.diff(fecha1, 'week') + 1;
-    return diasDeDiferencia + ' Semanas';
-  }
-
-  getDateFormat(fecha: Date) {//
-    moment.locale('es');
-    return moment(fecha).format('DD') + " de " + moment(fecha).format('MMMM');// + " del " + moment().format('YYYY');
-  }
-
-  /*
-  verifyCloseCousre(fechaFin: Date) {
-    let fechaActual = moment();
-    let diasDeDiferencia = moment(fechaFin).diff(fechaActual, 'days') + 1;
-    if (diasDeDiferencia>0 && this.total_quotas < this.courseDTO.cupo) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  */
-
-  /*
-  enrollCourse(): void {
-    if(this.localStorageService.getData("estado_sesion")==='true') {
-      this.searchEnrolledCourse();
-    } else {
-      Swal.fire({
-        icon: 'info',
-        title: 'Para inscribirse al curso debe iniciar sesión',
-        showConfirmButton: false,
-        timer: 2000
-      });
-    }
-  }
-  */
 
   searchEnrolledCourse(): void {
     this.loading = true;
