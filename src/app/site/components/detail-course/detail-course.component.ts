@@ -30,7 +30,7 @@ export class DetailCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.cod_curso = Number(this.rutaActiva.snapshot.paramMap.get("cod_curso")!);
-    this.verifyQuotas();
+    this.detailCourse();
   }
 
   verifyQuotas(): void {
@@ -40,7 +40,7 @@ export class DetailCourseComponent implements OnInit {
     .subscribe( (data) => {
         this.loading = false;
         this.total_quotas = data.total_quotas;
-        this.detailCourse();
+        this.validateRegistrationQuotas();
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
@@ -75,9 +75,25 @@ export class DetailCourseComponent implements OnInit {
     );
   }
 
+  validateRegistrationQuotas() {
+    if(this.courseDTO.cupo > this.total_quotas) {
+      this.formInscriptionComponent.cod_curso = this.cod_curso;
+      this.formInscriptionComponent.formNormal();
+      this.formInscriptionComponent.restoreFile();
+      this.formInscriptionComponent.typeForm = 'nuevo';
+      $("#modalConfirmInscription").modal('show');
+    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No se puede inscribir a este curso, porque el registro de cupos está completo',
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  }
+
   searchEnrolledCourse(): void {
     this.loading = true;
-
     this.enrollService.searchEnrolledCourse(this.cod_curso)
     .subscribe( (data) => {
         this.loading = false;
@@ -90,11 +106,7 @@ export class DetailCourseComponent implements OnInit {
               timer: 1500
             });
           } else {
-            this.formInscriptionComponent.cod_curso = this.cod_curso;
-            this.formInscriptionComponent.formNormal();
-            this.formInscriptionComponent.restoreFile();
-            this.formInscriptionComponent.typeForm = 'nuevo';
-            $("#modalConfirmInscription").modal('show');
+            this.verifyQuotas();
           }
       },
       (error: HttpErrorResponse) => {

@@ -57,7 +57,7 @@ export class ItemCourseComponent implements OnInit {
     return moment(fecha).format('DD') + " de " + moment(fecha).format('MMMM') + " del " + moment().format('YYYY');
   }
 
-  verifyCloseCousre(fechaFin: Date) {
+  verifyCloseCourse(fechaFin: Date) {
     let fechaActual = moment();
     let diasDeDiferencia = moment(fechaFin).diff(fechaActual, 'days') + 1;
     if (diasDeDiferencia>0) {

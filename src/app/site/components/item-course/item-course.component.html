@@ -16,8 +16,8 @@
         </p>
 
         <div *ngIf="banInicio || banDetalleCurso">
-          <span *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
-          <span *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
+          <span *ngIf="verifyCloseCourse(courseDTO.fecha_fin_inscripcion)" class="badge badge-green">Abierto</span>
+          <span *ngIf="!verifyCloseCourse(courseDTO.fecha_fin_inscripcion)" class="badge badge-red" >Cerrado</span>
         </div>
 
         
@@ -54,8 +54,8 @@
       
       <!-- Detalle de Curso -->
       <div *ngIf="banDetalleCurso">
-        <button *ngIf="verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-primary" (click)="enrollCourse()"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
-        <button *ngIf="!verifyCloseCousre(courseDTO.fecha_fin_inscripcion)" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Inscripción cerrada</button>
+        <button *ngIf="verifyCloseCourse(courseDTO.fecha_fin_inscripcion)" class="btn btn-primary" (click)="enrollCourse()"><i class="fa-solid fa-paper-plane"></i> Inscríbete</button>
+        <button *ngIf="!verifyCloseCourse(courseDTO.fecha_fin_inscripcion)" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Inscripción cerrada</button>
       </div>
 
       <!-- Mis Cursos -->
