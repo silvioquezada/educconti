@@ -16,6 +16,7 @@ declare var $:any;
 })
 export class RecoverPasswordComponent implements OnInit {
   usuarioDTO: UsuarioDTO;
+  usuario: string = '';
   cod_usuario: number = 0;
   correo: FormControl;
   registerForm: FormGroup;
@@ -26,12 +27,12 @@ export class RecoverPasswordComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
-    this.formNormal();
+    this.formNormal('');
   }
 
-  formNormal() : void {
+  formNormal(usuario: string) : void {
     this.usuarioDTO = new UsuarioDTO(0, '', '', '', '', '', '', '', '', '', '', '', 1, '', '');
-
+    this.usuario = usuario;
     this.correo = new FormControl(this.usuarioDTO.correo, [
       Validators.required,
       Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$')
@@ -63,7 +64,7 @@ export class RecoverPasswordComponent implements OnInit {
     this.usuarioDTO = this.registerForm.value;
     this.usuarioDTO.cod_usuario = this.cod_usuario;
 
-    const promise1 = this.searchEmail().then();
+    const promise1 = this.searchUserEmail().then();
     Promise.all([promise1])
     .then(() => {
       if(this.isValidFormEmail) {
@@ -71,7 +72,7 @@ export class RecoverPasswordComponent implements OnInit {
       } else {
         Swal.fire({
           icon: 'error',
-          title: 'El correo ingresado no está registrado',
+          title: 'El correo ingresado no está registrado para el usuario',
           showConfirmButton: false,
           timer: 1500
         });
@@ -87,10 +88,10 @@ export class RecoverPasswordComponent implements OnInit {
     });
   }
 
-  searchEmail() {
+  searchUserEmail() {
     this.loading = true;
     return new Promise((resolve, reject) => {
-      this.usuarioService.searchEmail(this.correo.value)
+      this.usuarioService.searchUserEmail(this.usuario, this.correo.value)
       .subscribe( (data : any) =>
       {
         this.loading = false;

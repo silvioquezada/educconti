@@ -121,7 +121,8 @@ export class LoginComponent implements OnInit {
   }
 
   recoverPassword(): void {
-    this.recoverPasswordComponent.formNormal();
+    console.log(this.usuario.value);
+    this.recoverPasswordComponent.formNormal(this.usuario.value);
   }
 
 }
