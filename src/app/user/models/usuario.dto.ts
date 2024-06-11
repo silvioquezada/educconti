@@ -38,7 +38,7 @@ export class UsuarioDTO {
     ValidateCedula(cedula: string) {
      
         let responseCeduleDTO = new ResponseCeduleDTO;
-        if(cedula.length == 10){
+        if(cedula.length === 10){
            
            let digito_region = Number(cedula.substring(0,2));
            
@@ -78,10 +78,10 @@ export class UsuarioDTO {
    
              let digito_validador = decena - suma_total;
    
-             if(digito_validador == 10)
+             if(digito_validador === 10)
                digito_validador = 0;
    
-             if(digito_validador == ultimo_digito){
+             if(digito_validador === ultimo_digito){
                responseCeduleDTO = null;
              }else{
                responseCeduleDTO.isValid = true;
