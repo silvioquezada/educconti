@@ -7,7 +7,7 @@
       <h1>Dashboard</h1>
       <div class="width-150px">
         <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
-          <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+          <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo === item.cod_periodo">
             {{item.codigo_periodo}}
           </option>
         </select>

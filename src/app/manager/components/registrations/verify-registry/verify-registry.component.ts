@@ -58,7 +58,7 @@ export class VerifyRegistryComponent implements OnInit {
 
   register(): void {
     this.isValidForm = false;
-    if (this.registerForm.status == 'INVALID') {
+    if (this.registerForm.status === 'INVALID') {
         Swal.fire({
           icon: 'error',
           title: 'Algunos datos son inválidos, revise por favor',

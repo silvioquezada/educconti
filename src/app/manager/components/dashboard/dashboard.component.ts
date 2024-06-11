@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
         this.loading = false;
         data.forEach((element) => {
           data.forEach((element) => {
-            if (element.estado_aprobacion == 2) {
+            if (element.estado_aprobacion === 2) {
               this.countApproved = this.countApproved + 1;
             }
           });
@@ -117,11 +117,11 @@ export class DashboardComponent implements OnInit {
     .subscribe( (data) => {
         this.loading = false;
         data.forEach((element) => {
-          if (element.estado_matricula == 0 || element.estado_matricula == 1 || element.estado_matricula == 2) {
+          if (element.estado_matricula === 0 || element.estado_matricula === 1 || element.estado_matricula === 2) {
             this.countEarrings = this.countEarrings + 1;
           }
           
-          if (element.estado_matricula == 3) {
+          if (element.estado_matricula === 3) {
             this.countEnrolled = this.countEnrolled + 1;
           }
         });

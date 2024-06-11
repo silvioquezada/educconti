@@ -141,7 +141,7 @@ export class UserManagerFormComponent implements OnInit {
 
   register() {
     this.isValidForm = false;
-    if (this.registerForm.status == 'INVALID') {
+    if (this.registerForm.status === 'INVALID') {
       Swal.fire({
         icon: 'error',
         title: 'Algunos datos son inválidos, revise por favor',

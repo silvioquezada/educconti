@@ -71,7 +71,7 @@ export class ApprovalsComponent implements OnInit {
   changeCourse(event: any): void {
     const elemento = event.target.value;
     this.cod_curso = elemento;
-    if(this.cod_curso == 0) {
+    if(this.cod_curso === 0) {
       this.listAllEstudentsCourse();
     } else {
       this.listEstudentsCourse();

@@ -6,7 +6,7 @@ function soloNumerosEnteros(e){
 
        tecla_especial = false
        for(var i in especiales){
-            if(key == especiales[i]){
+            if(key === especiales[i]){
                 tecla_especial = true;
                 break;
             }

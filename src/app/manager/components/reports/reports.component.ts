@@ -87,7 +87,7 @@ export class ReportsComponent implements OnInit {
       this.inscriptionsDTO.forEach(element => {
 
         let valueApprove = '';
-        if(this.cod_estado == 0 || this.cod_estado == 2 || this.cod_estado == 3) {
+        if(this.cod_estado === 0 || this.cod_estado === 2 || this.cod_estado === 3) {
           if(element.estado_aprobacion === 1) {
             valueApprove = 'No Aprobado';
           }
@@ -97,7 +97,7 @@ export class ReportsComponent implements OnInit {
           }
         }
         
-        if(this.cod_estado == 1 || this.cod_estado == 4 || this.cod_estado == 5) {
+        if(this.cod_estado === 1 || this.cod_estado === 4 || this.cod_estado === 5) {
 
           if(element.estado_matricula === 0 || element.estado_matricula === 1 || element.estado_matricula === 2) {
             valueApprove = 'Pendientes';
@@ -163,7 +163,7 @@ export class ReportsComponent implements OnInit {
         fila[5] = element.nombre_curso;
 
         let valueApprove = '';
-        if(this.cod_estado == 0 || this.cod_estado == 2 || this.cod_estado == 3) {
+        if(this.cod_estado === 0 || this.cod_estado === 2 || this.cod_estado === 3) {
           if(element.estado_aprobacion === 1) {
             valueApprove = 'No Aprobado';
           }
@@ -173,7 +173,7 @@ export class ReportsComponent implements OnInit {
           }
         }
         
-        if(this.cod_estado == 1 || this.cod_estado == 4 || this.cod_estado == 5) {
+        if(this.cod_estado === 1 || this.cod_estado === 4 || this.cod_estado === 5) {
 
           if(element.estado_matricula === 0 || element.estado_matricula === 1 || element.estado_matricula === 2) {
             valueApprove = 'Pendientes';
@@ -247,7 +247,7 @@ export class ReportsComponent implements OnInit {
   changeCourse(event: any): void {
     const elemento = event.target.value;
     this.cod_curso = elemento;
-    this.nombre_curso = this.coursesDTO.find( (item) => item.cod_curso == this.cod_curso ).nombre_curso;
+    this.nombre_curso = this.coursesDTO.find( (item) => item.cod_curso === this.cod_curso ).nombre_curso;
 
     this.searchSelect();
   }
@@ -255,17 +255,17 @@ export class ReportsComponent implements OnInit {
   changeStatus(event: any): void {
     const elemento = event.target.value;
     this.cod_estado = elemento;
-    this.nombre_estado = this.dataStatusInscription.find( (item) => item.cod_estado == this.cod_estado ).estado;
+    this.nombre_estado = this.dataStatusInscription.find( (item) => item.cod_estado === this.cod_estado ).estado;
     this.searchSelect();
   }
 
   searchSelect(): void {
-    if(this.cod_curso == 0 && this.cod_estado == 0) {
+    if(this.cod_curso === 0 && this.cod_estado === 0) {
       this.listAllEstudentsCourseApprove();
     }
 
-    if(this.cod_curso == 0 && (this.cod_estado == 2 || this.cod_estado == 3)) {
-      if(this.cod_estado == 2) {
+    if(this.cod_curso === 0 && (this.cod_estado === 2 || this.cod_estado === 3)) {
+      if(this.cod_estado === 2) {
         this.estado_aprobacion = 2;
       } else {
         this.estado_aprobacion = 1;
@@ -273,8 +273,8 @@ export class ReportsComponent implements OnInit {
       this.listAllEstudentsCourseApproveStatus();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado == 2 || this.cod_estado == 3)) {
-      if(this.cod_estado == 2) {
+    if(this.cod_curso != 0 && (this.cod_estado === 2 || this.cod_estado === 3)) {
+      if(this.cod_estado === 2) {
         this.estado_aprobacion = 2;
       } else {
         this.estado_aprobacion = 1;
@@ -282,7 +282,7 @@ export class ReportsComponent implements OnInit {
       this.listEstudentsCourseApprove();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado == 0)) {
+    if(this.cod_curso != 0 && (this.cod_estado === 0)) {
       this.listAllEstudentsCourseApproveAllStatus();
     }
 
@@ -290,12 +290,12 @@ export class ReportsComponent implements OnInit {
 
 
 
-    if(this.cod_curso == 0 && this.cod_estado == 1) {
+    if(this.cod_curso === 0 && this.cod_estado === 1) {
       this.listAllEstudentsCourseInscribed();
     }
 
-    if(this.cod_curso == 0 && (this.cod_estado == 4 || this.cod_estado == 5)) {
-      if(this.cod_estado == 4) {
+    if(this.cod_curso === 0 && (this.cod_estado === 4 || this.cod_estado === 5)) {
+      if(this.cod_estado === 4) {
         this.estado_matricula = 1;//0, 1, 2
       } else {
         this.estado_matricula = 3;
@@ -303,8 +303,8 @@ export class ReportsComponent implements OnInit {
       this.listAllEstudentsCourseInscribedStatus();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado == 4 || this.cod_estado == 5)) {
-      if(this.cod_estado == 4) {
+    if(this.cod_curso != 0 && (this.cod_estado === 4 || this.cod_estado === 5)) {
+      if(this.cod_estado === 4) {
         this.estado_matricula = 1;//0, 1, 2
       } else {
         this.estado_matricula = 3;
@@ -312,7 +312,7 @@ export class ReportsComponent implements OnInit {
       this.listEstudentsCourseInscribed();
     }
 
-    if(this.cod_curso != 0 && this.cod_estado == 1) {
+    if(this.cod_curso != 0 && this.cod_estado === 1) {
       this.listAllEstudentsCourseInscribedAllStatus();
     }
   }

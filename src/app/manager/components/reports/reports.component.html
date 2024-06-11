@@ -8,7 +8,7 @@
         <h1>Reportes de nóminas</h1>
         <div class="width-150px">
           <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
-            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo === item.cod_periodo">
               {{item.codigo_periodo}}
             </option>
           </select>
@@ -26,7 +26,7 @@
               <div class="input-group">
                 <label class="form-label" for="categoria">Curso:</label>
                 <select class="form-control form-control-select" id="cursos" (change)="changeCourse($event)">
-                  <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso == item.cod_curso">
+                  <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso === item.cod_curso">
                     {{item.nombre_curso}}
                   </option>
                 </select>
@@ -38,7 +38,7 @@
               <div class="input-group">
                 <label class="form-label" for="categoria">Estado:</label>
                 <select class="form-control form-control-select" id="estado" (change)="changeStatus($event)">
-                  <option [value]="item.cod_estado" *ngFor="let item of dataStatusInscription" [selected]="cod_estado == item.cod_estado">
+                  <option [value]="item.cod_estado" *ngFor="let item of dataStatusInscription" [selected]="cod_estado === item.cod_estado">
                     {{item.estado}}
                   </option>
                 </select>
@@ -82,11 +82,11 @@
                 <td>{{item.correo}}</td>
                 <td>{{item.celular}}</td>
                 <td>{{item.nombre_curso}}</td>
-                <td *ngIf="cod_estado == 0 || cod_estado == 2 || cod_estado == 3">
+                <td *ngIf="cod_estado === 0 || cod_estado === 2 || cod_estado === 3">
                   <span *ngIf="item.estado_aprobacion === 1">No Aprobado</span>
                   <span *ngIf="item.estado_aprobacion === 2">Aprobado</span>
                 </td>
-                <td *ngIf="cod_estado == 1 || cod_estado == 4 || cod_estado == 5">
+                <td *ngIf="cod_estado === 1 || cod_estado === 4 || cod_estado === 5">
                   <span *ngIf="item.estado_matricula === 0 || item.estado_matricula === 1 || item.estado_matricula === 2">Pendientes</span>
                   <span *ngIf="item.estado_matricula === 3">Matriculados</span>
                 </td>

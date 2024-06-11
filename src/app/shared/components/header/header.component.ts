@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
 
           this.statusSesion = this.localStorageService.getData("estado_sesion")!;
 
-          if(this.statusSesion == "")
+          if(this.statusSesion === "")
           {
             this.showAuthNormal = headerInfo.status_normal;
             this.showAuthManager = headerInfo.status_manager; 

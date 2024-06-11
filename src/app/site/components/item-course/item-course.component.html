@@ -24,11 +24,11 @@
 
         <!-- Mis Cursos -->
         <div *ngIf="banMisCursos">
-          <span *ngIf="enrollDTO.estado_matricula == 0 || enrollDTO.estado_matricula == 2" class="badge badge-yellow">Pendiente</span>
-          <span *ngIf="enrollDTO.estado_matricula == 1 && enrollDTO.estado_aprobacion == 0" class="badge badge-red">No cumple</span>
-          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 0" class="badge badge-info">Matriculado</span>
-          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2" class="badge badge-green">Aprobado</span>
-          <span *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 1" class="badge badge-red">No aprobado</span>
+          <span *ngIf="enrollDTO.estado_matricula === 0 || enrollDTO.estado_matricula === 2" class="badge badge-yellow">Pendiente</span>
+          <span *ngIf="enrollDTO.estado_matricula === 1 && enrollDTO.estado_aprobacion === 0" class="badge badge-red">No cumple</span>
+          <span *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 0" class="badge badge-info">Matriculado</span>
+          <span *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 2" class="badge badge-green">Aprobado</span>
+          <span *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 1" class="badge badge-red">No aprobado</span>
         </div>
         
 
@@ -60,12 +60,12 @@
 
       <!-- Mis Cursos -->
       <div *ngIf="banMisCursos">
-        <button *ngIf="enrollDTO.estado_matricula == 0 || enrollDTO.estado_matricula == 2" class="btn btn-primary" type="button" (click)="viewInscription(enrollDTO)"><i class="fas fa-search"></i> Ver Inscripción</button>
-        <button *ngIf="enrollDTO.estado_matricula == 1 && enrollDTO.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewObservation(enrollDTO)"><i class="fas fa-search"></i> Ver observaciones</button>
-        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 0" class="btn btn-primary" type="button" (click)="viewDetail(enrollDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
-        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2 && enrollDTO.archivo_certificado != ''" class="btn btn-primary" type="button" (click)="viewCertificate(enrollDTO.archivo_certificado)"><i class="fa-solid fa-file-pdf"></i> Descargar certificado</button>
-        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 2 && enrollDTO.archivo_certificado == ''" class="btn btn-warning" type="button"><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
-        <button *ngIf="enrollDTO.estado_matricula == 3 && enrollDTO.estado_aprobacion == 1" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
+        <button *ngIf="enrollDTO.estado_matricula === 0 || enrollDTO.estado_matricula === 2" class="btn btn-primary" type="button" (click)="viewInscription(enrollDTO)"><i class="fas fa-search"></i> Ver Inscripción</button>
+        <button *ngIf="enrollDTO.estado_matricula === 1 && enrollDTO.estado_aprobacion === 0" class="btn btn-primary" type="button" (click)="viewObservation(enrollDTO)"><i class="fas fa-search"></i> Ver observaciones</button>
+        <button *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 0" class="btn btn-primary" type="button" (click)="viewDetail(enrollDTO.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
+        <button *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 2 && enrollDTO.archivo_certificado != ''" class="btn btn-primary" type="button" (click)="viewCertificate(enrollDTO.archivo_certificado)"><i class="fa-solid fa-file-pdf"></i> Descargar certificado</button>
+        <button *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 2 && enrollDTO.archivo_certificado === ''" class="btn btn-warning" type="button"><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
+        <button *ngIf="enrollDTO.estado_matricula === 3 && enrollDTO.estado_aprobacion === 1" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
       </div>
 
     </div>

@@ -10,7 +10,7 @@
         <h1>Listado de Aprobaciones</h1>
         <div class="width-150px">
           <select class="form-control form-control-select" id="periodos" (change)="changePeriod($event)">
-            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo == item.cod_periodo">
+            <option [value]="item.cod_periodo" *ngFor="let item of periodsDTO" [selected]="cod_periodo === item.cod_periodo">
               {{item.codigo_periodo}}
             </option>
           </select>
@@ -26,7 +26,7 @@
 
             <div class="width-150px">
               <select class="form-control form-control-select" id="cursos" (change)="changeCourse($event)">
-                <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso == item.cod_curso">
+                <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso === item.cod_curso">
                   {{item.nombre_curso}}
                 </option>
               </select>
@@ -56,7 +56,7 @@
                   <div class="flex-content-right">
                     <div class="width-150px">
                       <select class="form-control form-control-select" id="estado_aprobacion" (change)="changeStatusApprovals($event, item)">
-                        <option [value]="itemStatus.cod_estado_aprobacion" *ngFor="let itemStatus of dataStatusApproval" [selected]="item.estado_aprobacion == itemStatus.cod_estado_aprobacion">
+                        <option [value]="itemStatus.cod_estado_aprobacion" *ngFor="let itemStatus of dataStatusApproval" [selected]="item.estado_aprobacion === itemStatus.cod_estado_aprobacion">
                           {{itemStatus.estado_aprobacion}}
                         </option>
                       </select>
@@ -64,16 +64,16 @@
                   </div>
                 </td>
                 <td class="inline-block">
-                    <div *ngIf="item.estado_aprobacion == 2" class="upload-container">
+                    <div *ngIf="item.estado_aprobacion === 2" class="upload-container">
                       <label for="file-input" (click)="selectItem(item.cod_matricula)">
                         <div class="btn btn-primary btn-sm" toggle="tooltip" data-bs-placement="top" title="Cargar Certificado"><i class="fa-solid fa-cloud-arrow-up"></i></div>
                       </label>
                       <input class="file-input" type="file" accept=".pdf" id="file-input" (change)="selectPdf($event)">
                     </div>
 
-                    <button *ngIf="item.estado_aprobacion == 2 && item.archivo_certificado != ''" class="btn btn-primary btn-sm" type="button" toggle="tooltip" data-bs-placement="top" title="Visualizar Certificado" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-search"></i></button>
+                    <button *ngIf="item.estado_aprobacion === 2 && item.archivo_certificado != ''" class="btn btn-primary btn-sm" type="button" toggle="tooltip" data-bs-placement="top" title="Visualizar Certificado" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-search"></i></button>
 
-                    <div *ngIf="item.estado_aprobacion == 2 && item.archivo_certificado == ''">
+                    <div *ngIf="item.estado_aprobacion === 2 && item.archivo_certificado === ''">
                       <span class="badge badge-yellow">Sin Certificado</span>
                     </div>
                     
