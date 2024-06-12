@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
 
   changePeriod(event: any): void {
     const elemento = event.target.value;
-    this.cod_periodo = elemento;
+    this.cod_periodo = Number(elemento);
     this.countCourses = 0;
     this.countEarrings = 0;
     this.countEnrolled = 0;
@@ -117,7 +117,7 @@ export class DashboardComponent implements OnInit {
     .subscribe( (data) => {
         this.loading = false;
         data.forEach((element) => {
-          if (element.estado_matricula === 0 || element.estado_matricula === 1 || element.estado_matricula === 2) {
+          if (Number(element.estado_matricula) === 0 || Number(element.estado_matricula) === 1 || Number(element.estado_matricula) === 2) {
             this.countEarrings = this.countEarrings + 1;
           }
           

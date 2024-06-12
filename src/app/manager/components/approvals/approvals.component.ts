@@ -61,7 +61,8 @@ export class ApprovalsComponent implements OnInit {
 
   changePeriod(event: any): void {
     const elemento = event.target.value;
-    this.cod_periodo = elemento;
+    this.cod_periodo = Number(elemento);
+    this.cod_curso = 0;
     this.coursesDTO = [];
     this.inscriptionsDTO = [];
     this.listCourse();
@@ -70,7 +71,7 @@ export class ApprovalsComponent implements OnInit {
 
   changeCourse(event: any): void {
     const elemento = event.target.value;
-    this.cod_curso = elemento;
+    this.cod_curso = Number(elemento);
     if(this.cod_curso === 0) {
       this.listAllEstudentsCourse();
     } else {
@@ -79,7 +80,7 @@ export class ApprovalsComponent implements OnInit {
   }
 
   changeStatusApprovals(event: any, inscriptionDTO: InscriptionDTO): void {
-    const elemento = event.target.value;
+    const elemento = Number(event.target.value);
     this.inscriptionDTO = new InscriptionDTO(0, '', '', '', '', '', '', '', 0, 1);
     this.approve(inscriptionDTO, elemento);
   }

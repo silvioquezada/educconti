@@ -57,13 +57,14 @@ export class ListRegistrationComponent implements OnInit {
 
   changePeriod(event: any): void {
     const elemento = event.target.value;
-    this.cod_periodo = elemento;
+    this.cod_periodo = Number(elemento);
+    this.cod_estado_inscripcion = 0;
     this.listRegistration();
   }
 
   changeStatus(event: any): void {
     const elemento = event.target.value;
-    this.cod_estado_inscripcion = elemento;
+    this.cod_estado_inscripcion = Number(elemento);
     this.listRegistration();
   }
 

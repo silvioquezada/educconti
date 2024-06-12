@@ -237,7 +237,8 @@ export class ReportsComponent implements OnInit {
 
   changePeriod(event: any): void {
     const elemento = event.target.value;
-    this.cod_periodo = elemento;
+    this.cod_periodo = Number(elemento);
+    this.cod_curso = 0;
     this.coursesDTO = [];
     this.inscriptionsDTO = [];
     this.listCourse();
@@ -246,7 +247,7 @@ export class ReportsComponent implements OnInit {
 
   changeCourse(event: any): void {
     const elemento = event.target.value;
-    this.cod_curso = elemento;
+    this.cod_curso = Number(elemento);
     this.nombre_curso = this.coursesDTO.find( (item) => item.cod_curso === this.cod_curso ).nombre_curso;
 
     this.searchSelect();
@@ -254,7 +255,7 @@ export class ReportsComponent implements OnInit {
 
   changeStatus(event: any): void {
     const elemento = event.target.value;
-    this.cod_estado = elemento;
+    this.cod_estado = Number(elemento);
     this.nombre_estado = this.dataStatusInscription.find( (item) => item.cod_estado === this.cod_estado ).estado;
     this.searchSelect();
   }
