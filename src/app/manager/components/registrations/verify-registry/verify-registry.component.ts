@@ -21,7 +21,7 @@ export class VerifyRegistryComponent implements OnInit {
   cod_curso: number;
   loading: boolean = false;
   documento_descripcion: string = '';
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   registerForm: FormGroup;
   observacion_revision: FormControl;
   title: string = '';

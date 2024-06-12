@@ -276,7 +276,7 @@ export class ReportsComponent implements OnInit {
       this.listAllEstudentsCourseApproveStatus();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado === 2 || this.cod_estado === 3)) {
+    if(this.cod_curso !== 0 && (this.cod_estado === 2 || this.cod_estado === 3)) {
       if(this.cod_estado === 2) {
         this.estado_aprobacion = 2;
       } else {
@@ -285,7 +285,7 @@ export class ReportsComponent implements OnInit {
       this.listEstudentsCourseApprove();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado === 0)) {
+    if(this.cod_curso !== 0 && (this.cod_estado === 0)) {
       this.listAllEstudentsCourseApproveAllStatus();
     }
 
@@ -306,7 +306,7 @@ export class ReportsComponent implements OnInit {
       this.listAllEstudentsCourseInscribedStatus();
     }
 
-    if(this.cod_curso != 0 && (this.cod_estado === 4 || this.cod_estado === 5)) {
+    if(this.cod_curso !== 0 && (this.cod_estado === 4 || this.cod_estado === 5)) {
       if(this.cod_estado === 4) {
         this.estado_matricula = 1;//0, 1, 2
       } else {
@@ -315,7 +315,7 @@ export class ReportsComponent implements OnInit {
       this.listEstudentsCourseInscribed();
     }
 
-    if(this.cod_curso != 0 && this.cod_estado === 1) {
+    if(this.cod_curso !== 0 && this.cod_estado === 1) {
       this.listAllEstudentsCourseInscribedAllStatus();
     }
   }

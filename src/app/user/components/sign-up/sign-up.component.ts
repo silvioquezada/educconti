@@ -30,7 +30,7 @@ export class SignUpComponent implements OnInit {
   password: FormControl;
   password2: FormControl;
   signUpForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormCedula: boolean;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
@@ -126,7 +126,7 @@ export class SignUpComponent implements OnInit {
       return { isValid: true }
     }
 
-    if (this.password.value != password2){
+    if (this.password.value !== password2){
       this.messaguePassword = 'Las contraseñas no coinciden';
       return { isValid: true }
     }

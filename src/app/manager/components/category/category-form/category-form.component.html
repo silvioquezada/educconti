@@ -15,9 +15,9 @@
           <div class="panel panel-col-p100">
             <div class="input-group">
               <label class="form-label" for="categoria">Categoría: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="categoria" type="text" placeholder="Ingrese categoría" maxlength="100" [formControl]="categoria" [ngClass]="{ 'is-invalid': (categoria.errors && isValidForm != null && !isValidForm) || !isValidFormCategory}">
+              <input class="form-control" id="categoria" type="text" placeholder="Ingrese categoría" maxlength="100" [formControl]="categoria" [ngClass]="{ 'is-invalid': (categoria.errors && !isValidForm) || !isValidFormCategory}">
               <div *ngIf="categoria.errors || !isValidFormCategory">
-                <div *ngIf="categoria.errors && isValidForm != null && !isValidForm">
+                <div *ngIf="categoria.errors && !isValidForm">
                   <small class="text-color-red" *ngIf="categoria?.hasError('required')">Categoría es requerido</small>
                 </div>
                 <div *ngIf="!isValidFormCategory">

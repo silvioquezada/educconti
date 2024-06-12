@@ -22,7 +22,7 @@ export class PeriodFormComponent implements OnInit {
   anio: FormControl;
   descripcion: FormControl;
   registerForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormPeriod: boolean;
   messaguePeriod: string = '';
   periodTemporal: string = '';

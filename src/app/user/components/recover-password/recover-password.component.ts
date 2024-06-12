@@ -20,7 +20,7 @@ export class RecoverPasswordComponent implements OnInit {
   cod_usuario: number = 0;
   correo: FormControl;
   registerForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormEmail: boolean;
   loading: boolean = false;
 

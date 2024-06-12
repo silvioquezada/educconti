@@ -80,7 +80,7 @@ export class CourseFormComponent implements OnInit {
 
   registerForm: FormGroup;
   isValidFormImage!: boolean | null;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormCourse: boolean;
   messagueImage: string = '';
   codigoCursoTemporal: string = '';

@@ -12,18 +12,18 @@
       <div class="panel-login">
         <div class="input-group">
           <label class="form-label" for="username">Usuario: <span class="required" aria-label="required">*</span></label>
-          <input class="form-control" id="username" type="text" placeholder="Ingrese username" [formControl]="usuario" [ngClass]="{ 'is-invalid': usuario.errors && isValidForm != null && !isValidForm}">
+          <input class="form-control" id="username" type="text" placeholder="Ingrese username" [formControl]="usuario" [ngClass]="{ 'is-invalid': usuario.errors && !isValidForm}">
           <div *ngIf="usuario.errors">
-            <div *ngIf="usuario.errors && isValidForm != null && !isValidForm">
+            <div *ngIf="usuario.errors && !isValidForm">
               <small class="text-color-red" *ngIf="usuario?.hasError('required')">Usuario es requerido</small>
             </div>
           </div>
         </div>
         <div class="input-group">
           <label class="form-label" for="password">Contraseña: <span class="required" aria-label="required">*</span></label>
-          <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && isValidForm != null && !isValidForm}">
+          <input class="form-control" id="password" type="password" placeholder="Ingrese contraseña" [formControl]="password" [ngClass]="{ 'is-invalid': password.errors && !isValidForm}">
           <div *ngIf="password.errors">
-            <div *ngIf="password.errors && isValidForm != null && !isValidForm">
+            <div *ngIf="password.errors && !isValidForm">
               <small class="text-color-red" *ngIf="password?.hasError('required')">Contraseña es requerido</small>
             </div>
           </div>

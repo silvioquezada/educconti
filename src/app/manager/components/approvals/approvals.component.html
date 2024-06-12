@@ -24,7 +24,7 @@
 
           <div class="content-column-between">
 
-            <div class="width-150px">
+            <div class="width-250px">
               <select class="form-control form-control-select" id="cursos" (change)="changeCourse($event)">
                 <option [value]="item.cod_curso" *ngFor="let item of coursesDTO" [selected]="cod_curso === item.cod_curso">
                   {{item.nombre_curso}}
@@ -71,7 +71,7 @@
                       <input class="file-input" type="file" accept=".pdf" id="file-input" (change)="selectPdf($event)">
                     </div>
 
-                    <button *ngIf="item.estado_aprobacion === 2 && item.archivo_certificado != ''" class="btn btn-primary btn-sm" type="button" toggle="tooltip" data-bs-placement="top" title="Visualizar Certificado" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-search"></i></button>
+                    <button *ngIf="item.estado_aprobacion === 2 && item.archivo_certificado !== ''" class="btn btn-primary btn-sm" type="button" toggle="tooltip" data-bs-placement="top" title="Visualizar Certificado" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-search"></i></button>
 
                     <div *ngIf="item.estado_aprobacion === 2 && item.archivo_certificado === ''">
                       <span class="badge badge-yellow">Sin Certificado</span>

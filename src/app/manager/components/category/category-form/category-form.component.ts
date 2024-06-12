@@ -20,7 +20,7 @@ export class CategoryFormComponent implements OnInit {
   cod_categoria: number = 0;
   categoria: FormControl;
   registerForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormCategory: boolean;
   messaguePeriod: string = '';
   periodTemporal: string = '';

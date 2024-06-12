@@ -38,7 +38,7 @@ export class RequirementsComponent implements OnInit {
   public editorcodigo = ClassicEditor;
   requisitos: FormControl;
   registerForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   requirementDTO: RequirementsDTO;
 
   constructor(private requirementsService: RequirementsService, private formBuilder: FormBuilder) { }

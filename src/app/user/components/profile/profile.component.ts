@@ -33,7 +33,7 @@ export class ProfileComponent implements OnInit {
   password: FormControl;
   password2: FormControl;
   profileForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormCedula: boolean;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
@@ -145,7 +145,7 @@ export class ProfileComponent implements OnInit {
       return { isValid: true }
     }
 
-    if (this.password.value != password2){
+    if (this.password.value !== password2){
       this.messaguePassword = 'Las contraseñas no coinciden';
       return { isValid: true }
     }

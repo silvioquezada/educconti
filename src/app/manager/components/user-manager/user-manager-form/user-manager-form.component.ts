@@ -27,7 +27,7 @@ export class UserManagerFormComponent implements OnInit {
   password: FormControl;
   password2: FormControl;
   registerForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   isValidFormEmail: boolean;
   isValidFormUser: boolean;
   messagueEmail: string = '';
@@ -126,7 +126,7 @@ export class UserManagerFormComponent implements OnInit {
       return { isValid: true }
     }
 
-    if (this.password.value != password2){
+    if (this.password.value !== password2){
       this.messaguePassword = 'Las contraseñas no coinciden';
       return { isValid: true }
     }

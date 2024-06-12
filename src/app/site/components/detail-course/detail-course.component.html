@@ -17,7 +17,7 @@
 
         <div class="width-100" [innerHTML]="courseDTO.descripcion"></div>
 
-        <div *ngIf="courseDTO.documento_descripcion != null" class="text-center">
+        <div *ngIf="courseDTO.documento_descripcion !== null" class="text-center">
           <p class="text-weight">Haz clic en el siguiente botón para descargar el programa completo del curso</p>
           <button class="btn btn-primary" (click)="viewProgram(courseDTO.documento_descripcion)"><i class="fa-solid fa-file-pdf"></i> Descargar Programa</button>
         </div>

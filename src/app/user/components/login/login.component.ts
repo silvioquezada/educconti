@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
   usuario: FormControl;
   password: FormControl;
   loginForm: FormGroup;
-  isValidForm!: boolean | null;
+  isValidForm: boolean  = true;
   loading: boolean = false;
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
@@ -42,6 +42,8 @@ export class LoginComponent implements OnInit {
         usuario: this.usuario,
         password: this.password,
       });
+
+      console.log(this.isValidForm);
     }
 
   ngOnInit(): void {

@@ -14,10 +14,10 @@
           <div class="input-group">
             <button class="btn btn-primary btn-sm" type="submit"><i class="fas fa-save"></i> ACTUALIZAR</button>
           </div>
-          <div [ngClass]="{ 'input-error': requisitos.errors && isValidForm != null && !isValidForm}">
+          <div [ngClass]="{ 'input-error': requisitos.errors && !isValidForm}">
             <ckeditor class="ck-editor__editable_inline" [editor]="editorcodigo" [config]="editorConfig" [formControl]="requisitos"></ckeditor>
           </div>
-          <div *ngIf="requisitos.errors && isValidForm != null && !isValidForm">
+          <div *ngIf="requisitos.errors && !isValidForm">
             <small class="text-color-red" *ngIf="requisitos?.hasError('required')">Requisitos es requerido</small>
           </div>
         </div>

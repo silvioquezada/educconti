@@ -14,9 +14,9 @@
 
             <div class="input-group">
               <label class="form-label" for="observaciones">Observaciones: <span class="required" aria-label="required">*</span></label>
-              <textarea class="form-control" id="observaciones" [formControl]="observacion_revision" [ngClass]="{ 'is-invalid': observacion_revision.errors && isValidForm != null && !isValidForm}"></textarea>
+              <textarea class="form-control" id="observaciones" [formControl]="observacion_revision" [ngClass]="{ 'is-invalid': observacion_revision.errors && !isValidForm}"></textarea>
               <div *ngIf="observacion_revision.errors">
-                <div *ngIf="observacion_revision.errors && isValidForm != null && !isValidForm">
+                <div *ngIf="observacion_revision.errors && !isValidForm">
                   <small class="text-color-red" *ngIf="observacion_revision?.hasError('required')">Observación es requerido</small>
                 </div>
               </div>
