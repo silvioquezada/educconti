@@ -68,7 +68,7 @@ export class DashboardComponent implements OnInit {
   listCouse(): void {
     this.loading = true;
 
-    this.courseService.list()
+    this.courseService.listCoursePeriod(this.cod_periodo)
     .subscribe( (data) => {
         this.loading = false;
         this.countCourses = data.length;
