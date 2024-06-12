@@ -239,6 +239,8 @@ export class ReportsComponent implements OnInit {
     const elemento = event.target.value;
     this.cod_periodo = Number(elemento);
     this.cod_curso = 0;
+    this.cod_estado = 0;
+    this.nombre_curso = 'Todos';
     this.coursesDTO = [];
     this.inscriptionsDTO = [];
     this.listCourse();
