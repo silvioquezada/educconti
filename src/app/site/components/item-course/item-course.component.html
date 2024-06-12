@@ -10,7 +10,7 @@
     <div class="detail-course">
       <div class="inline-block">
         <p>
-          <span class="icon-courseDTOs"><i class="fa-solid fa-calendar-days"></i></span>
+          <span class="icon-items"><i class="fa-solid fa-calendar-days"></i></span>
           <span>Inicio: </span>
           {{getDateFormat(courseDTO.fecha_inicio)}}
         </p>
@@ -35,12 +35,12 @@
 
       </div>
       <p>
-        <span class="icon-courseDTOs"><i class="fa-regular fa-clock"></i></span>
+        <span class="icon-items"><i class="fa-regular fa-clock"></i></span>
         <span>Duración: </span>
         {{getDiffWeek(courseDTO.fecha_inicio, courseDTO.fecha_fin)}}
       </p>
       <p>
-        <span class="icon-courseDTOs"><i class="fa-solid fa-location-dot"></i></span>
+        <span class="icon-items"><i class="fa-solid fa-location-dot"></i></span>
         <span>Modalidad: </span>
         {{courseDTO.modalidad}}
       </p>

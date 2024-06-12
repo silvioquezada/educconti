@@ -25,6 +25,7 @@ export class FormInscriptionComponent implements OnInit {
   selectedPdf: File = null;
   @ViewChild("filePdf") filePdf: ElementRef = null;
   ban: boolean = true;
+  banButton: boolean = true;
   textButton: string = '';
   title: string = '';
   typeForm: string = '';
@@ -45,6 +46,7 @@ export class FormInscriptionComponent implements OnInit {
     this.selectedPdf = null;
     this.title = 'Confirmar Inscripción';
     this.ban = true;
+    this.banButton = true;
     this.textButton = 'Enviar';
   }
 
@@ -52,6 +54,7 @@ export class FormInscriptionComponent implements OnInit {
     this.cod_matricula = Number(enrollDTO.cod_matricula);
     this.documento_descripcion.setValue(enrollDTO.documento_descripcion);
     this.ban = false;
+    this.banButton = false;
     this.textButton = 'Actualizar';
     this.restoreFile();
   }
@@ -68,6 +71,7 @@ export class FormInscriptionComponent implements OnInit {
   }
 
   selectPdf(event): void {
+    this.banButton = true;
     this.selectedPdf = <File>event.target.files[0];
     this.documento_descripcion.setValue(this.cod_matricula);
   }

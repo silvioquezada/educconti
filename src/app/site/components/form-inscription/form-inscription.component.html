@@ -22,7 +22,7 @@
               <input class="form-control" id="subir_programa" type="file" accept=".pdf" name="pdf" (change)="selectPdf($event)" #filePdf>
             </div>
 
-            <div *ngIf="ban === false && documento_descripcion.value !== null" class="input-group">
+            <div *ngIf="banButton === false && documento_descripcion.value !== null" class="input-group">
               <button class="btn btn-primary btn-sm width-100" type="button" (click) = "view()"><i class="fa-solid fa-search"></i> Visualizar</button>
             </div>
 

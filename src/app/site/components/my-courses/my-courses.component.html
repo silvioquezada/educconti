@@ -14,51 +14,6 @@
     <div class="card-container">
   
       <app-item-course class="card" (sendViewInscription)="viewInscription($event)" (sendViewObservation)="viewObservation($event)" [courseDTO] = "item.curso" [enrollDTO] = "item" *ngFor="let item of coursesDTO"></app-item-course>
-
-        <!-- <div class="card" *ngFor="let item of coursesDTO">
-    
-            <div class="card-head">
-              <img class="image-card" src={{getRouteImage(item.curso.imagen_curso)}} alt="Imagen course">
-            </div>
-            
-            <div class="description-card">
-              <p class="text-weight">{{item.curso.nombre_curso}}</p>
-  
-              <div class="detail-course">
-                <div class="inline-block">
-                  <p>
-                    <span class="icon-items"><i class="fa-solid fa-calendar-days"></i></span>
-                    <span>Inicio: </span>
-                    {{getDateFormat(item.curso.fecha_inicio)}}
-                  </p>
-                  <span *ngIf="item.estado_matricula === 0 || item.estado_matricula === 2" class="badge badge-yellow">Pendiente</span>
-                  <span *ngIf="item.estado_matricula === 1 && item.estado_aprobacion === 0" class="badge badge-red">No cumple</span>
-                  <span *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 0" class="badge badge-info">Matriculado</span>
-                  <span *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 2" class="badge badge-green">Aprobado</span>
-                  <span *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 1" class="badge badge-red">No aprobado</span>
-                </div>
-                <p>
-                  <span class="icon-items"><i class="fa-regular fa-clock"></i></span>
-                  <span>Duración: </span>
-                  {{getDiffWeek(item.curso.fecha_inicio, item.curso.fecha_fin)}}
-                </p>
-                <p>
-                  <span class="icon-items"><i class="fa-solid fa-location-dot"></i></span>
-                  <span>Modalidad: </span>
-                  {{item.curso.modalidad}}
-                </p>
-              </div>
-            </div>
-      
-              <div class="foot-card">
-                <button *ngIf="item.estado_matricula === 0 || item.estado_matricula === 2" class="btn btn-primary" type="button" (click)="viewInscription(item)"><i class="fas fa-search"></i> Ver Inscripción</button>
-                <button *ngIf="item.estado_matricula === 1 && item.estado_aprobacion === 0" class="btn btn-primary" type="button" (click)="viewObservation(item)"><i class="fas fa-search"></i> Ver observaciones</button>
-                <button *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 0" class="btn btn-primary" type="button" (click)="viewDetail(item.cod_curso)"><i class="fas fa-search"></i> Ver detalles</button>
-                <button *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 2 && item.archivo_certificado != ''" class="btn btn-primary" type="button" (click)="viewCertificate(item.archivo_certificado)"><i class="fa-solid fa-file-pdf"></i> Descargar certificado</button>
-                <button *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 2 && item.archivo_certificado === ''" class="btn btn-warning" type="button"><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
-                <button *ngIf="item.estado_matricula === 3 && item.estado_aprobacion === 1" class="btn btn-warning" type="button" ><i class="fa-solid fa-circle-info"></i> Certificado no disponible</button>
-              </div>
-          </div> -->
       
     </div>
   </section>
