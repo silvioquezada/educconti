@@ -90,13 +90,11 @@ export class DashboardComponent implements OnInit {
     this.enrollService.listAllEstudentsCourseApprove(this.cod_periodo)
     .subscribe( (data) => {
         this.loading = false;
-        data.forEach((element) => {
           data.forEach((element) => {
             if (element.estado_aprobacion === 2) {
               this.countApproved = this.countApproved + 1;
             }
           });
-        });
       },
       (error: HttpErrorResponse) => {
         this.loading = false;
