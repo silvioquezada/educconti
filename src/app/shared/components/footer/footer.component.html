@@ -15,7 +15,7 @@
               <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categoría</a>
               <ul class="dropdown-menu shadow">
                 <li *ngFor="let item of categoriesDTO">
-                  <a class="dropdown-item text-color-black" (click)="category(item.cod_categoria)">{{item.categoria}}</a>
+                  <a class="dropdown-item text-color-black" (click)="category(item)">{{item.categoria}}</a>
                 </li>
               </ul>
             </li>
@@ -24,6 +24,9 @@
             <li *ngIf="showAuthManager" class="nav-item dropdown">
               <a class="padding-block nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Gestión</a>
               <ul class="dropdown-menu shadow">
+                <li>
+                  <a class="dropdown-item text-color-black" (click)="dashboard()">Dashboard</a>
+                </li>
                 <li>
                   <a class="dropdown-item text-color-black" (click)="requirementsmanager()">Requisitos</a>
                 </li>

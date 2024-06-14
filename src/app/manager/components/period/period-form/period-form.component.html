@@ -27,8 +27,8 @@
             </div>
 
             <div class="input-group">
-              <label class="form-label" for="apellidos">Año: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="apellidos" type="text" placeholder="Ingrese año" maxlength="4" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && !isValidForm}" onKeyPress="return soloNumerosEnteros(event)">
+              <label class="form-label" for="año">Año: <span class="required" aria-label="required">*</span></label>
+              <input class="form-control" id="año" type="text" placeholder="Ingrese año" maxlength="4" [formControl]="anio" [ngClass]="{ 'is-invalid': anio.errors && !isValidForm}" onKeyPress="return soloNumerosEnteros(event)">
               <div *ngIf="anio.errors">
                 <div *ngIf="anio.errors && !isValidForm">
                   <small class="text-color-red" *ngIf="anio?.hasError('required')">Año es requerido</small>
@@ -36,8 +36,8 @@
               </div>
             </div>
             <div class="input-group">
-              <label class="form-label" for="nombres">Descripción: <span class="required" aria-label="required">*</span></label>
-              <input class="form-control" id="nombres" type="text" placeholder="Ingrese descripción" maxlength="50" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && !isValidForm}">
+              <label class="form-label" for="descripcion">Descripción: <span class="required" aria-label="required">*</span></label>
+              <input class="form-control" id="descripcion" type="text" placeholder="Ingrese descripción" maxlength="50" [formControl]="descripcion" [ngClass]="{ 'is-invalid': descripcion.errors && !isValidForm}">
               <div *ngIf="descripcion.errors">
                 <div *ngIf="descripcion.errors && !isValidForm">
                   <small class="text-color-red" *ngIf="descripcion?.hasError('required')">Descripción es requerido</small>
